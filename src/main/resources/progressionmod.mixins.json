@@ -3,12 +3,12 @@
   "package": "com.progressionmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-      "PlayerHandBreakMixin",
-      "MiningLevelMixin",
-      "ItemPickupMixin",
-      "GrassBreakMixin",
-      "MiningDropMixin",
-      "GoldToolMiningMixin"
+    "PlayerHandBreakMixin",
+    "MiningLevelMixin",
+    "ItemPickupMixin",
+    "GrassBreakMixin",
+    "MiningDropMixin",
+    "GoldToolMiningMixin"
   ],
   "injectors": {
     "defaultRequire": 1

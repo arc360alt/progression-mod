@@ -10,7 +10,7 @@ A progression mod for 1.20.1 that makes minecraft playthroughs more fun, simples
 
 ## Progression:
 
-***Flint > Wood > Stone > Copper > Iron > Gold > Diamond > Netherite***
+***Flint > Wood > Stone > Copper > Iron > Gold > Diamond > Amethyst > Netherite***
 
 You must have the last tier to mine the next tier, so you cannot mine diamond with iron, you must have gold first (yes gold pickaxes can now mine diamonds)
 

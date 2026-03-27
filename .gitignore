@@ -1,0 +1,26 @@
+# Build Artifacts
+/build/
+/bin/
+/target/
+*.jar
+
+# IDE Support
+.idea/
+.vscode/
+*.iws
+*.iml
+*.ipr
+.settings/
+.project
+.classpath
+
+# Minecraft/Forge/Fabric
+/run/
+/usercache.json
+/usernamecache.json
+.gradle/
+/out/
+
+# OS Specific
+.DS_Store
+Thumbs.db

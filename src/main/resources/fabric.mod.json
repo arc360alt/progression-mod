@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Progression Overhaul",
   "description": "A complete progression overhaul starting from Flint tools.",
-  "authors": ["You"],
+  "authors": ["Arc360"],
   "contact": {},
   "license": "MIT",
   "icon": "assets/progressionmod/icon.png",
@@ -14,7 +14,7 @@
       "com.progressionmod.ProgressionMod"
     ],
     "modmenu": [
-        "com.progressionmod.ModMenuIntegration"
+      "com.progressionmod.ModMenuIntegration"
     ]
   },
   "mixins": [

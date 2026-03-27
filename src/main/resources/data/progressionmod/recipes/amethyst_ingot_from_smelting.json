@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "progressionmod:raw_amethyst" },
+  "result": "progressionmod:amethyst_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

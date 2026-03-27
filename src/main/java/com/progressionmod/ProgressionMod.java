@@ -1,14 +1,12 @@
 package com.progressionmod;
 
+import com.progressionmod.blocks.ModBlocks;
 import com.progressionmod.items.ModItems;
+import com.progressionmod.items.ModItemGroup;
+import com.progressionmod.worldgen.AmethystOreGeneration;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.progressionmod.items.ModItemGroup;
-import com.progressionmod.GrassStringLoot;
-import com.progressionmod.ModConfig;
-import com.progressionmod.RecipeUnlocker;
 
 public class ProgressionMod implements ModInitializer {
 
@@ -20,9 +18,11 @@ public class ProgressionMod implements ModInitializer {
         LOGGER.info("Progression Overhaul loading...");
         ModConfig.register();
         RecipeUnlocker.register();
+        ModBlocks.registerBlocks();       // Blocks must be registered before items
         ModItems.registerItems();
         ModItemGroup.registerItemGroup();
         GrassStringLoot.register();
+        AmethystOreGeneration.register(); // World gen last
         LOGGER.info("Progression Overhaul loaded!");
     }
 }

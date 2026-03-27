@@ -1,5 +1,6 @@
 package com.progressionmod;
 
+import com.progressionmod.items.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -34,10 +35,25 @@ public class RecipeUnlocker {
                 "progressionmod:copper_boots"
         );
 
-        UNLOCK_MAP.put(Items.FLINT, allFlintRecipes);
-        UNLOCK_MAP.put(Items.COPPER_INGOT, allCopperRecipes);
+        List<String> allAmethystRecipes = List.of(
+                "progressionmod:amethyst_axe",
+                "progressionmod:amethyst_pickaxe",
+                "progressionmod:amethyst_shovel",
+                "progressionmod:amethyst_sword",
+                "progressionmod:amethyst_hoe",
+                "progressionmod:amethyst_helmet",
+                "progressionmod:amethyst_chestplate",
+                "progressionmod:amethyst_leggings",
+                "progressionmod:amethyst_boots",
+                "progressionmod:amethyst_ingot_from_smelting",
+                "progressionmod:amethyst_ingot_from_blasting"
+        );
 
-        UNLOCK_MAP.put(Items.GRAVEL, List.of("progressionmod:sticks_from_gravel"));
+        UNLOCK_MAP.put(Items.FLINT,         allFlintRecipes);
+        UNLOCK_MAP.put(Items.COPPER_INGOT,  allCopperRecipes);
+        UNLOCK_MAP.put(ModItems.RAW_AMETHYST, allAmethystRecipes);
+
+        UNLOCK_MAP.put(Items.GRAVEL,    List.of("progressionmod:sticks_from_gravel"));
         UNLOCK_MAP.put(Items.OAK_LEAVES, List.of("progressionmod:sticks_from_leaves"));
     }
 
@@ -46,7 +62,7 @@ public class RecipeUnlocker {
         if (toUnlock == null) return;
 
         Identifier[] ids = toUnlock.stream()
-                .map(id -> new Identifier(id))
+                .map(Identifier::new)
                 .toArray(Identifier[]::new);
 
         player.unlockRecipes(ids);

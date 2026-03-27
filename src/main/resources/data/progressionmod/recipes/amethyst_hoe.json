@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["AA"," S"," S"],
+  "key": {"A": {"item": "progressionmod:amethyst_ingot"}, "S": {"item": "minecraft:stick"}},
+  "result": {"item": "progressionmod:amethyst_hoe"}
+}

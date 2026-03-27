@@ -2,13 +2,34 @@
   "item.progressionmod.flint_axe": "Flint Axe",
   "item.progressionmod.flint_pickaxe": "Flint Pickaxe",
   "item.progressionmod.flint_shovel": "Flint Shovel",
-  "item.progressionmod.flint_sword": "Flint Sword",
+  "item.progressionmod.flint_sword": "Flint Knife",
   "item.progressionmod.flint_hoe": "Flint Hoe",
+
   "item.progressionmod.copper_axe": "Copper Axe",
   "item.progressionmod.copper_pickaxe": "Copper Pickaxe",
   "item.progressionmod.copper_shovel": "Copper Shovel",
   "item.progressionmod.copper_sword": "Copper Sword",
   "item.progressionmod.copper_hoe": "Copper Hoe",
+  "item.progressionmod.copper_helmet": "Copper Helmet",
+  "item.progressionmod.copper_chestplate": "Copper Chestplate",
+  "item.progressionmod.copper_leggings": "Copper Leggings",
+  "item.progressionmod.copper_boots": "Copper Boots",
+
+  "item.progressionmod.raw_amethyst": "Raw Amethyst",
+  "item.progressionmod.amethyst_ingot": "Amethyst Ingot",
+
+  "block.progressionmod.amethyst_ore": "Amethyst Ore",
+  "block.progressionmod.deepslate_amethyst_ore": "Deepslate Amethyst Ore",
+
+  "item.progressionmod.amethyst_axe": "Amethyst Axe",
+  "item.progressionmod.amethyst_pickaxe": "Amethyst Pickaxe",
+  "item.progressionmod.amethyst_shovel": "Amethyst Shovel",
+  "item.progressionmod.amethyst_sword": "Amethyst Sword",
+  "item.progressionmod.amethyst_hoe": "Amethyst Hoe",
+  "item.progressionmod.amethyst_helmet": "Amethyst Helmet",
+  "item.progressionmod.amethyst_chestplate": "Amethyst Chestplate",
+  "item.progressionmod.amethyst_leggings": "Amethyst Leggings",
+  "item.progressionmod.amethyst_boots": "Amethyst Boots",
 
   "itemGroup.progressionmod.progression_tools": "Progression Overhaul",
 
@@ -16,10 +37,5 @@
   "text.autoconfig.progressionmod.option.showMiningTierMessages": "Show Mining Tier Messages",
   "text.autoconfig.progressionmod.option.showMiningTierMessages.tooltip": "Shows a message in the action bar when you try to mine a block you don't have the right tool tier for.",
   "text.autoconfig.progressionmod.option.showHandBreakWarning": "Show Hand Break Warning",
-  "text.autoconfig.progressionmod.option.showHandBreakWarning.tooltip": "Shows a message when you try to break wood with your bare hands.",
-
-  "item.progressionmod.copper_helmet": "Copper Helmet",
-  "item.progressionmod.copper_chestplate": "Copper Chestplate",
-  "item.progressionmod.copper_leggings": "Copper Leggings",
-  "item.progressionmod.copper_boots": "Copper Boots"
+  "text.autoconfig.progressionmod.option.showHandBreakWarning.tooltip": "Shows a message when you try to break wood with your bare hands."
 }
