@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "progressionmod",
+  "version": "${version}",
+  "name": "Progression Overhaul",
+  "description": "A complete progression overhaul starting from Flint tools.",
+  "authors": ["You"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/progressionmod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.progressionmod.ProgressionMod"
+    ],
+    "modmenu": [
+        "com.progressionmod.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "progressionmod.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "fabric-api": "*",
+    "minecraft": "~1.20.1"
+  }
+}

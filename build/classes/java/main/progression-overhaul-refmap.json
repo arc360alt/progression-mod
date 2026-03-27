@@ -1,0 +1,44 @@
+{
+  "mappings": {
+    "com/progressionmod/mixin/GoldToolMiningMixin": {
+      "isSuitableFor": "Lnet/minecraft/class_1799;method_7951(Lnet/minecraft/class_2680;)Z"
+    },
+    "com/progressionmod/mixin/GrassBreakMixin": {
+      "tryBreakBlock": "Lnet/minecraft/class_3225;method_14266(Lnet/minecraft/class_2338;)Z"
+    },
+    "com/progressionmod/mixin/ItemPickupMixin": {
+      "onPlayerCollision": "Lnet/minecraft/class_1542;method_5694(Lnet/minecraft/class_1657;)V"
+    },
+    "com/progressionmod/mixin/MiningDropMixin": {
+      "tryBreakBlock": "Lnet/minecraft/class_3225;method_14266(Lnet/minecraft/class_2338;)Z"
+    },
+    "com/progressionmod/mixin/MiningLevelMixin": {
+      "getBlockBreakingSpeed": "Lnet/minecraft/class_1657;method_7351(Lnet/minecraft/class_2680;)F"
+    },
+    "com/progressionmod/mixin/PlayerHandBreakMixin": {
+      "getBlockBreakingSpeed": "Lnet/minecraft/class_1657;method_7351(Lnet/minecraft/class_2680;)F"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/progressionmod/mixin/GoldToolMiningMixin": {
+        "isSuitableFor": "Lnet/minecraft/class_1799;method_7951(Lnet/minecraft/class_2680;)Z"
+      },
+      "com/progressionmod/mixin/GrassBreakMixin": {
+        "tryBreakBlock": "Lnet/minecraft/class_3225;method_14266(Lnet/minecraft/class_2338;)Z"
+      },
+      "com/progressionmod/mixin/ItemPickupMixin": {
+        "onPlayerCollision": "Lnet/minecraft/class_1542;method_5694(Lnet/minecraft/class_1657;)V"
+      },
+      "com/progressionmod/mixin/MiningDropMixin": {
+        "tryBreakBlock": "Lnet/minecraft/class_3225;method_14266(Lnet/minecraft/class_2338;)Z"
+      },
+      "com/progressionmod/mixin/MiningLevelMixin": {
+        "getBlockBreakingSpeed": "Lnet/minecraft/class_1657;method_7351(Lnet/minecraft/class_2680;)F"
+      },
+      "com/progressionmod/mixin/PlayerHandBreakMixin": {
+        "getBlockBreakingSpeed": "Lnet/minecraft/class_1657;method_7351(Lnet/minecraft/class_2680;)F"
+      }
+    }
+  }
+}

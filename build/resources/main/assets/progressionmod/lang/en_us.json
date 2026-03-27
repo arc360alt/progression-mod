@@ -1,0 +1,25 @@
+{
+  "item.progressionmod.flint_axe": "Flint Axe",
+  "item.progressionmod.flint_pickaxe": "Flint Pickaxe",
+  "item.progressionmod.flint_shovel": "Flint Shovel",
+  "item.progressionmod.flint_sword": "Flint Sword",
+  "item.progressionmod.flint_hoe": "Flint Hoe",
+  "item.progressionmod.copper_axe": "Copper Axe",
+  "item.progressionmod.copper_pickaxe": "Copper Pickaxe",
+  "item.progressionmod.copper_shovel": "Copper Shovel",
+  "item.progressionmod.copper_sword": "Copper Sword",
+  "item.progressionmod.copper_hoe": "Copper Hoe",
+
+  "itemGroup.progressionmod.progression_tools": "Progression Overhaul",
+
+  "text.autoconfig.progressionmod.title": "Progression Overhaul Config",
+  "text.autoconfig.progressionmod.option.showMiningTierMessages": "Show Mining Tier Messages",
+  "text.autoconfig.progressionmod.option.showMiningTierMessages.tooltip": "Shows a message in the action bar when you try to mine a block you don't have the right tool tier for.",
+  "text.autoconfig.progressionmod.option.showHandBreakWarning": "Show Hand Break Warning",
+  "text.autoconfig.progressionmod.option.showHandBreakWarning.tooltip": "Shows a message when you try to break wood with your bare hands.",
+
+  "item.progressionmod.copper_helmet": "Copper Helmet",
+  "item.progressionmod.copper_chestplate": "Copper Chestplate",
+  "item.progressionmod.copper_leggings": "Copper Leggings",
+  "item.progressionmod.copper_boots": "Copper Boots"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CC"," S"," S"],
+  "key": {"C": {"item": "minecraft:copper_ingot"}, "S": {"item": "minecraft:stick"}},
+  "result": {"item": "progressionmod:copper_hoe"}
+}
