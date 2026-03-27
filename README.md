@@ -25,5 +25,4 @@ You must first collect sticks from breaking leaves on trees, then find some flin
 
 
 ## Extra notes:
-- Source code is coming soon, I am not completly ready to publish it yet
 - This is my first ever fabric project not using MCreator so if you find any bugs ill add a repot link somewhere at some point.
