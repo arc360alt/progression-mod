@@ -1,3 +1,0 @@
-v1	named	intermediary
-FIELD	com/progressionmod/mixin/GrassBreakMixin	Lnet/minecraft/server/network/ServerPlayerEntity;	player	field_14008
-FIELD	com/progressionmod/mixin/MiningDropMixin	Lnet/minecraft/server/network/ServerPlayerEntity;	player	field_14008
