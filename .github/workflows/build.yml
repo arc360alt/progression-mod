@@ -1,20 +1,58 @@
-name: Build Mod
-on: [push, pull_request]
+name: Build and Release Mod
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    if: ${{ github.event_name == 'pull_request' || contains(github.event.head_commit.message, '.') && startsWith(github.event.head_commit.message, '0') == false && (github.event.head_commit.message != '') }}
+
     steps:
+      - name: Check for version tag in commit message
+        id: version_check
+        run: |
+          VERSION=$(echo "${{ github.event.head_commit.message }}" | grep -oP '^\d+\.\d+\.\d+' | head -1)
+          if [ -z "$VERSION" ]; then
+            echo "No version number found in commit message. Skipping release."
+            echo "has_version=false" >> $GITHUB_OUTPUT
+          else
+            echo "Found version: $VERSION"
+            echo "has_version=true" >> $GITHUB_OUTPUT
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+          fi
+
       - name: Checkout Repository
+        if: steps.version_check.outputs.has_version == 'true'
         uses: actions/checkout@v4
+
       - name: Setup Java
+        if: steps.version_check.outputs.has_version == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
+
       - name: Build with Gradle
+        if: steps.version_check.outputs.has_version == 'true'
         run: ./gradlew build
-      - name: Capture Artifacts
-        uses: actions/upload-artifact@v4
+
+      - name: List build output
+        if: steps.version_check.outputs.has_version == 'true'
+        run: ls -la build/libs/
+
+      - name: Create GitHub Release
+        if: steps.version_check.outputs.has_version == 'true'
+        uses: softprops/action-gh-release@v2
         with:
-          name: Build Artifacts
-          path: build/libs/
+          tag_name: ${{ steps.version_check.outputs.version }}
+          name: Release ${{ steps.version_check.outputs.version }}
+          body: ${{ github.event.head_commit.message }}
+          files: build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
