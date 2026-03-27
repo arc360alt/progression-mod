@@ -23,10 +23,10 @@ import net.minecraft.block.Blocks;
  * Tier ladder:
  *  1 Flint    → wood logs, dirt, gravel, sand
  *  2 Wood     → stone-tier blocks
- *  3 Stone    → copper ore
- *  4 Copper   → iron ore
- *  5 Iron     → gold ore
- *  6 Gold     → diamond + all deepslate ores
+ *  3 Stone    → copper ore + deepslate copper ore
+ *  4 Copper   → iron ore + lapis + deepslate iron + deepslate lapis
+ *  5 Iron     → gold ore + redstone + emerald + deepslate gold + deepslate redstone + deepslate emerald
+ *  6 Gold     → diamond ore + deepslate diamond ore
  *  7 Diamond  → amethyst ore
  *  8 Amethyst → ancient debris
  *  9 Netherite→ everything
@@ -41,7 +41,7 @@ public class MiningLevelMixin {
         Item heldItem = held.getItem();
 
         int toolTier = getToolTier(heldItem);
-        if (toolTier < 0) return; // not a tracked tool, let vanilla handle it
+        if (toolTier < 0) return;
 
         // Stone-tier blocks — require Wood (2)
         if (isStoneBlock(state)) {
@@ -53,7 +53,7 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Copper ore — require Stone (3)
+        // Copper ore + Deepslate Copper Ore — require Stone (3)
         if (isCopperBlock(state)) {
             if (toolTier < 3) {
                 cir.setReturnValue(0.001f);
@@ -63,7 +63,7 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Iron ore — require Copper (4)
+        // Iron ore + Lapis + Deepslate Iron + Deepslate Lapis — require Copper (4)
         if (isIronBlock(state)) {
             if (toolTier < 4) {
                 cir.setReturnValue(0.001f);
@@ -73,7 +73,7 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Gold ore — require Iron (5)
+        // Gold ore + Redstone + Emerald + Deepslate variants — require Iron (5)
         if (isGoldBlock(state)) {
             if (toolTier < 5) {
                 cir.setReturnValue(0.001f);
@@ -83,8 +83,8 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Diamond / deepslate ores — require Gold (6)
-        if (isDiamondOrDeepslateBlock(state)) {
+        // Diamond ore + Deepslate Diamond Ore — require Gold (6)
+        if (isDiamondBlock(state)) {
             if (toolTier < 6) {
                 cir.setReturnValue(0.001f);
                 if (ModConfig.get().showMiningTierMessages)
@@ -94,7 +94,6 @@ public class MiningLevelMixin {
         }
 
         // Amethyst ore — require Diamond (7)
-        // IMPORTANT: do NOT override speed here if tier >= 7, let vanilla give full speed
         if (isAmethystOreBlock(state)) {
             if (toolTier < 7) {
                 cir.setReturnValue(0.001f);
@@ -154,7 +153,7 @@ public class MiningLevelMixin {
                 && !isCopperBlock(state)
                 && !isIronBlock(state)
                 && !isGoldBlock(state)
-                && !isDiamondOrDeepslateBlock(state)
+                && !isDiamondBlock(state)
                 && !isAmethystOreBlock(state)
                 && !isNetheriteBlock(state)
                 && !isObsidianBlock(state);
@@ -162,33 +161,32 @@ public class MiningLevelMixin {
 
     private boolean isCopperBlock(BlockState state) {
         return state.isOf(Blocks.COPPER_ORE)
+            || state.isOf(Blocks.DEEPSLATE_COPPER_ORE)
             || state.isOf(Blocks.RAW_COPPER_BLOCK);
     }
 
     private boolean isIronBlock(BlockState state) {
         return state.isOf(Blocks.IRON_ORE)
+            || state.isOf(Blocks.DEEPSLATE_IRON_ORE)
             || state.isOf(Blocks.RAW_IRON_BLOCK)
             || state.isOf(Blocks.LAPIS_ORE)
+            || state.isOf(Blocks.DEEPSLATE_LAPIS_ORE)
             || state.isOf(Blocks.LAPIS_BLOCK);
     }
 
     private boolean isGoldBlock(BlockState state) {
         return state.isOf(Blocks.GOLD_ORE)
+            || state.isOf(Blocks.DEEPSLATE_GOLD_ORE)
             || state.isOf(Blocks.RAW_GOLD_BLOCK)
             || state.isOf(Blocks.REDSTONE_ORE)
-            || state.isOf(Blocks.EMERALD_ORE);
+            || state.isOf(Blocks.DEEPSLATE_REDSTONE_ORE)
+            || state.isOf(Blocks.EMERALD_ORE)
+            || state.isOf(Blocks.DEEPSLATE_EMERALD_ORE);
     }
 
-    private boolean isDiamondOrDeepslateBlock(BlockState state) {
+    private boolean isDiamondBlock(BlockState state) {
         return state.isOf(Blocks.DIAMOND_ORE)
-            || state.isOf(Blocks.DEEPSLATE_DIAMOND_ORE)
-            || state.isOf(Blocks.DEEPSLATE_IRON_ORE)
-            || state.isOf(Blocks.DEEPSLATE_GOLD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_COPPER_ORE)
-            || state.isOf(Blocks.DEEPSLATE_COAL_ORE)
-            || state.isOf(Blocks.DEEPSLATE_LAPIS_ORE)
-            || state.isOf(Blocks.DEEPSLATE_REDSTONE_ORE)
-            || state.isOf(Blocks.DEEPSLATE_EMERALD_ORE);
+            || state.isOf(Blocks.DEEPSLATE_DIAMOND_ORE);
     }
 
     private boolean isAmethystOreBlock(BlockState state) {

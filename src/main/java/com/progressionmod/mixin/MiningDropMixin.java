@@ -29,12 +29,12 @@ public class MiningDropMixin {
 
         if (tier < 0) return;
 
-        if (isCopperBlock(state)        && tier < 3) { cir.setReturnValue(false); return; }
-        if (isIronBlock(state)          && tier < 4) { cir.setReturnValue(false); return; }
-        if (isGoldBlock(state)          && tier < 5) { cir.setReturnValue(false); return; }
-        if (isDiamondOrDeepslate(state) && tier < 6) { cir.setReturnValue(false); return; }
-        if (isAmethystOre(state)        && tier < 7) { cir.setReturnValue(false); return; }
-        if (isNetheriteBlock(state)     && tier < 8) { cir.setReturnValue(false); return; }
+        if (isCopperBlock(state)    && tier < 3) { cir.setReturnValue(false); return; }
+        if (isIronBlock(state)      && tier < 4) { cir.setReturnValue(false); return; }
+        if (isGoldBlock(state)      && tier < 5) { cir.setReturnValue(false); return; }
+        if (isDiamondBlock(state)   && tier < 6) { cir.setReturnValue(false); return; }
+        if (isAmethystOre(state)    && tier < 7) { cir.setReturnValue(false); return; }
+        if (isNetheriteBlock(state) && tier < 8) { cir.setReturnValue(false); return; }
     }
 
     private int getToolTier(Item item) {
@@ -60,29 +60,33 @@ public class MiningDropMixin {
     }
 
     private boolean isCopperBlock(BlockState state) {
-        return state.isOf(Blocks.COPPER_ORE) || state.isOf(Blocks.RAW_COPPER_BLOCK);
+        return state.isOf(Blocks.COPPER_ORE)
+            || state.isOf(Blocks.DEEPSLATE_COPPER_ORE)
+            || state.isOf(Blocks.RAW_COPPER_BLOCK);
     }
 
     private boolean isIronBlock(BlockState state) {
-        return state.isOf(Blocks.IRON_ORE)  || state.isOf(Blocks.RAW_IRON_BLOCK)
-            || state.isOf(Blocks.LAPIS_ORE) || state.isOf(Blocks.LAPIS_BLOCK);
+        return state.isOf(Blocks.IRON_ORE)
+            || state.isOf(Blocks.DEEPSLATE_IRON_ORE)
+            || state.isOf(Blocks.RAW_IRON_BLOCK)
+            || state.isOf(Blocks.LAPIS_ORE)
+            || state.isOf(Blocks.DEEPSLATE_LAPIS_ORE)
+            || state.isOf(Blocks.LAPIS_BLOCK);
     }
 
     private boolean isGoldBlock(BlockState state) {
-        return state.isOf(Blocks.GOLD_ORE)     || state.isOf(Blocks.RAW_GOLD_BLOCK)
-            || state.isOf(Blocks.REDSTONE_ORE) || state.isOf(Blocks.EMERALD_ORE);
+        return state.isOf(Blocks.GOLD_ORE)
+            || state.isOf(Blocks.DEEPSLATE_GOLD_ORE)
+            || state.isOf(Blocks.RAW_GOLD_BLOCK)
+            || state.isOf(Blocks.REDSTONE_ORE)
+            || state.isOf(Blocks.DEEPSLATE_REDSTONE_ORE)
+            || state.isOf(Blocks.EMERALD_ORE)
+            || state.isOf(Blocks.DEEPSLATE_EMERALD_ORE);
     }
 
-    private boolean isDiamondOrDeepslate(BlockState state) {
+    private boolean isDiamondBlock(BlockState state) {
         return state.isOf(Blocks.DIAMOND_ORE)
-            || state.isOf(Blocks.DEEPSLATE_DIAMOND_ORE)
-            || state.isOf(Blocks.DEEPSLATE_IRON_ORE)
-            || state.isOf(Blocks.DEEPSLATE_GOLD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_COPPER_ORE)
-            || state.isOf(Blocks.DEEPSLATE_COAL_ORE)
-            || state.isOf(Blocks.DEEPSLATE_LAPIS_ORE)
-            || state.isOf(Blocks.DEEPSLATE_REDSTONE_ORE)
-            || state.isOf(Blocks.DEEPSLATE_EMERALD_ORE);
+            || state.isOf(Blocks.DEEPSLATE_DIAMOND_ORE);
     }
 
     private boolean isAmethystOre(BlockState state) {

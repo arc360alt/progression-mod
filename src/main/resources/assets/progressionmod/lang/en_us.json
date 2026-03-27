@@ -37,5 +37,13 @@
   "text.autoconfig.progressionmod.option.showMiningTierMessages": "Show Mining Tier Messages",
   "text.autoconfig.progressionmod.option.showMiningTierMessages.tooltip": "Shows a message in the action bar when you try to mine a block you don't have the right tool tier for.",
   "text.autoconfig.progressionmod.option.showHandBreakWarning": "Show Hand Break Warning",
-  "text.autoconfig.progressionmod.option.showHandBreakWarning.tooltip": "Shows a message when you try to break wood with your bare hands."
+  "text.autoconfig.progressionmod.option.showHandBreakWarning.tooltip": "Shows a message when you try to break wood with your bare hands.",
+
+  "jade.progressionmod.required_tool": "Requires: %s",
+  "jade.progressionmod.tool.stone_pickaxe": "Stone Pickaxe",
+  "jade.progressionmod.tool.copper_pickaxe": "Copper Pickaxe",
+  "jade.progressionmod.tool.iron_pickaxe": "Iron Pickaxe",
+  "jade.progressionmod.tool.gold_pickaxe": "Gold Pickaxe",
+  "jade.progressionmod.tool.diamond_pickaxe": "Diamond Pickaxe",
+  "jade.progressionmod.tool.amethyst_pickaxe": "Amethyst Pickaxe"
 }
