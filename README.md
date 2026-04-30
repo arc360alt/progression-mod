@@ -6,6 +6,7 @@ A progression mod for 1.21.1 that makes minecraft playthroughs more fun, simples
 - Copper tools backported to 1.21.1
 - Full on progression system that rquieres you to have the past tier to mine the new ore
 - A bunch of QOL features like Mod Menu support and tooltips that tell you if you can mine that material or not
+- Added a full new Amethyst tool and armor teir thats a level above diamond and is NEEDED to mine netherite.
 
 ## 1.21.1 Broken Features:
 - Have not found any yet, please report any issues with the 1.21.1 version if you find any.
@@ -27,4 +28,4 @@ You must first collect sticks from breaking leaves on trees, then find some flin
 
 
 ## Extra notes:
-- This is my first ever fabric project not using MCreator so if you find any bugs ill add a repot link somewhere at some point.
+- This is my first ever fabric project not using MCreator so if you find any bugs report them on the github bugs page, the link for wich you can find on the sidepanel on the right.
