@@ -3,7 +3,7 @@ package com.progressionmod.mixin;
 import com.progressionmod.items.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
@@ -24,10 +24,11 @@ public class GrassBreakMixin {
     private void onTryBreakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         BlockState state = player.getWorld().getBlockState(pos);
 
-        if (state.isOf(Blocks.GRASS) || state.isOf(Blocks.TALL_GRASS)) {
+        if (state.isOf(Blocks.SHORT_GRASS) || state.isOf(Blocks.TALL_GRASS)) {
             ItemStack held = player.getMainHandStack();
             if (held.getItem() == ModItems.FLINT_SWORD) {
-                held.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
+                // In 1.21.1, ItemStack.damage() takes an EquipmentSlot, not a Hand
+                held.damage(1, player, EquipmentSlot.MAINHAND);
             }
         }
     }

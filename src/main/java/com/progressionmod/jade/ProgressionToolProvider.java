@@ -14,8 +14,7 @@ import snownee.jade.api.config.IPluginConfig;
 public enum ProgressionToolProvider implements IBlockComponentProvider {
     INSTANCE;
 
-    public static final Identifier ID =
-            new Identifier("progressionmod", "required_tool");
+    public static final Identifier ID = Identifier.of("progressionmod", "required_tool");
 
     @Override
     public Identifier getUid() {

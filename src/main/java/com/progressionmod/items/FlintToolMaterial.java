@@ -1,40 +1,24 @@
 package com.progressionmod.items;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 
-public enum FlintToolMaterial implements ToolMaterial {
-    INSTANCE;
+public class FlintToolMaterial implements ToolMaterial {
 
-    private static final int MINING_LEVEL = 1; 
-    private static final int ITEM_DURABILITY = 45; 
-    private static final float MINING_SPEED = 1.1f; 
-    private static final float ATTACK_DAMAGE = 0.5f; 
-    private static final int ENCHANTABILITY = 5; 
+    public static final FlintToolMaterial INSTANCE = new FlintToolMaterial();
 
+    @Override public int   getDurability()            { return 45; }
+    @Override public float getMiningSpeedMultiplier() { return 1.1f; }
+    @Override public float getAttackDamage()          { return 0.5f; }
+    @Override public int   getEnchantability()        { return 5; }
+
+    // Replaces getMiningLevel() in 1.21.1 — defines blocks this tier CANNOT mine
     @Override
-    public int getDurability() {
-        return ITEM_DURABILITY;
-    }
-
-    @Override
-    public float getMiningSpeedMultiplier() {
-        return MINING_SPEED;
-    }
-
-    @Override
-    public float getAttackDamage() {
-        return ATTACK_DAMAGE;
-    }
-
-    @Override
-    public int getMiningLevel() {
-        return MINING_LEVEL;
-    }
-
-    @Override
-    public int getEnchantability() {
-        return ENCHANTABILITY;
+    public TagKey<Block> getInverseTag() {
+        return BlockTags.INCORRECT_FOR_WOODEN_TOOL;
     }
 
     @Override

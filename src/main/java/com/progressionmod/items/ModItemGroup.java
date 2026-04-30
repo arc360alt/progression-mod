@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 public class ModItemGroup {
     public static final ItemGroup PROGRESSION_GROUP = Registry.register(
         Registries.ITEM_GROUP,
-        new Identifier(ProgressionMod.MOD_ID, "progression_tools"),
+        Identifier.of(ProgressionMod.MOD_ID, "progression_tools"),
         FabricItemGroup.builder()
             .displayName(Text.literal("Progression Overhaul"))
             .icon(() -> new ItemStack(ModItems.FLINT_AXE))

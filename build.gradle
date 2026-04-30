@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.9-SNAPSHOT'
+	id 'fabric-loom' version '1.9.1'
 	id 'maven-publish'
 }
 
@@ -21,10 +21,10 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "com.terraformersmc:modmenu:7.2.0"
-	modImplementation "me.shedaniel.cloth:cloth-config-fabric:11.1.118"
-	include "me.shedaniel.cloth:cloth-config-fabric:11.1.118"
-    modCompileOnly "maven.modrinth:jade:11.10.0+fabric"
+	modImplementation "com.terraformersmc:modmenu:11.0.2"
+	modImplementation "me.shedaniel.cloth:cloth-config-fabric:15.0.140"
+	include "me.shedaniel.cloth:cloth-config-fabric:15.0.140"
+    modCompileOnly "maven.modrinth:jade:15.3.3+fabric"
 }
 
 processResources {
@@ -37,13 +37,13 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
 	withSourcesJar()
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {

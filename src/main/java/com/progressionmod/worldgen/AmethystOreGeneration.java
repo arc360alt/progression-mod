@@ -18,11 +18,11 @@ public class AmethystOreGeneration {
 
     private static final RegistryKey<PlacedFeature> AMETHYST_ORE =
             RegistryKey.of(RegistryKeys.PLACED_FEATURE,
-                    new Identifier("progressionmod", "amethyst_ore"));
+                    Identifier.of("progressionmod", "amethyst_ore"));
 
     private static final RegistryKey<PlacedFeature> DEEPSLATE_AMETHYST_ORE =
             RegistryKey.of(RegistryKeys.PLACED_FEATURE,
-                    new Identifier("progressionmod", "deepslate_amethyst_ore"));
+                    Identifier.of("progressionmod", "deepslate_amethyst_ore"));
 
     public static void register() {
         BiomeModifications.addFeature(

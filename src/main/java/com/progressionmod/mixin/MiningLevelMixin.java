@@ -25,7 +25,7 @@ import net.minecraft.block.Blocks;
  *  2 Wood     → stone-tier blocks
  *  3 Stone    → copper ore + deepslate copper ore
  *  4 Copper   → iron ore + lapis + deepslate iron + deepslate lapis
- *  5 Iron     → gold ore + redstone + emerald + deepslate gold + deepslate redstone + deepslate emerald
+ *  5 Iron     → gold ore + redstone + emerald + deepslate variants
  *  6 Gold     → diamond ore + deepslate diamond ore
  *  7 Diamond  → amethyst ore
  *  8 Amethyst → ancient debris
@@ -53,7 +53,7 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Copper ore + Deepslate Copper Ore — require Stone (3)
+        // Copper ore — require Stone (3)
         if (isCopperBlock(state)) {
             if (toolTier < 3) {
                 cir.setReturnValue(0.001f);
@@ -63,7 +63,7 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Iron ore + Lapis + Deepslate Iron + Deepslate Lapis — require Copper (4)
+        // Iron ore + Lapis — require Copper (4)
         if (isIronBlock(state)) {
             if (toolTier < 4) {
                 cir.setReturnValue(0.001f);
@@ -73,7 +73,7 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Gold ore + Redstone + Emerald + Deepslate variants — require Iron (5)
+        // Gold ore + Redstone + Emerald — require Iron (5)
         if (isGoldBlock(state)) {
             if (toolTier < 5) {
                 cir.setReturnValue(0.001f);
@@ -83,7 +83,7 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Diamond ore + Deepslate Diamond Ore — require Gold (6)
+        // Diamond ore — require Gold (6)
         if (isDiamondBlock(state)) {
             if (toolTier < 6) {
                 cir.setReturnValue(0.001f);

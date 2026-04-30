@@ -49,11 +49,11 @@ public class RecipeUnlocker {
                 "progressionmod:amethyst_ingot_from_blasting"
         );
 
-        UNLOCK_MAP.put(Items.FLINT,         allFlintRecipes);
-        UNLOCK_MAP.put(Items.COPPER_INGOT,  allCopperRecipes);
+        UNLOCK_MAP.put(Items.FLINT,           allFlintRecipes);
+        UNLOCK_MAP.put(Items.COPPER_INGOT,    allCopperRecipes);
         UNLOCK_MAP.put(ModItems.RAW_AMETHYST, allAmethystRecipes);
 
-        UNLOCK_MAP.put(Items.GRAVEL,    List.of("progressionmod:sticks_from_gravel"));
+        UNLOCK_MAP.put(Items.GRAVEL,     List.of("progressionmod:sticks_from_gravel"));
         UNLOCK_MAP.put(Items.OAK_LEAVES, List.of("progressionmod:sticks_from_leaves"));
     }
 
@@ -61,9 +61,10 @@ public class RecipeUnlocker {
         List<String> toUnlock = UNLOCK_MAP.get(pickedUp);
         if (toUnlock == null) return;
 
-        Identifier[] ids = toUnlock.stream()
-                .map(Identifier::new)
-                .toArray(Identifier[]::new);
+        // In 1.21.1, unlockRecipes takes List<Identifier>
+        List<Identifier> ids = toUnlock.stream()
+                .map(id -> Identifier.of(id))
+                .toList();
 
         player.unlockRecipes(ids);
     }

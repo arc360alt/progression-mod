@@ -1,7 +1,7 @@
 package com.progressionmod;
 
 import com.progressionmod.items.ModItems;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
@@ -16,9 +16,9 @@ import net.minecraft.util.Identifier;
 
 public class GrassStringLoot {
     public static void register() {
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if (id.equals(Blocks.GRASS.getLootTableId())
-             || id.equals(new Identifier("minecraft", "blocks/tall_grass"))) {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+            if (key.getValue().equals(Blocks.SHORT_GRASS.getLootTableKey().getValue())
+             || key.getValue().equals(Identifier.of("minecraft", "blocks/tall_grass"))) {
 
                 // String drop — only with flint sword
                 LootPool.Builder stringPool = LootPool.builder()

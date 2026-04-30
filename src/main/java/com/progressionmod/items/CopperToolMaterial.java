@@ -1,29 +1,29 @@
 package com.progressionmod.items;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.item.Items;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 
 /**
- * Copper Tool Material - Tier between Stone and Iron
- *
- * Slightly better than stone, worse than iron.
- * Can mine iron ore (which stone cannot).
+ * Copper Tool Material — between Stone and Iron.
+ * Stone-tier inverse tag; MiningDropMixin handles custom gating above that.
  */
-public enum CopperToolMaterial implements ToolMaterial {
-    INSTANCE;
+public class CopperToolMaterial implements ToolMaterial {
 
-    private static final int MINING_LEVEL = 2;   // Same as stone
-    private static final int ITEM_DURABILITY = 200; // Stone=131, Iron=250 — copper sits between
-    private static final float MINING_SPEED = 5.5f; // Stone=4.0, Iron=6.0
-    private static final float ATTACK_DAMAGE = 1.0f;
-    private static final int ENCHANTABILITY = 8;
+    public static final CopperToolMaterial INSTANCE = new CopperToolMaterial();
 
-    @Override public int getDurability() { return ITEM_DURABILITY; }
-    @Override public float getMiningSpeedMultiplier() { return MINING_SPEED; }
-    @Override public float getAttackDamage() { return ATTACK_DAMAGE; }
-    @Override public int getMiningLevel() { return MINING_LEVEL; }
-    @Override public int getEnchantability() { return ENCHANTABILITY; }
+    @Override public int   getDurability()            { return 200; }
+    @Override public float getMiningSpeedMultiplier() { return 5.5f; }
+    @Override public float getAttackDamage()          { return 1.0f; }
+    @Override public int   getEnchantability()        { return 8; }
+
+    @Override
+    public TagKey<Block> getInverseTag() {
+        return BlockTags.INCORRECT_FOR_STONE_TOOL;
+    }
 
     @Override
     public Ingredient getRepairIngredient() {

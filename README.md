@@ -7,6 +7,8 @@ A progression mod for 1.20.1 that makes minecraft playthroughs more fun, simples
 - Full on progression system that rquieres you to have the past tier to mine the new ore
 - A bunch of QOL features like Mod Menu support and tooltips that tell you if you can mine that material or not
 
+## 1.21.1 Broken Features:
+- Recipies do not work
 
 ## Progression:
 
