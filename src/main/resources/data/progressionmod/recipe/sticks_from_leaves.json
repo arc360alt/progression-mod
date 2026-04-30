@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"tag": "minecraft:leaves"},
+    {"tag": "minecraft:leaves"},
+    {"tag": "minecraft:leaves"}
+  ],
+  "result": {"id": "minecraft:stick", "count": 2},
+  "group": "primitive_sticks"
+}
