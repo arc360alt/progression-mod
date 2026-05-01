@@ -32,7 +32,7 @@ public class PrimitiveLoot {
                     && key.getValue().equals(Identifier.of("minecraft", "blocks/gravel"))) {
                 LootPool.Builder extraFlintPool = LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1))
-                    .conditionally(RandomChanceLootCondition.builder(0.18f))
+                    .conditionally(RandomChanceLootCondition.builder(0.14f))
                     .with(ItemEntry.builder(Items.FLINT))
                     .apply(SetCountLootFunction.builder(
                         ConstantLootNumberProvider.create(1)));

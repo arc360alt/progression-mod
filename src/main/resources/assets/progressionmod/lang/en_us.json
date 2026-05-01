@@ -41,7 +41,7 @@
   "text.autoconfig.progressionmod.option.stickDropFromLeaves": "Increase stick drop from leaves",
   "text.autoconfig.progressionmod.option.stickDropFromLeaves.@Tooltip": "Leaves have a 14% chance to drop 1-2 sticks when broken.",
   "text.autoconfig.progressionmod.option.improvedFlintFromGravel": "Increase flint drop from gravel",
-  "text.autoconfig.progressionmod.option.improvedFlintFromGravel.@Tooltip": "Adds an extra 18% chance to drop flint when breaking gravel, on top of the vanilla drop chance.",
+  "text.autoconfig.progressionmod.option.improvedFlintFromGravel.@Tooltip": "Adds an extra 14% chance to drop flint when breaking gravel, on top of the vanilla drop chance.",
 
   "jade.progressionmod.required_tool": "Requires: %s",
   "jade.progressionmod.tool.stone_pickaxe": "Stone Pickaxe",
