@@ -18,11 +18,12 @@ public class ProgressionMod implements ModInitializer {
         LOGGER.info("Progression Overhaul loading...");
         ModConfig.register();
         RecipeUnlocker.register();
-        ModBlocks.registerBlocks();       // Blocks must be registered before items
+        ModBlocks.registerBlocks();
         ModItems.registerItems();
         ModItemGroup.registerItemGroup();
         GrassStringLoot.register();
-        AmethystOreGeneration.register(); // World gen last
+        PrimitiveLoot.register();
+        AmethystOreGeneration.register();
         LOGGER.info("Progression Overhaul loaded!");
     }
 }

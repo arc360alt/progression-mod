@@ -15,6 +15,12 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 1)
     public boolean showHandBreakWarning = true;
 
+    @ConfigEntry.Gui.Tooltip(count = 1)
+    public boolean stickDropFromLeaves = false;
+
+    @ConfigEntry.Gui.Tooltip(count = 1)
+    public boolean improvedFlintFromGravel = false;
+
     public static ModConfig get() {
         return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }
