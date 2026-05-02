@@ -21,7 +21,7 @@ public class PrimitiveLoot {
                     && tablePath.startsWith("blocks/") && tablePath.endsWith("_leaves")) {
                 LootPool.Builder stickPool = LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1))
-                    .conditionally(RandomChanceLootCondition.builder(0.14f))
+                    .conditionally(RandomChanceLootCondition.builder(0.10f))
                     .with(ItemEntry.builder(Items.STICK))
                     .apply(SetCountLootFunction.builder(
                         UniformLootNumberProvider.create(1, 2)));
@@ -32,7 +32,7 @@ public class PrimitiveLoot {
                     && key.getValue().equals(Identifier.of("minecraft", "blocks/gravel"))) {
                 LootPool.Builder extraFlintPool = LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1))
-                    .conditionally(RandomChanceLootCondition.builder(0.14f))
+                    .conditionally(RandomChanceLootCondition.builder(0.10f))
                     .with(ItemEntry.builder(Items.FLINT))
                     .apply(SetCountLootFunction.builder(
                         ConstantLootNumberProvider.create(1)));

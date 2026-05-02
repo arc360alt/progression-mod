@@ -11,15 +11,9 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "enchantments": [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels": { "min": 1 }
-                      }
-                    ]
-                  }
+                  "condition": "minecraft:enchantment_active_check",
+                  "enchantment": "minecraft:silk_touch",
+                  "active": true
                 }
               ],
               "name": "progressionmod:amethyst_ore"

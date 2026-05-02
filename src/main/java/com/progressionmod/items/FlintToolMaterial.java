@@ -1,28 +1,32 @@
 package com.progressionmod.items;
 
-import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 
-public class FlintToolMaterial implements ToolMaterial {
+/**
+ * Flint Tool Material — below Wood tier.
+ *
+ * In 1.21.2+, ToolMaterial is a record, not an interface.
+ * Constructor signature (Yarn 1.21.5):
+ *   ToolMaterial(TagKey<Block> inverseTag, int durability, float speed,
+ *                float attackDamage, int enchantability, TagKey<Item> repairItems)
+ */
+public class FlintToolMaterial {
 
-    public static final FlintToolMaterial INSTANCE = new FlintToolMaterial();
+    // Tag pointing to minecraft:flint so the anvil repair works
+    public static final TagKey<Item> REPAIRS_FLINT_TOOLS =
+            TagKey.of(Registries.ITEM.getKey(), Identifier.of("progressionmod", "repairs_flint_tools"));
 
-    @Override public int   getDurability()            { return 45; }
-    @Override public float getMiningSpeedMultiplier() { return 1.1f; }
-    @Override public float getAttackDamage()          { return 0.5f; }
-    @Override public int   getEnchantability()        { return 5; }
-
-    // Replaces getMiningLevel() in 1.21.1 — defines blocks this tier CANNOT mine
-    @Override
-    public TagKey<Block> getInverseTag() {
-        return BlockTags.INCORRECT_FOR_WOODEN_TOOL;
-    }
-
-    @Override
-    public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(net.minecraft.item.Items.FLINT);
-    }
+    public static final ToolMaterial INSTANCE = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_WOODEN_TOOL, // can mine same blocks as wood
+            45,                                   // durability
+            1.1f,                                 // mining speed
+            0.5f,                                 // attack damage bonus
+            5,                                    // enchantability
+            REPAIRS_FLINT_TOOLS                   // repair item tag
+    );
 }

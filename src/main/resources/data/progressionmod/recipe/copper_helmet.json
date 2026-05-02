@@ -1,8 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["CCC", "C C"],
+  "pattern": [
+    "CCC",
+    "C C"
+  ],
   "key": {
-    "C": {"item": "minecraft:copper_ingot"}
+    "C": "minecraft:copper_ingot"
   },
-  "result": {"id": "progressionmod:copper_helmet"}
+  "result": {
+    "id": "progressionmod:copper_helmet"
+  }
 }

@@ -23,6 +23,7 @@ public class ProgressionMod implements ModInitializer {
         ModItemGroup.registerItemGroup();
         GrassStringLoot.register();
         PrimitiveLoot.register();
+        AmethystOreLoot.register();  // replaces broken JSON loot tables in code
         AmethystOreGeneration.register();
         LOGGER.info("Progression Overhaul loaded!");
     }

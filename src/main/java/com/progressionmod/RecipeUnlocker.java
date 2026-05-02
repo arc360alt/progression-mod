@@ -3,6 +3,9 @@ package com.progressionmod;
 import com.progressionmod.items.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
@@ -61,9 +64,9 @@ public class RecipeUnlocker {
         List<String> toUnlock = UNLOCK_MAP.get(pickedUp);
         if (toUnlock == null) return;
 
-        // In 1.21.1, unlockRecipes takes List<Identifier>
-        List<Identifier> ids = toUnlock.stream()
-                .map(id -> Identifier.of(id))
+        // In 1.21.5, unlockRecipes takes List<RegistryKey<Recipe<?>>>
+        List<RegistryKey<Recipe<?>>> ids = toUnlock.stream()
+                .map(id -> RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(id)))
                 .toList();
 
         player.unlockRecipes(ids);

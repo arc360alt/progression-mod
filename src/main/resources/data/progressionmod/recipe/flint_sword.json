@@ -1,9 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["FT", "F "],
+  "pattern": [
+    "FT",
+    "F "
+  ],
   "key": {
-    "F": {"item": "minecraft:flint"},
-    "T": {"item": "minecraft:stick"}
+    "F": "minecraft:flint",
+    "T": "minecraft:stick"
   },
-  "result": {"id": "progressionmod:flint_sword"}
+  "result": {
+    "id": "progressionmod:flint_sword"
+  }
 }

@@ -1,13 +1,13 @@
 package com.progressionmod.items;
 
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,26 +16,30 @@ import java.util.Map;
  * Diamond:   3/8/6/3 = 20 total, toughness=2
  * Netherite: 3/8/6/3 = 20 total, toughness=3, knockback=0.1
  * Amethyst:  3/8/7/3 = 21 total, toughness=2.5, knockback=0.05
+ *
+ * The EquipmentAsset key points to assets/progressionmod/equipment/amethyst.json
  */
 public class AmethystArmorMaterial {
 
-    public static final RegistryEntry<ArmorMaterial> INSTANCE = RegistryEntry.of(
-        new ArmorMaterial(
+    public static final RegistryKey<EquipmentAsset> EQUIPMENT_KEY =
+            RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of("progressionmod", "amethyst"));
+
+    // Netherite uses 37, Diamond uses 33 — amethyst sits between at 35
+    public static final int BASE_DURABILITY = 35;
+
+    public static final ArmorMaterial INSTANCE = new ArmorMaterial(
+            BASE_DURABILITY,
             Map.of(
-                ArmorItem.Type.BOOTS,       3,
-                ArmorItem.Type.LEGGINGS,    8,
-                ArmorItem.Type.CHESTPLATE,  7,
-                ArmorItem.Type.HELMET,      3,
-                ArmorItem.Type.BODY,        5
+                    EquipmentType.HELMET,     3,
+                    EquipmentType.CHESTPLATE, 7,
+                    EquipmentType.LEGGINGS,   8,
+                    EquipmentType.BOOTS,      3
             ),
-            /*enchantability*/  12,
+            12,                                        // enchantability
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
-            () -> Ingredient.ofItems(ModItems.AMETHYST_INGOT),
-            List.of(
-                new ArmorMaterial.Layer(Identifier.of("progressionmod", "amethyst"))
-            ),
-            /*toughness*/       2.5f,
-            /*knockbackResist*/ 0.05f
-        )
+            2.5f,                                      // toughness
+            0.05f,                                     // knockback resistance
+            AmethystToolMaterial.REPAIRS_AMETHYST_TOOLS,
+            EQUIPMENT_KEY
     );
 }

@@ -18,8 +18,8 @@
   "item.progressionmod.raw_amethyst": "Raw Amethyst",
   "item.progressionmod.amethyst_ingot": "Amethyst Ingot",
 
-  "block.progressionmod.amethyst_ore": "Amethyst Ore",
-  "block.progressionmod.deepslate_amethyst_ore": "Deepslate Amethyst Ore",
+  "item.progressionmod.amethyst_ore": "Amethyst Ore",
+  "item.progressionmod.deepslate_amethyst_ore": "Deepslate Amethyst Ore",
 
   "item.progressionmod.amethyst_axe": "Amethyst Axe",
   "item.progressionmod.amethyst_pickaxe": "Amethyst Pickaxe",
@@ -39,9 +39,9 @@
   "text.autoconfig.progressionmod.option.showHandBreakWarning": "Show Hand Break Warning",
   "text.autoconfig.progressionmod.option.showHandBreakWarning.@Tooltip": "Shows a message when you try to break wood with your bare hands.",
   "text.autoconfig.progressionmod.option.stickDropFromLeaves": "Increase stick drop from leaves",
-  "text.autoconfig.progressionmod.option.stickDropFromLeaves.@Tooltip": "Leaves have a 14% chance to drop 1-2 sticks when broken.",
+  "text.autoconfig.progressionmod.option.stickDropFromLeaves.@Tooltip": "Leaves have a 10% chance to drop 1-2 sticks when broken.",
   "text.autoconfig.progressionmod.option.improvedFlintFromGravel": "Increase flint drop from gravel",
-  "text.autoconfig.progressionmod.option.improvedFlintFromGravel.@Tooltip": "Adds an extra 14% chance to drop flint when breaking gravel, on top of the vanilla drop chance.",
+  "text.autoconfig.progressionmod.option.improvedFlintFromGravel.@Tooltip": "Adds an extra 10% chance to drop flint when breaking gravel, on top of the vanilla drop chance.",
 
   "jade.progressionmod.required_tool": "Requires: %s",
   "jade.progressionmod.tool.stone_pickaxe": "Stone Pickaxe",

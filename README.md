@@ -1,15 +1,15 @@
 # Progression Overhaul
-A progression mod for 1.21.1 that makes minecraft playthroughs more fun, simplest way I can explain this mod.
+A progression mod for 1.21.5 that makes minecraft playthroughs more fun, simplest way I can explain this mod.
 
 ## Features:
 - Flint tools added
-- Copper tools backported to 1.21.1
+- Copper tools backported to 1.21.5
 - Full on progression system that rquieres you to have the past tier to mine the new ore
 - A bunch of QOL features like Mod Menu support and tooltips that tell you if you can mine that material or not
 - Added a full new Amethyst tool and armor teir thats a level above diamond and is NEEDED to mine netherite.
 
-## 1.21.1 Broken Features:
-- Have not found any yet, please report any issues with the 1.21.1 version if you find any.
+## 1.21.5 Broken Features:
+- Have not found any yet, please report any issues with the 1.21.5 version if you find any.
 
 ## Progression:
 

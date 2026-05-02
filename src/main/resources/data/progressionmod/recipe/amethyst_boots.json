@@ -1,8 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["A A", "A A"],
+  "pattern": [
+    "A A",
+    "A A"
+  ],
   "key": {
-    "A": {"item": "progressionmod:amethyst_ingot"}
+    "A": "progressionmod:amethyst_ingot"
   },
-  "result": {"id": "progressionmod:amethyst_boots"}
+  "result": {
+    "id": "progressionmod:amethyst_boots"
+  }
 }

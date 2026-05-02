@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "progressionmod:copper"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "progressionmod:copper"
+      }
+    ]
+  }
+}

@@ -1,32 +1,28 @@
 package com.progressionmod.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 
 /**
  * Copper Tool Material — between Stone and Iron.
- * Stone-tier inverse tag; MiningDropMixin handles custom gating above that.
+ *
+ * In 1.21.2+, ToolMaterial is a record, not an interface.
  */
-public class CopperToolMaterial implements ToolMaterial {
+public class CopperToolMaterial {
 
-    public static final CopperToolMaterial INSTANCE = new CopperToolMaterial();
+    public static final TagKey<Item> REPAIRS_COPPER_TOOLS =
+            TagKey.of(Registries.ITEM.getKey(), Identifier.of("progressionmod", "repairs_copper_tools"));
 
-    @Override public int   getDurability()            { return 200; }
-    @Override public float getMiningSpeedMultiplier() { return 5.5f; }
-    @Override public float getAttackDamage()          { return 1.0f; }
-    @Override public int   getEnchantability()        { return 8; }
-
-    @Override
-    public TagKey<Block> getInverseTag() {
-        return BlockTags.INCORRECT_FOR_STONE_TOOL;
-    }
-
-    @Override
-    public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Items.COPPER_INGOT);
-    }
+    public static final ToolMaterial INSTANCE = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_STONE_TOOL, // can mine same blocks as stone
+            200,                                 // durability
+            5.5f,                                // mining speed
+            1.0f,                                // attack damage bonus
+            8,                                   // enchantability
+            REPAIRS_COPPER_TOOLS                 // repair item tag
+    );
 }
