@@ -48,6 +48,21 @@ public class ModItemGroup {
                 entries.add(ModItems.AMETHYST_CHESTPLATE);
                 entries.add(ModItems.AMETHYST_LEGGINGS);
                 entries.add(ModItems.AMETHYST_BOOTS);
+                // Endium materials & ore
+                entries.add(ModItems.ENDIUM_ORE_ITEM);
+                entries.add(ModItems.RAW_ENDIUM);
+                entries.add(ModItems.ENDIUM_CRYSTAL);
+                // Endium tools
+                entries.add(ModItems.ENDIUM_AXE);
+                entries.add(ModItems.ENDIUM_PICKAXE);
+                entries.add(ModItems.ENDIUM_SHOVEL);
+                entries.add(ModItems.ENDIUM_HOE);
+                entries.add(ModItems.ENDIUM_SWORD);
+                // Endium armor
+                entries.add(ModItems.ENDIUM_HELMET);
+                entries.add(ModItems.ENDIUM_CHESTPLATE);
+                entries.add(ModItems.ENDIUM_LEGGINGS);
+                entries.add(ModItems.ENDIUM_BOOTS);
             })
             .build()
     );

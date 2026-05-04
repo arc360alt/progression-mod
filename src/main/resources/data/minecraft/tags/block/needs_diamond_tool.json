@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "progressionmod:amethyst_ore",
-    "progressionmod:deepslate_amethyst_ore"
+    "progressionmod:deepslate_amethyst_ore",
+    "progressionmod:endium_ore"
   ]
 }

@@ -10,16 +10,6 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
-/**
- * In 1.21.5, ArmorItem was completely removed (along with SwordItem, PickaxeItem etc).
- * ALL items — tools AND armor — are now plain Item instances whose behaviour is
- * configured entirely through Item.Settings component methods:
- *   Tools:  .axe()  .pickaxe()  .shovel()  .hoe()  .sword()
- *   Armor:  .armor(material, equipmentType)
- *
- * In 1.21.2+, every Item.Settings must also carry a .registryKey() so the game
- * resolves the correct translation key from the lang file.
- */
 public class ModItems {
 
     private static RegistryKey<Item> key(String name) {
@@ -146,6 +136,60 @@ public class ModItems {
             new Item(new Item.Settings().registryKey(key("amethyst_boots"))
                     .armor(AmethystArmorMaterial.INSTANCE, EquipmentType.BOOTS)
                     .maxDamage(EquipmentType.BOOTS.getMaxDamage(AmethystArmorMaterial.BASE_DURABILITY))));
+
+    // ── Endium Raw/Crystal ────────────────────────────────────────────────────
+    public static final Item RAW_ENDIUM = register("raw_endium",
+            new Item(new Item.Settings().registryKey(key("raw_endium"))));
+
+    public static final Item ENDIUM_CRYSTAL = register("endium_crystal",
+            new Item(new Item.Settings().registryKey(key("endium_crystal"))));
+
+    // ── Endium Ore Block Item ─────────────────────────────────────────────────
+    public static final Item ENDIUM_ORE_ITEM = register("endium_ore",
+            new BlockItem(ModBlocks.ENDIUM_ORE,
+                    new Item.Settings().registryKey(key("endium_ore"))));
+
+    // ── Endium Tools ──────────────────────────────────────────────────────────
+    public static final Item ENDIUM_AXE = register("endium_axe",
+            new Item(new Item.Settings().registryKey(key("endium_axe"))
+                    .axe(EndiumToolMaterial.INSTANCE, 7.0f, -3.0f)));
+
+    public static final Item ENDIUM_PICKAXE = register("endium_pickaxe",
+            new Item(new Item.Settings().registryKey(key("endium_pickaxe"))
+                    .pickaxe(EndiumToolMaterial.INSTANCE, 1.0f, -2.8f)));
+
+    public static final Item ENDIUM_SHOVEL = register("endium_shovel",
+            new Item(new Item.Settings().registryKey(key("endium_shovel"))
+                    .shovel(EndiumToolMaterial.INSTANCE, 1.5f, -3.0f)));
+
+    public static final Item ENDIUM_HOE = register("endium_hoe",
+            new Item(new Item.Settings().registryKey(key("endium_hoe"))
+                    .hoe(EndiumToolMaterial.INSTANCE, -4.0f, -1.0f)));
+
+    public static final Item ENDIUM_SWORD = register("endium_sword",
+            new Item(new Item.Settings().registryKey(key("endium_sword"))
+                    .sword(EndiumToolMaterial.INSTANCE, 4.0f, -2.4f)));
+
+    // ── Endium Armor ──────────────────────────────────────────────────────────
+    public static final Item ENDIUM_HELMET = register("endium_helmet",
+            new Item(new Item.Settings().registryKey(key("endium_helmet"))
+                    .armor(EndiumArmorMaterial.INSTANCE, EquipmentType.HELMET)
+                    .maxDamage(EquipmentType.HELMET.getMaxDamage(EndiumArmorMaterial.BASE_DURABILITY))));
+
+    public static final Item ENDIUM_CHESTPLATE = register("endium_chestplate",
+            new Item(new Item.Settings().registryKey(key("endium_chestplate"))
+                    .armor(EndiumArmorMaterial.INSTANCE, EquipmentType.CHESTPLATE)
+                    .maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(EndiumArmorMaterial.BASE_DURABILITY))));
+
+    public static final Item ENDIUM_LEGGINGS = register("endium_leggings",
+            new Item(new Item.Settings().registryKey(key("endium_leggings"))
+                    .armor(EndiumArmorMaterial.INSTANCE, EquipmentType.LEGGINGS)
+                    .maxDamage(EquipmentType.LEGGINGS.getMaxDamage(EndiumArmorMaterial.BASE_DURABILITY))));
+
+    public static final Item ENDIUM_BOOTS = register("endium_boots",
+            new Item(new Item.Settings().registryKey(key("endium_boots"))
+                    .armor(EndiumArmorMaterial.INSTANCE, EquipmentType.BOOTS)
+                    .maxDamage(EquipmentType.BOOTS.getMaxDamage(EndiumArmorMaterial.BASE_DURABILITY))));
 
     // ── Helper ───────────────────────────────────────────────────────────────
     private static Item register(String name, Item item) {

@@ -15,22 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.progressionmod.ModConfig;
 import net.minecraft.block.Blocks;
 
-/**
- * Enforces custom tier progression by overriding break speed.
- * If you have the RIGHT tier or higher → return without override (vanilla speed).
- * If you have the WRONG tier → set speed to 0.001 and show message.
- *
- * Tier ladder:
- *  1 Flint    → wood logs, dirt, gravel, sand
- *  2 Wood     → stone-tier blocks
- *  3 Stone    → copper ore + deepslate copper ore
- *  4 Copper   → iron ore + lapis + deepslate iron + deepslate lapis
- *  5 Iron     → gold ore + redstone + emerald + deepslate variants
- *  6 Gold     → diamond ore + deepslate diamond ore
- *  7 Diamond  → amethyst ore
- *  8 Amethyst → ancient debris
- *  9 Netherite→ everything
- */
 @Mixin(PlayerEntity.class)
 public class MiningLevelMixin {
 
@@ -112,6 +96,16 @@ public class MiningLevelMixin {
             }
             return;
         }
+
+        // Endium ore — require Netherite (9)
+        if (isEndiumOreBlock(state)) {
+            if (toolTier < 9) {
+                cir.setReturnValue(0.001f);
+                if (ModConfig.get().showMiningTierMessages)
+                    sendTierMessage(player, "You need at least a Netherite Pickaxe to mine Endium Ore!");
+            }
+            return;
+        }
     }
 
     // ── Tier mapping ──────────────────────────────────────────────────────────
@@ -156,6 +150,7 @@ public class MiningLevelMixin {
                 && !isDiamondBlock(state)
                 && !isAmethystOreBlock(state)
                 && !isNetheriteBlock(state)
+                && !isEndiumOreBlock(state)
                 && !isObsidianBlock(state);
     }
 
@@ -196,6 +191,10 @@ public class MiningLevelMixin {
 
     private boolean isNetheriteBlock(BlockState state) {
         return state.isOf(Blocks.ANCIENT_DEBRIS);
+    }
+
+    private boolean isEndiumOreBlock(BlockState state) {
+        return state.isOf(ModBlocks.ENDIUM_ORE);
     }
 
     private boolean isObsidianBlock(BlockState state) {

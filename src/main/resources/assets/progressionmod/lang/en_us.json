@@ -31,6 +31,20 @@
   "item.progressionmod.amethyst_leggings": "Amethyst Leggings",
   "item.progressionmod.amethyst_boots": "Amethyst Boots",
 
+  "item.progressionmod.raw_endium": "Raw Endium",
+  "item.progressionmod.endium_crystal": "Endium Ingot",
+  "item.progressionmod.endium_ore": "Endium Ore",
+
+  "item.progressionmod.endium_axe": "Endium Axe",
+  "item.progressionmod.endium_pickaxe": "Endium Pickaxe",
+  "item.progressionmod.endium_shovel": "Endium Shovel",
+  "item.progressionmod.endium_sword": "Endium Sword",
+  "item.progressionmod.endium_hoe": "Endium Hoe",
+  "item.progressionmod.endium_helmet": "Endium Helmet",
+  "item.progressionmod.endium_chestplate": "Endium Chestplate",
+  "item.progressionmod.endium_leggings": "Endium Leggings",
+  "item.progressionmod.endium_boots": "Endium Boots",
+
   "itemGroup.progressionmod.progression_tools": "Progression Overhaul",
 
   "text.autoconfig.progressionmod.title": "Progression Overhaul Config",
@@ -49,5 +63,6 @@
   "jade.progressionmod.tool.iron_pickaxe": "Iron Pickaxe",
   "jade.progressionmod.tool.gold_pickaxe": "Gold Pickaxe",
   "jade.progressionmod.tool.diamond_pickaxe": "Diamond Pickaxe",
-  "jade.progressionmod.tool.amethyst_pickaxe": "Amethyst Pickaxe"
+  "jade.progressionmod.tool.amethyst_pickaxe": "Amethyst Pickaxe",
+  "jade.progressionmod.tool.netherite_pickaxe": "Netherite Pickaxe"
 }

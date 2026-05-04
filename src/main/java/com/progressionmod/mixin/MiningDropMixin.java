@@ -27,6 +27,12 @@ public class MiningDropMixin {
         Item held = player.getMainHandStack().getItem();
         int tier = getToolTier(held);
 
+        if (isEndiumOre(state)) {
+            System.out.println("[DEBUG] Endium ore break attempt — tier: " + tier + " — item: " + held);
+        }
+
+        if (isEndiumOre(state) && tier < 9) { cir.setReturnValue(false); return; }
+
         if (tier < 0) return;
 
         if (isCopperBlock(state)    && tier < 3) { cir.setReturnValue(false); return; }
@@ -96,5 +102,9 @@ public class MiningDropMixin {
 
     private boolean isNetheriteBlock(BlockState state) {
         return state.isOf(Blocks.ANCIENT_DEBRIS);
+    }
+
+    private boolean isEndiumOre(BlockState state) {
+        return state.isOf(ModBlocks.ENDIUM_ORE);
     }
 }

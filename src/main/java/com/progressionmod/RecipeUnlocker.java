@@ -52,9 +52,24 @@ public class RecipeUnlocker {
                 "progressionmod:amethyst_ingot_from_blasting"
         );
 
+        List<String> allEndiumRecipes = List.of(
+                "progressionmod:endium_axe",
+                "progressionmod:endium_pickaxe",
+                "progressionmod:endium_shovel",
+                "progressionmod:endium_sword",
+                "progressionmod:endium_hoe",
+                "progressionmod:endium_helmet",
+                "progressionmod:endium_chestplate",
+                "progressionmod:endium_leggings",
+                "progressionmod:endium_boots",
+                "progressionmod:endium_crystal_from_smelting",
+                "progressionmod:endium_crystal_from_blasting"
+        );
+
         UNLOCK_MAP.put(Items.FLINT,           allFlintRecipes);
         UNLOCK_MAP.put(Items.COPPER_INGOT,    allCopperRecipes);
         UNLOCK_MAP.put(ModItems.RAW_AMETHYST, allAmethystRecipes);
+        UNLOCK_MAP.put(ModItems.RAW_ENDIUM,   allEndiumRecipes);
 
         UNLOCK_MAP.put(Items.GRAVEL,     List.of("progressionmod:sticks_from_gravel"));
         UNLOCK_MAP.put(Items.OAK_LEAVES, List.of("progressionmod:sticks_from_leaves"));
@@ -64,7 +79,6 @@ public class RecipeUnlocker {
         List<String> toUnlock = UNLOCK_MAP.get(pickedUp);
         if (toUnlock == null) return;
 
-        // In 1.21.5, unlockRecipes takes List<RegistryKey<Recipe<?>>>
         List<RegistryKey<Recipe<?>>> ids = toUnlock.stream()
                 .map(id -> RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(id)))
                 .toList();

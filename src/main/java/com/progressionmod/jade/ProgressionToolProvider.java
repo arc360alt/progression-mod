@@ -41,6 +41,7 @@ public enum ProgressionToolProvider implements IBlockComponentProvider {
         if (isDiamondBlock(state))   return "jade.progressionmod.tool.gold_pickaxe";
         if (isAmethystOre(state))    return "jade.progressionmod.tool.diamond_pickaxe";
         if (isNetheriteBlock(state)) return "jade.progressionmod.tool.amethyst_pickaxe";
+        if (isEndiumOre(state))      return "jade.progressionmod.tool.netherite_pickaxe";
         return null;
     }
 
@@ -81,5 +82,9 @@ public enum ProgressionToolProvider implements IBlockComponentProvider {
 
     private boolean isNetheriteBlock(BlockState state) {
         return state.isOf(Blocks.ANCIENT_DEBRIS);
+    }
+
+    private boolean isEndiumOre(BlockState state) {
+        return state.isOf(ModBlocks.ENDIUM_ORE);
     }
 }
