@@ -31,3 +31,6 @@
 - This is my first ever fabric project not using MCreator so if you find any bugs report them on the github bugs page, the link for which you can find on the sidepanel on the right.
 
 </div>
+
+# Known Bugs:
+- All tools and armor added in by this mod cannot be enchanted.
