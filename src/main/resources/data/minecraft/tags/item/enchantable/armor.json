@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "progressionmod:copper_helmet",
+    "progressionmod:copper_chestplate",
+    "progressionmod:copper_leggings",
+    "progressionmod:copper_boots",
+    "progressionmod:amethyst_helmet",
+    "progressionmod:amethyst_chestplate",
+    "progressionmod:amethyst_leggings",
+    "progressionmod:amethyst_boots",
+    "progressionmod:endium_helmet",
+    "progressionmod:endium_chestplate",
+    "progressionmod:endium_leggings",
+    "progressionmod:endium_boots"
+  ]
+}

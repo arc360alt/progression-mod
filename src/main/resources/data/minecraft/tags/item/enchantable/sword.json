@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "progressionmod:flint_sword",
+    "progressionmod:copper_sword",
+    "progressionmod:amethyst_sword",
+    "progressionmod:endium_sword"
+  ]
+}

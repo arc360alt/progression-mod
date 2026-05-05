@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "progressionmod:flint_pickaxe",
+    "progressionmod:flint_axe",
+    "progressionmod:flint_shovel",
+    "progressionmod:flint_hoe",
+    "progressionmod:copper_pickaxe",
+    "progressionmod:copper_axe",
+    "progressionmod:copper_shovel",
+    "progressionmod:copper_hoe",
+    "progressionmod:amethyst_pickaxe",
+    "progressionmod:amethyst_axe",
+    "progressionmod:amethyst_shovel",
+    "progressionmod:amethyst_hoe",
+    "progressionmod:endium_pickaxe",
+    "progressionmod:endium_axe",
+    "progressionmod:endium_shovel",
+    "progressionmod:endium_hoe"
+  ]
+}
