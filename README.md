@@ -12,10 +12,10 @@
 <div>
 
 - Flint tools added
-- Copper tools backported to 1.21.11
 - Full on progression system that requires you to have the past tier to mine the new ore
 - A bunch of QOL features like Mod Menu support and tooltips that tell you if you can mine that material or not
 - Added a full new Amethyst tool and armor tier that's a level above diamond and is NEEDED to mine netherite.
+- New endium ore with armor and tool sets (Above netherite)
 
 </div>
 <h2 align="center">Progression:</h2>
