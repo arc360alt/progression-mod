@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "progressionmod:copper_helmet",
     "progressionmod:amethyst_helmet",
     "progressionmod:endium_helmet"
   ]

@@ -54,7 +54,7 @@ public class PlayerHandBreakMixin {
              || state.isOf(net.minecraft.block.Blocks.CHERRY_WOOD)) {
                 cir.setReturnValue(0.001f);
                 if (ModConfig.get().showHandBreakWarning) {
-                    long now = player.getWorld().getTime();
+                    long now = player.getEntityWorld().getTime();
                     if (now - lastWarnTime > 40) {
                         player.sendMessage(
                                 Text.literal("✋ You need at least a Flint Axe to chop wood!")

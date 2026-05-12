@@ -37,48 +37,6 @@ public class ModItems {
             new Item(new Item.Settings().registryKey(key("flint_sword"))
                     .sword(FlintToolMaterial.INSTANCE, 3.0f, -2.4f)));
 
-    // ── Copper Tools ─────────────────────────────────────────────────────────
-    public static final Item COPPER_AXE = register("copper_axe",
-            new Item(new Item.Settings().registryKey(key("copper_axe"))
-                    .axe(CopperToolMaterial.INSTANCE, 6.0f, -3.1f)));
-
-    public static final Item COPPER_PICKAXE = register("copper_pickaxe",
-            new Item(new Item.Settings().registryKey(key("copper_pickaxe"))
-                    .pickaxe(CopperToolMaterial.INSTANCE, 1.0f, -2.8f)));
-
-    public static final Item COPPER_SHOVEL = register("copper_shovel",
-            new Item(new Item.Settings().registryKey(key("copper_shovel"))
-                    .shovel(CopperToolMaterial.INSTANCE, 1.5f, -3.0f)));
-
-    public static final Item COPPER_HOE = register("copper_hoe",
-            new Item(new Item.Settings().registryKey(key("copper_hoe"))
-                    .hoe(CopperToolMaterial.INSTANCE, -2.0f, -1.0f)));
-
-    public static final Item COPPER_SWORD = register("copper_sword",
-            new Item(new Item.Settings().registryKey(key("copper_sword"))
-                    .sword(CopperToolMaterial.INSTANCE, 3.0f, -2.4f)));
-
-    // ── Copper Armor ─────────────────────────────────────────────────────────
-    public static final Item COPPER_HELMET = register("copper_helmet",
-            new Item(new Item.Settings().registryKey(key("copper_helmet"))
-                    .armor(CopperArmorMaterial.INSTANCE, EquipmentType.HELMET)
-                    .maxDamage(EquipmentType.HELMET.getMaxDamage(CopperArmorMaterial.BASE_DURABILITY))));
-
-    public static final Item COPPER_CHESTPLATE = register("copper_chestplate",
-            new Item(new Item.Settings().registryKey(key("copper_chestplate"))
-                    .armor(CopperArmorMaterial.INSTANCE, EquipmentType.CHESTPLATE)
-                    .maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(CopperArmorMaterial.BASE_DURABILITY))));
-
-    public static final Item COPPER_LEGGINGS = register("copper_leggings",
-            new Item(new Item.Settings().registryKey(key("copper_leggings"))
-                    .armor(CopperArmorMaterial.INSTANCE, EquipmentType.LEGGINGS)
-                    .maxDamage(EquipmentType.LEGGINGS.getMaxDamage(CopperArmorMaterial.BASE_DURABILITY))));
-
-    public static final Item COPPER_BOOTS = register("copper_boots",
-            new Item(new Item.Settings().registryKey(key("copper_boots"))
-                    .armor(CopperArmorMaterial.INSTANCE, EquipmentType.BOOTS)
-                    .maxDamage(EquipmentType.BOOTS.getMaxDamage(CopperArmorMaterial.BASE_DURABILITY))));
-
     // ── Amethyst Raw/Smelted ─────────────────────────────────────────────────
     public static final Item RAW_AMETHYST = register("raw_amethyst",
             new Item(new Item.Settings().registryKey(key("raw_amethyst"))));

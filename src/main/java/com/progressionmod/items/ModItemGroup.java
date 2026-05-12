@@ -4,6 +4,7 @@ import com.progressionmod.ProgressionMod;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -23,16 +24,16 @@ public class ModItemGroup {
                 entries.add(ModItems.FLINT_SHOVEL);
                 entries.add(ModItems.FLINT_SWORD);
                 entries.add(ModItems.FLINT_HOE);
-                // Copper tools & armor
-                entries.add(ModItems.COPPER_AXE);
-                entries.add(ModItems.COPPER_PICKAXE);
-                entries.add(ModItems.COPPER_SHOVEL);
-                entries.add(ModItems.COPPER_SWORD);
-                entries.add(ModItems.COPPER_HOE);
-                entries.add(ModItems.COPPER_HELMET);
-                entries.add(ModItems.COPPER_CHESTPLATE);
-                entries.add(ModItems.COPPER_LEGGINGS);
-                entries.add(ModItems.COPPER_BOOTS);
+                // Vanilla copper tools & armor (added in 1.21.9)
+                entries.add(Items.COPPER_AXE);
+                entries.add(Items.COPPER_PICKAXE);
+                entries.add(Items.COPPER_SHOVEL);
+                entries.add(Items.COPPER_SWORD);
+                entries.add(Items.COPPER_HOE);
+                entries.add(Items.COPPER_HELMET);
+                entries.add(Items.COPPER_CHESTPLATE);
+                entries.add(Items.COPPER_LEGGINGS);
+                entries.add(Items.COPPER_BOOTS);
                 // Amethyst materials & ores
                 entries.add(ModItems.AMETHYST_ORE_ITEM);
                 entries.add(ModItems.DEEPSLATE_AMETHYST_ORE_ITEM);

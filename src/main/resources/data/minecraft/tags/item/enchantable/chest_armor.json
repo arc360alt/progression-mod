@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "progressionmod:copper_chestplate",
     "progressionmod:amethyst_chestplate",
     "progressionmod:endium_chestplate"
   ]

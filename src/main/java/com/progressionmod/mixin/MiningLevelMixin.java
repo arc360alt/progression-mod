@@ -25,7 +25,6 @@ public class MiningLevelMixin {
         Item heldItem = held.getItem();
 
         int toolTier = getToolTier(heldItem);
-        if (toolTier < 0) return;
 
         // Stone-tier blocks — require Wood (2)
         if (isStoneBlock(state)) {
@@ -119,8 +118,8 @@ public class MiningLevelMixin {
         if (item == Items.STONE_PICKAXE       || item == Items.STONE_AXE
          || item == Items.STONE_SHOVEL)                                          return 3;
 
-        if (item == ModItems.COPPER_PICKAXE   || item == ModItems.COPPER_AXE
-         || item == ModItems.COPPER_SHOVEL    || item == ModItems.COPPER_HOE)   return 4;
+        if (item == Items.COPPER_PICKAXE      || item == Items.COPPER_AXE
+         || item == Items.COPPER_SHOVEL       || item == Items.COPPER_HOE)      return 4;
 
         if (item == Items.IRON_PICKAXE        || item == Items.IRON_AXE
          || item == Items.IRON_SHOVEL)                                           return 5;
@@ -206,7 +205,7 @@ public class MiningLevelMixin {
     private long lastMessageTime = 0;
 
     private void sendTierMessage(PlayerEntity player, String message) {
-        long now = player.getWorld().getTime();
+        long now = player.getEntityWorld().getTime();
         if (now - lastMessageTime > 40) {
             player.sendMessage(Text.literal("⛏ " + message).formatted(Formatting.RED), true);
             lastMessageTime = now;

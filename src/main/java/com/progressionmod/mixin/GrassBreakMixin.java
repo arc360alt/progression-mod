@@ -22,7 +22,7 @@ public class GrassBreakMixin {
 
     @Inject(method = "tryBreakBlock", at = @At("HEAD"))
     private void onTryBreakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        BlockState state = player.getWorld().getBlockState(pos);
+        BlockState state = player.getEntityWorld().getBlockState(pos);
 
         if (state.isOf(Blocks.SHORT_GRASS) || state.isOf(Blocks.TALL_GRASS)) {
             ItemStack held = player.getMainHandStack();

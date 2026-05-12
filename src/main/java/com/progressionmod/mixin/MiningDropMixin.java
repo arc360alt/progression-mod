@@ -23,7 +23,7 @@ public class MiningDropMixin {
 
     @Inject(method = "tryBreakBlock", at = @At("HEAD"), cancellable = true)
     private void preventWrongTierMining(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        BlockState state = player.getWorld().getBlockState(pos);
+        BlockState state = player.getEntityWorld().getBlockState(pos);
         Item held = player.getMainHandStack().getItem();
         int tier = getToolTier(held);
 
@@ -32,8 +32,6 @@ public class MiningDropMixin {
         }
 
         if (isEndiumOre(state) && tier < 9) { cir.setReturnValue(false); return; }
-
-        if (tier < 0) return;
 
         if (isCopperBlock(state)    && tier < 3) { cir.setReturnValue(false); return; }
         if (isIronBlock(state)      && tier < 4) { cir.setReturnValue(false); return; }
@@ -50,8 +48,8 @@ public class MiningDropMixin {
          || item == Items.WOODEN_SHOVEL)                                         return 2;
         if (item == Items.STONE_PICKAXE       || item == Items.STONE_AXE
          || item == Items.STONE_SHOVEL)                                          return 3;
-        if (item == ModItems.COPPER_PICKAXE   || item == ModItems.COPPER_AXE
-         || item == ModItems.COPPER_SHOVEL)                                      return 4;
+        if (item == Items.COPPER_PICKAXE      || item == Items.COPPER_AXE
+         || item == Items.COPPER_SHOVEL)                                         return 4;
         if (item == Items.IRON_PICKAXE        || item == Items.IRON_AXE
          || item == Items.IRON_SHOVEL)                                           return 5;
         if (item == Items.GOLDEN_PICKAXE      || item == Items.GOLDEN_AXE

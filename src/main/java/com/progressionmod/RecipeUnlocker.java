@@ -27,15 +27,15 @@ public class RecipeUnlocker {
         );
 
         List<String> allCopperRecipes = List.of(
-                "progressionmod:copper_axe",
-                "progressionmod:copper_pickaxe",
-                "progressionmod:copper_shovel",
-                "progressionmod:copper_sword",
-                "progressionmod:copper_hoe",
-                "progressionmod:copper_helmet",
-                "progressionmod:copper_chestplate",
-                "progressionmod:copper_leggings",
-                "progressionmod:copper_boots"
+                "minecraft:copper_axe",
+                "minecraft:copper_pickaxe",
+                "minecraft:copper_shovel",
+                "minecraft:copper_sword",
+                "minecraft:copper_hoe",
+                "minecraft:copper_helmet",
+                "minecraft:copper_chestplate",
+                "minecraft:copper_leggings",
+                "minecraft:copper_boots"
         );
 
         List<String> allAmethystRecipes = List.of(
