@@ -2,49 +2,36 @@ package com.progressionmod;
 
 import com.progressionmod.items.ModItems;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.condition.MatchToolLootCondition;
-import net.minecraft.loot.condition.RandomChanceLootCondition;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 public class GrassStringLoot {
     public static void register() {
-        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, holder) -> {
+            Identifier tableId = key.identifier();
 
-            // getLootTableKey() returns Optional<RegistryKey<LootTable>> in 1.21.5
-            Identifier tableId = key.getValue();
-
-            boolean isShortGrass = Blocks.SHORT_GRASS.getLootTableKey()
-                    .map(k -> k.getValue().equals(tableId))
-                    .orElse(false);
-
-            boolean isTallGrass = tableId.equals(Identifier.of("minecraft", "blocks/tall_grass"));
+            boolean isShortGrass = tableId.equals(Identifier.fromNamespaceAndPath("minecraft", "blocks/short_grass"));
+            boolean isTallGrass  = tableId.equals(Identifier.fromNamespaceAndPath("minecraft", "blocks/tall_grass"));
 
             if (isShortGrass || isTallGrass) {
-                // In 1.21.5, ItemPredicate.Builder.items() needs a RegistryEntryLookup<Item>
-                // obtained from the registries wrapper passed in by the loot event.
-                var itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
+                var itemGetter = holder.lookupOrThrow(Registries.ITEM);
+                LootPool.Builder stringPool = LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .when(LootItemRandomChanceCondition.randomChance(0.25f))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemGetter, ModItems.FLINT_SWORD)))
+                        .add(LootItem.lootTableItem(Items.STRING)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))));
 
-                LootPool.Builder stringPool = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.25f))
-                        .conditionally(MatchToolLootCondition.builder(
-                                ItemPredicate.Builder.create()
-                                        .items(itemLookup, ModItems.FLINT_SWORD)
-                        ))
-                        .with(ItemEntry.builder(Items.STRING))
-                        .apply(SetCountLootFunction.builder(
-                                UniformLootNumberProvider.create(1, 2)));
-
-                tableBuilder.pool(stringPool);
+                tableBuilder.withPool(stringPool);
             }
         });
     }

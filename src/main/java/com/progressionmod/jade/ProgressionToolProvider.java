@@ -1,11 +1,11 @@
 package com.progressionmod.jade;
 
 import com.progressionmod.blocks.ModBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
@@ -14,7 +14,7 @@ import snownee.jade.api.config.IPluginConfig;
 public enum ProgressionToolProvider implements IBlockComponentProvider {
     INSTANCE;
 
-    public static final Identifier ID = Identifier.of("progressionmod", "required_tool");
+    public static final Identifier ID = Identifier.fromNamespaceAndPath("progressionmod", "required_tool");
 
     @Override
     public Identifier getUid() {
@@ -28,9 +28,9 @@ public enum ProgressionToolProvider implements IBlockComponentProvider {
         if (translationKey == null) return;
 
         tooltip.add(
-            Text.translatable("jade.progressionmod.required_tool",
-                Text.translatable(translationKey).formatted(Formatting.YELLOW))
-                .formatted(Formatting.GRAY)
+            Component.translatable("jade.progressionmod.required_tool",
+                Component.translatable(translationKey).withStyle(ChatFormatting.YELLOW))
+                .withStyle(ChatFormatting.GRAY)
         );
     }
 
@@ -46,45 +46,45 @@ public enum ProgressionToolProvider implements IBlockComponentProvider {
     }
 
     private boolean isCopperBlock(BlockState state) {
-        return state.isOf(Blocks.COPPER_ORE)
-            || state.isOf(Blocks.DEEPSLATE_COPPER_ORE)
-            || state.isOf(Blocks.RAW_COPPER_BLOCK);
+        return state.is(Blocks.COPPER_ORE)
+            || state.is(Blocks.DEEPSLATE_COPPER_ORE)
+            || state.is(Blocks.RAW_COPPER_BLOCK);
     }
 
     private boolean isIronBlock(BlockState state) {
-        return state.isOf(Blocks.IRON_ORE)
-            || state.isOf(Blocks.DEEPSLATE_IRON_ORE)
-            || state.isOf(Blocks.RAW_IRON_BLOCK)
-            || state.isOf(Blocks.LAPIS_ORE)
-            || state.isOf(Blocks.DEEPSLATE_LAPIS_ORE)
-            || state.isOf(Blocks.LAPIS_BLOCK);
+        return state.is(Blocks.IRON_ORE)
+            || state.is(Blocks.DEEPSLATE_IRON_ORE)
+            || state.is(Blocks.RAW_IRON_BLOCK)
+            || state.is(Blocks.LAPIS_ORE)
+            || state.is(Blocks.DEEPSLATE_LAPIS_ORE)
+            || state.is(Blocks.LAPIS_BLOCK);
     }
 
     private boolean isGoldBlock(BlockState state) {
-        return state.isOf(Blocks.GOLD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_GOLD_ORE)
-            || state.isOf(Blocks.RAW_GOLD_BLOCK)
-            || state.isOf(Blocks.REDSTONE_ORE)
-            || state.isOf(Blocks.DEEPSLATE_REDSTONE_ORE)
-            || state.isOf(Blocks.EMERALD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_EMERALD_ORE);
+        return state.is(Blocks.GOLD_ORE)
+            || state.is(Blocks.DEEPSLATE_GOLD_ORE)
+            || state.is(Blocks.RAW_GOLD_BLOCK)
+            || state.is(Blocks.REDSTONE_ORE)
+            || state.is(Blocks.DEEPSLATE_REDSTONE_ORE)
+            || state.is(Blocks.EMERALD_ORE)
+            || state.is(Blocks.DEEPSLATE_EMERALD_ORE);
     }
 
     private boolean isDiamondBlock(BlockState state) {
-        return state.isOf(Blocks.DIAMOND_ORE)
-            || state.isOf(Blocks.DEEPSLATE_DIAMOND_ORE);
+        return state.is(Blocks.DIAMOND_ORE)
+            || state.is(Blocks.DEEPSLATE_DIAMOND_ORE);
     }
 
     private boolean isAmethystOre(BlockState state) {
-        return state.isOf(ModBlocks.AMETHYST_ORE)
-            || state.isOf(ModBlocks.DEEPSLATE_AMETHYST_ORE);
+        return state.is(ModBlocks.AMETHYST_ORE)
+            || state.is(ModBlocks.DEEPSLATE_AMETHYST_ORE);
     }
 
     private boolean isNetheriteBlock(BlockState state) {
-        return state.isOf(Blocks.ANCIENT_DEBRIS);
+        return state.is(Blocks.ANCIENT_DEBRIS);
     }
 
     private boolean isEndiumOre(BlockState state) {
-        return state.isOf(ModBlocks.ENDIUM_ORE);
+        return state.is(ModBlocks.ENDIUM_ORE);
     }
 }

@@ -1,56 +1,44 @@
 package com.progressionmod.blocks;
 
 import com.progressionmod.ProgressionMod;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.loot.LootTable;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-
-import java.util.Optional;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ModBlocks {
 
     public static final Block AMETHYST_ORE = register("amethyst_ore",
             new AmethystOreBlock(
-                    AbstractBlock.Settings.copy(Blocks.IRON_ORE)
-                            .registryKey(RegistryKey.of(RegistryKeys.BLOCK,
-                                    Identifier.of(ProgressionMod.MOD_ID, "amethyst_ore")))
-                            .lootTable(Optional.of(RegistryKey.of(RegistryKeys.LOOT_TABLE,
-                                    Identifier.of(ProgressionMod.MOD_ID, "blocks/amethyst_ore"))))
-                            .hardness(3.0f)
-                            .resistance(3.0f)
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(ProgressionMod.MOD_ID, "amethyst_ore")))
+                            .strength(3.0f, 3.0f)
             ));
 
     public static final Block DEEPSLATE_AMETHYST_ORE = register("deepslate_amethyst_ore",
             new AmethystOreBlock(
-                    AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)
-                            .registryKey(RegistryKey.of(RegistryKeys.BLOCK,
-                                    Identifier.of(ProgressionMod.MOD_ID, "deepslate_amethyst_ore")))
-                            .lootTable(Optional.of(RegistryKey.of(RegistryKeys.LOOT_TABLE,
-                                    Identifier.of(ProgressionMod.MOD_ID, "blocks/deepslate_amethyst_ore"))))
-                            .hardness(4.5f)
-                            .resistance(3.0f)
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(ProgressionMod.MOD_ID, "deepslate_amethyst_ore")))
+                            .strength(4.5f, 3.0f)
             ));
 
     public static final Block ENDIUM_ORE = register("endium_ore",
             new EndiumOreBlock(
-                    AbstractBlock.Settings.copy(Blocks.END_STONE)
-                            .registryKey(RegistryKey.of(RegistryKeys.BLOCK,
-                                    Identifier.of(ProgressionMod.MOD_ID, "endium_ore")))
-                            .lootTable(Optional.of(RegistryKey.of(RegistryKeys.LOOT_TABLE,
-                                    Identifier.of(ProgressionMod.MOD_ID, "blocks/endium_ore"))))
-                            .hardness(5.0f)
-                            .resistance(6.0f)
-                            .requiresTool()
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(ProgressionMod.MOD_ID, "endium_ore")))
+                            .strength(5.0f, 6.0f)
+                            .requiresCorrectToolForDrops()
             ));
 
     private static Block register(String name, Block block) {
-        return Registry.register(Registries.BLOCK, Identifier.of(ProgressionMod.MOD_ID, name), block);
+        return Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(ProgressionMod.MOD_ID, name), block);
     }
 
     public static void registerBlocks() {

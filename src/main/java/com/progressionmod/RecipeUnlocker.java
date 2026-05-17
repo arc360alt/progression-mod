@@ -1,13 +1,13 @@
 package com.progressionmod;
 
 import com.progressionmod.items.ModItems;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.HashMap;
 import java.util.List;
@@ -75,15 +75,15 @@ public class RecipeUnlocker {
         UNLOCK_MAP.put(Items.OAK_LEAVES, List.of("progressionmod:sticks_from_leaves"));
     }
 
-    public static void tryUnlock(ServerPlayerEntity player, Item pickedUp) {
+    @SuppressWarnings("unchecked")
+    public static void tryUnlock(ServerPlayer player, Item pickedUp) {
         List<String> toUnlock = UNLOCK_MAP.get(pickedUp);
         if (toUnlock == null) return;
 
-        List<RegistryKey<Recipe<?>>> ids = toUnlock.stream()
-                .map(id -> RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(id)))
+        var keys = toUnlock.stream()
+                .map(id -> ResourceKey.<Recipe<?>>create(Registries.RECIPE, Identifier.parse(id)))
                 .toList();
-
-        player.unlockRecipes(ids);
+        player.awardRecipesByKey(keys);
     }
 
     public static void register() {

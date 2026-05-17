@@ -1,15 +1,11 @@
 package com.progressionmod.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
-/**
- * Simple block class for Amethyst Ore and Deepslate Amethyst Ore.
- * Loot tables handle the drops (raw amethyst).
- */
 public class AmethystOreBlock extends Block {
 
-    public AmethystOreBlock(AbstractBlock.Settings settings) {
-        super(settings);
+    public AmethystOreBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 }

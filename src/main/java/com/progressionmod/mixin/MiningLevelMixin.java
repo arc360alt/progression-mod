@@ -1,32 +1,33 @@
 package com.progressionmod.mixin;
 
+import com.progressionmod.ModConfig;
 import com.progressionmod.blocks.ModBlocks;
 import com.progressionmod.items.ModItems;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.*;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import com.progressionmod.ModConfig;
-import net.minecraft.block.Blocks;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public class MiningLevelMixin {
 
-    @Inject(method = "getBlockBreakingSpeed", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getDestroySpeed", at = @At("RETURN"), cancellable = true)
     private void enforceTierProgression(BlockState state, CallbackInfoReturnable<Float> cir) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-        ItemStack held = player.getMainHandStack();
+        Player player = (Player) (Object) this;
+        ItemStack held = player.getMainHandItem();
         Item heldItem = held.getItem();
 
         int toolTier = getToolTier(heldItem);
 
-        // Stone-tier blocks — require Wood (2)
         if (isStoneBlock(state)) {
             if (toolTier < 2) {
                 cir.setReturnValue(0.001f);
@@ -36,7 +37,6 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Copper ore — require Stone (3)
         if (isCopperBlock(state)) {
             if (toolTier < 3) {
                 cir.setReturnValue(0.001f);
@@ -46,7 +46,6 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Iron ore + Lapis — require Copper (4)
         if (isIronBlock(state)) {
             if (toolTier < 4) {
                 cir.setReturnValue(0.001f);
@@ -56,7 +55,6 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Gold ore + Redstone + Emerald — require Iron (5)
         if (isGoldBlock(state)) {
             if (toolTier < 5) {
                 cir.setReturnValue(0.001f);
@@ -66,7 +64,6 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Diamond ore — require Gold (6)
         if (isDiamondBlock(state)) {
             if (toolTier < 6) {
                 cir.setReturnValue(0.001f);
@@ -76,7 +73,6 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Amethyst ore — require Diamond (7)
         if (isAmethystOreBlock(state)) {
             if (toolTier < 7) {
                 cir.setReturnValue(0.001f);
@@ -86,7 +82,6 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Ancient debris — require Amethyst (8)
         if (isNetheriteBlock(state)) {
             if (toolTier < 8) {
                 cir.setReturnValue(0.001f);
@@ -96,7 +91,6 @@ public class MiningLevelMixin {
             return;
         }
 
-        // Endium ore — require Netherite (9)
         if (isEndiumOreBlock(state)) {
             if (toolTier < 9) {
                 cir.setReturnValue(0.001f);
@@ -107,7 +101,6 @@ public class MiningLevelMixin {
         }
     }
 
-    // ── Tier mapping ──────────────────────────────────────────────────────────
     private int getToolTier(Item item) {
         if (item == ModItems.FLINT_PICKAXE    || item == ModItems.FLINT_AXE
          || item == ModItems.FLINT_SHOVEL     || item == ModItems.FLINT_HOE)    return 1;
@@ -139,10 +132,8 @@ public class MiningLevelMixin {
         return -1;
     }
 
-    // ── Block category checks ─────────────────────────────────────────────────
-
     private boolean isStoneBlock(BlockState state) {
-        return state.isIn(BlockTags.PICKAXE_MINEABLE)
+        return state.is(BlockTags.MINEABLE_WITH_PICKAXE)
                 && !isCopperBlock(state)
                 && !isIronBlock(state)
                 && !isGoldBlock(state)
@@ -154,60 +145,60 @@ public class MiningLevelMixin {
     }
 
     private boolean isCopperBlock(BlockState state) {
-        return state.isOf(Blocks.COPPER_ORE)
-            || state.isOf(Blocks.DEEPSLATE_COPPER_ORE)
-            || state.isOf(Blocks.RAW_COPPER_BLOCK);
+        return state.is(Blocks.COPPER_ORE)
+            || state.is(Blocks.DEEPSLATE_COPPER_ORE)
+            || state.is(Blocks.RAW_COPPER_BLOCK);
     }
 
     private boolean isIronBlock(BlockState state) {
-        return state.isOf(Blocks.IRON_ORE)
-            || state.isOf(Blocks.DEEPSLATE_IRON_ORE)
-            || state.isOf(Blocks.RAW_IRON_BLOCK)
-            || state.isOf(Blocks.LAPIS_ORE)
-            || state.isOf(Blocks.DEEPSLATE_LAPIS_ORE)
-            || state.isOf(Blocks.LAPIS_BLOCK);
+        return state.is(Blocks.IRON_ORE)
+            || state.is(Blocks.DEEPSLATE_IRON_ORE)
+            || state.is(Blocks.RAW_IRON_BLOCK)
+            || state.is(Blocks.LAPIS_ORE)
+            || state.is(Blocks.DEEPSLATE_LAPIS_ORE)
+            || state.is(Blocks.LAPIS_BLOCK);
     }
 
     private boolean isGoldBlock(BlockState state) {
-        return state.isOf(Blocks.GOLD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_GOLD_ORE)
-            || state.isOf(Blocks.RAW_GOLD_BLOCK)
-            || state.isOf(Blocks.REDSTONE_ORE)
-            || state.isOf(Blocks.DEEPSLATE_REDSTONE_ORE)
-            || state.isOf(Blocks.EMERALD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_EMERALD_ORE);
+        return state.is(Blocks.GOLD_ORE)
+            || state.is(Blocks.DEEPSLATE_GOLD_ORE)
+            || state.is(Blocks.RAW_GOLD_BLOCK)
+            || state.is(Blocks.REDSTONE_ORE)
+            || state.is(Blocks.DEEPSLATE_REDSTONE_ORE)
+            || state.is(Blocks.EMERALD_ORE)
+            || state.is(Blocks.DEEPSLATE_EMERALD_ORE);
     }
 
     private boolean isDiamondBlock(BlockState state) {
-        return state.isOf(Blocks.DIAMOND_ORE)
-            || state.isOf(Blocks.DEEPSLATE_DIAMOND_ORE);
+        return state.is(Blocks.DIAMOND_ORE)
+            || state.is(Blocks.DEEPSLATE_DIAMOND_ORE);
     }
 
     private boolean isAmethystOreBlock(BlockState state) {
-        return state.isOf(ModBlocks.AMETHYST_ORE)
-            || state.isOf(ModBlocks.DEEPSLATE_AMETHYST_ORE);
+        return state.is(ModBlocks.AMETHYST_ORE)
+            || state.is(ModBlocks.DEEPSLATE_AMETHYST_ORE);
     }
 
     private boolean isNetheriteBlock(BlockState state) {
-        return state.isOf(Blocks.ANCIENT_DEBRIS);
+        return state.is(Blocks.ANCIENT_DEBRIS);
     }
 
     private boolean isEndiumOreBlock(BlockState state) {
-        return state.isOf(ModBlocks.ENDIUM_ORE);
+        return state.is(ModBlocks.ENDIUM_ORE);
     }
 
     private boolean isObsidianBlock(BlockState state) {
-        return state.isOf(Blocks.OBSIDIAN)
-            || state.isOf(Blocks.CRYING_OBSIDIAN);
+        return state.is(Blocks.OBSIDIAN)
+            || state.is(Blocks.CRYING_OBSIDIAN);
     }
 
-    // ── Message throttle ──────────────────────────────────────────────────────
     private long lastMessageTime = 0;
 
-    private void sendTierMessage(PlayerEntity player, String message) {
-        long now = player.getEntityWorld().getTime();
+    private void sendTierMessage(Player player, String message) {
+        long now = player.level().getGameTime();
         if (now - lastMessageTime > 40) {
-            player.sendMessage(Text.literal("⛏ " + message).formatted(Formatting.RED), true);
+            player.sendOverlayMessage(
+                    Component.literal("⛏ " + message).withStyle(ChatFormatting.RED));
             lastMessageTime = now;
         }
     }

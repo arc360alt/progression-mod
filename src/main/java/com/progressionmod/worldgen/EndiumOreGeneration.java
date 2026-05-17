@@ -1,34 +1,27 @@
 package com.progressionmod.worldgen;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-/**
- * Registers Endium Ore generation exclusively in The End dimension biomes.
- * The actual ore config is in data/progressionmod/worldgen/configured_feature/endium_ore.json
- * and data/progressionmod/worldgen/placed_feature/endium_ore.json
- */
 public class EndiumOreGeneration {
 
-    private static final RegistryKey<PlacedFeature> ENDIUM_ORE =
-            RegistryKey.of(RegistryKeys.PLACED_FEATURE,
-                    Identifier.of("progressionmod", "endium_ore"));
+    private static final ResourceKey<PlacedFeature> ENDIUM_ORE =
+            ResourceKey.create(Registries.PLACED_FEATURE,
+                    Identifier.fromNamespaceAndPath("progressionmod", "endium_ore"));
 
     public static void register() {
-        // Only spawn in The End — small islands and the main island biome
         BiomeModifications.addFeature(
-                ctx -> ctx.getBiomeKey().equals(BiomeKeys.THE_END)
-                    || ctx.getBiomeKey().equals(BiomeKeys.END_HIGHLANDS)
-                    || ctx.getBiomeKey().equals(BiomeKeys.END_MIDLANDS)
-                    || ctx.getBiomeKey().equals(BiomeKeys.END_BARRENS)
-                    || ctx.getBiomeKey().equals(BiomeKeys.SMALL_END_ISLANDS),
-                GenerationStep.Feature.UNDERGROUND_ORES,
+                ctx -> ctx.getBiomeKey().equals(Biomes.THE_END)
+                    || ctx.getBiomeKey().equals(Biomes.END_HIGHLANDS)
+                    || ctx.getBiomeKey().equals(Biomes.END_MIDLANDS)
+                    || ctx.getBiomeKey().equals(Biomes.END_BARRENS)
+                    || ctx.getBiomeKey().equals(Biomes.SMALL_END_ISLANDS),
+                GenerationStep.Decoration.UNDERGROUND_ORES,
                 ENDIUM_ORE
         );
     }

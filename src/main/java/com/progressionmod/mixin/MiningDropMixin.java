@@ -2,29 +2,29 @@ package com.progressionmod.mixin;
 
 import com.progressionmod.blocks.ModBlocks;
 import com.progressionmod.items.ModItems;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.network.ServerPlayerInteractionManager;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerPlayerGameMode;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ServerPlayerInteractionManager.class)
+@Mixin(ServerPlayerGameMode.class)
 public class MiningDropMixin {
 
     @Shadow
-    protected ServerPlayerEntity player;
+    protected ServerPlayer player;
 
-    @Inject(method = "tryBreakBlock", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "destroyBlock", at = @At("HEAD"), cancellable = true)
     private void preventWrongTierMining(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        BlockState state = player.getEntityWorld().getBlockState(pos);
-        Item held = player.getMainHandStack().getItem();
+        BlockState state = player.level().getBlockState(pos);
+        Item held = player.getMainHandItem().getItem();
         int tier = getToolTier(held);
 
         if (isEndiumOre(state)) {
@@ -64,45 +64,45 @@ public class MiningDropMixin {
     }
 
     private boolean isCopperBlock(BlockState state) {
-        return state.isOf(Blocks.COPPER_ORE)
-            || state.isOf(Blocks.DEEPSLATE_COPPER_ORE)
-            || state.isOf(Blocks.RAW_COPPER_BLOCK);
+        return state.is(Blocks.COPPER_ORE)
+            || state.is(Blocks.DEEPSLATE_COPPER_ORE)
+            || state.is(Blocks.RAW_COPPER_BLOCK);
     }
 
     private boolean isIronBlock(BlockState state) {
-        return state.isOf(Blocks.IRON_ORE)
-            || state.isOf(Blocks.DEEPSLATE_IRON_ORE)
-            || state.isOf(Blocks.RAW_IRON_BLOCK)
-            || state.isOf(Blocks.LAPIS_ORE)
-            || state.isOf(Blocks.DEEPSLATE_LAPIS_ORE)
-            || state.isOf(Blocks.LAPIS_BLOCK);
+        return state.is(Blocks.IRON_ORE)
+            || state.is(Blocks.DEEPSLATE_IRON_ORE)
+            || state.is(Blocks.RAW_IRON_BLOCK)
+            || state.is(Blocks.LAPIS_ORE)
+            || state.is(Blocks.DEEPSLATE_LAPIS_ORE)
+            || state.is(Blocks.LAPIS_BLOCK);
     }
 
     private boolean isGoldBlock(BlockState state) {
-        return state.isOf(Blocks.GOLD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_GOLD_ORE)
-            || state.isOf(Blocks.RAW_GOLD_BLOCK)
-            || state.isOf(Blocks.REDSTONE_ORE)
-            || state.isOf(Blocks.DEEPSLATE_REDSTONE_ORE)
-            || state.isOf(Blocks.EMERALD_ORE)
-            || state.isOf(Blocks.DEEPSLATE_EMERALD_ORE);
+        return state.is(Blocks.GOLD_ORE)
+            || state.is(Blocks.DEEPSLATE_GOLD_ORE)
+            || state.is(Blocks.RAW_GOLD_BLOCK)
+            || state.is(Blocks.REDSTONE_ORE)
+            || state.is(Blocks.DEEPSLATE_REDSTONE_ORE)
+            || state.is(Blocks.EMERALD_ORE)
+            || state.is(Blocks.DEEPSLATE_EMERALD_ORE);
     }
 
     private boolean isDiamondBlock(BlockState state) {
-        return state.isOf(Blocks.DIAMOND_ORE)
-            || state.isOf(Blocks.DEEPSLATE_DIAMOND_ORE);
+        return state.is(Blocks.DIAMOND_ORE)
+            || state.is(Blocks.DEEPSLATE_DIAMOND_ORE);
     }
 
     private boolean isAmethystOre(BlockState state) {
-        return state.isOf(ModBlocks.AMETHYST_ORE)
-            || state.isOf(ModBlocks.DEEPSLATE_AMETHYST_ORE);
+        return state.is(ModBlocks.AMETHYST_ORE)
+            || state.is(ModBlocks.DEEPSLATE_AMETHYST_ORE);
     }
 
     private boolean isNetheriteBlock(BlockState state) {
-        return state.isOf(Blocks.ANCIENT_DEBRIS);
+        return state.is(Blocks.ANCIENT_DEBRIS);
     }
 
     private boolean isEndiumOre(BlockState state) {
-        return state.isOf(ModBlocks.ENDIUM_ORE);
+        return state.is(ModBlocks.ENDIUM_ORE);
     }
 }
