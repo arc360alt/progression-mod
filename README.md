@@ -7,7 +7,7 @@
   <a href="http://arc360hub.com"><img src="https://arc360alt.github.io/NeoCode/128x/domain_icon_bg.png" width="90" alt="Website"></a>
   <a href="https://www.notion.so/3558c68151618064bdc9eeadecaffe7f?v=3558c681516180289c2d000cae596aa3&source=copy_link"><img src="https://arc360alt.github.io/NeoCode/128x/notion_icon_bg.png" width="90" alt="Trello"></a>
 </p>
-<h3 align="center">A progression mod for 1.21.11 that makes minecraft playthroughs more fun, simplest way I can explain this mod.</h3>
+<h3 align="center">A progression mod for 26.1 that makes minecraft playthroughs more fun, simplest way I can explain this mod.</h3>
 <h2 align="center">Features:</h2>
 <div>
 
