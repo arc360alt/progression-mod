@@ -57,6 +57,7 @@ public class ModItemGroup {
                 output.accept(ModItems.ENDIUM_CHESTPLATE);
                 output.accept(ModItems.ENDIUM_LEGGINGS);
                 output.accept(ModItems.ENDIUM_BOOTS);
+                output.accept(ModItems.ENDIUM_LOCATOR);
             })
             .build()
     );

@@ -150,6 +150,12 @@ public class ModItems {
                     .humanoidArmor(EndiumArmorMaterial.INSTANCE, ArmorType.BOOTS)
                     .durability(ArmorType.BOOTS.getDurability(EndiumArmorMaterial.BASE_DURABILITY))));
 
+    // ── Endium Locator ────────────────────────────────────────────────────────
+    public static final Item ENDIUM_LOCATOR = register("endium_locator",
+            new EndiumLocatorItem(new Item.Properties()
+                    .setId(key("endium_locator"))
+                    .durability(25)));
+
     // ── Helper ───────────────────────────────────────────────────────────────
     private static Item register(String name, Item item) {
         return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(ProgressionMod.MOD_ID, name), item);

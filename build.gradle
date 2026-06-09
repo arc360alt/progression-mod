@@ -16,6 +16,10 @@ repositories {
 	maven { url "https://api.modrinth.com/maven" }
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/progressionmod.accesswidener")
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"

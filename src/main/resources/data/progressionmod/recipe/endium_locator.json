@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "BNB",
+    "DDD"
+  ],
+  "key": {
+    "D": "minecraft:diamond",
+    "B": "minecraft:diamond_block",
+    "N": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "progressionmod:endium_locator",
+    "count": 1
+  }
+}
