@@ -38,9 +38,20 @@ jobs:
           distribution: 'temurin'
           java-version: '25'
 
+      - name: Cache Gradle dependencies
+        if: steps.version_check.outputs.has_version == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Build with Gradle
         if: steps.version_check.outputs.has_version == 'true'
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon
 
       - name: List build output
         if: steps.version_check.outputs.has_version == 'true'
