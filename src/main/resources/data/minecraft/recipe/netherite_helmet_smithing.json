@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "progressionmod:amethyst_netherite_upgrade",
+  "base": "progressionmod:amethyst_helmet",
+  "addition": "#minecraft:netherite_tool_materials",
+  "result": {
+    "id": "minecraft:netherite_helmet"
+  }
+}

@@ -7,6 +7,7 @@
 
   "item.progressionmod.raw_amethyst": "Amethyst Crystal",
   "item.progressionmod.amethyst_ingot": "Amethyst Ingot",
+  "item.progressionmod.unsmelted_amethyst_alloy": "Unsmelted Amethyst Alloy",
 
   "item.progressionmod.amethyst_ore": "Amethyst Ore",
   "item.progressionmod.deepslate_amethyst_ore": "Deepslate Amethyst Ore",
@@ -25,6 +26,10 @@
   "item.progressionmod.endium_crystal": "Endium Ingot",
   "item.progressionmod.endium_ore": "Endium Ore",
   "item.progressionmod.endium_locator": "Endium Locator (WIP)",
+
+  "item.progressionmod.diamond_amethyst_upgrade": "Diamond to Amethyst Upgrade",
+  "item.progressionmod.amethyst_netherite_upgrade": "Amethyst to Netherite Upgrade",
+  "item.progressionmod.netherite_endium_upgrade": "Netherite to Endium Upgrade",
 
   "item.progressionmod.endium_axe": "Endium Axe",
   "item.progressionmod.endium_pickaxe": "Endium Pickaxe",

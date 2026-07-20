@@ -1,6 +1,7 @@
 package com.progressionmod;
 
 import com.progressionmod.blocks.ModBlocks;
+import com.progressionmod.entities.ModEntities;
 import com.progressionmod.items.EndiumLocatorItem;
 import com.progressionmod.items.ModItems;
 import com.progressionmod.items.ModItemGroup;
@@ -24,10 +25,12 @@ public class ProgressionMod implements ModInitializer {
         RecipeUnlocker.register();
         ModBlocks.registerBlocks();
         ModItems.registerItems();
+        ModEntities.register();
         ModItemGroup.registerItemGroup();
         GrassStringLoot.register();
         PrimitiveLoot.register();
         AmethystOreLoot.register();
+        SmithingTemplateLoot.register();
         AmethystOreGeneration.register();
         EndiumOreGeneration.register();
 

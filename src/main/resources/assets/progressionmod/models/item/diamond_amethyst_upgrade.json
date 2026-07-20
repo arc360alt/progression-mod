@@ -1,0 +1,4 @@
+{
+  "parent": "item/generated",
+  "textures": { "layer0": "progressionmod:item/diamond_amethyst_upgrade" }
+}

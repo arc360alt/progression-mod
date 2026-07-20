@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "progressionmod:netherite_endium_upgrade",
+  "base": "minecraft:netherite_leggings",
+  "addition": "progressionmod:endium_crystal",
+  "result": {
+    "id": "progressionmod:endium_leggings"
+  }
+}

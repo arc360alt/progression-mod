@@ -29,5 +29,6 @@
 <div align="center">
 
 - This is my first ever fabric project not using MCreator so if you find any bugs report them on the github bugs page, the link for which you can find on the sidepanel on the right.
+- If you are completly confused on how to progress in this mod, read [PROGRESSION_GUIDE.md](PROGRESSION_GUIDE.md)
 
 </div>

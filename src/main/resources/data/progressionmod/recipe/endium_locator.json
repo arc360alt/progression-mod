@@ -1,12 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "DDD",
-    "BNB",
-    "DDD"
+    "BBB",
+    "NNN",
+    "BBB"
   ],
   "key": {
-    "D": "minecraft:diamond",
     "B": "minecraft:diamond_block",
     "N": "minecraft:netherite_ingot"
   },

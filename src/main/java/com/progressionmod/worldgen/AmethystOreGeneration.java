@@ -19,11 +19,7 @@ public class AmethystOreGeneration {
                     Identifier.fromNamespaceAndPath("progressionmod", "deepslate_amethyst_ore"));
 
     public static void register() {
-        BiomeModifications.addFeature(
-                BiomeSelectors.foundInOverworld(),
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                AMETHYST_ORE
-        );
+        // Stone amethyst ore disabled — only deepslate variant spawns
         BiomeModifications.addFeature(
                 BiomeSelectors.foundInOverworld(),
                 GenerationStep.Decoration.UNDERGROUND_ORES,

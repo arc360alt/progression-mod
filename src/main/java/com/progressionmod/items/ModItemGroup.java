@@ -36,6 +36,8 @@ public class ModItemGroup {
                 output.accept(ModItems.DEEPSLATE_AMETHYST_ORE_ITEM);
                 output.accept(ModItems.RAW_AMETHYST);
                 output.accept(ModItems.AMETHYST_INGOT);
+                output.accept(ModItems.UNSMELTED_AMETHYST_ALLOY);
+                output.accept(ModItems.DIAMOND_AMETHYST_UPGRADE);
                 output.accept(ModItems.AMETHYST_AXE);
                 output.accept(ModItems.AMETHYST_PICKAXE);
                 output.accept(ModItems.AMETHYST_SHOVEL);
@@ -45,9 +47,11 @@ public class ModItemGroup {
                 output.accept(ModItems.AMETHYST_CHESTPLATE);
                 output.accept(ModItems.AMETHYST_LEGGINGS);
                 output.accept(ModItems.AMETHYST_BOOTS);
+                output.accept(ModItems.AMETHYST_NETHERITE_UPGRADE);
                 output.accept(ModItems.ENDIUM_ORE_ITEM);
                 output.accept(ModItems.RAW_ENDIUM);
                 output.accept(ModItems.ENDIUM_CRYSTAL);
+                output.accept(ModItems.NETHERITE_ENDIUM_UPGRADE);
                 output.accept(ModItems.ENDIUM_AXE);
                 output.accept(ModItems.ENDIUM_PICKAXE);
                 output.accept(ModItems.ENDIUM_SHOVEL);

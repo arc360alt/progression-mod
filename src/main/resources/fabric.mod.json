@@ -13,6 +13,9 @@
     "main": [
       "com.progressionmod.ProgressionMod"
     ],
+    "client": [
+      "com.progressionmod.ProgressionModClient"
+    ],
     "modmenu": [
       "com.progressionmod.ModMenuIntegration"
     ],

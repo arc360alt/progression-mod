@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "progressionmod:raw_amethyst",
+    "minecraft:amethyst_shard",
+    "minecraft:amethyst_shard"
+  ],
+  "result": {
+    "id": "progressionmod:unsmelted_amethyst_alloy",
+    "count": 1
+  }
+}

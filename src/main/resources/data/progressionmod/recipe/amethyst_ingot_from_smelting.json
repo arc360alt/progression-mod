@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "progressionmod:raw_amethyst",
+  "ingredient": "progressionmod:unsmelted_amethyst_alloy",
   "result": {
     "id": "progressionmod:amethyst_ingot"
   },

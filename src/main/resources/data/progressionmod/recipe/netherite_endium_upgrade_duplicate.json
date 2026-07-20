@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "#E#",
+    "###"
+  ],
+  "key": {
+    "#": "minecraft:netherite_ingot",
+    "S": "progressionmod:netherite_endium_upgrade",
+    "E": "progressionmod:endium_crystal"
+  },
+  "result": {
+    "id": "progressionmod:netherite_endium_upgrade",
+    "count": 2
+  }
+}

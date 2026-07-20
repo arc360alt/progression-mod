@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "progressionmod:item/unsmelted_amethyst_alloy"
+  }
+}

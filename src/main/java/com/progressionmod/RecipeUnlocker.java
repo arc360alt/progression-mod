@@ -39,31 +39,36 @@ public class RecipeUnlocker {
         );
 
         List<String> allAmethystRecipes = List.of(
-                "progressionmod:amethyst_axe",
-                "progressionmod:amethyst_pickaxe",
-                "progressionmod:amethyst_shovel",
-                "progressionmod:amethyst_sword",
-                "progressionmod:amethyst_hoe",
-                "progressionmod:amethyst_helmet",
-                "progressionmod:amethyst_chestplate",
-                "progressionmod:amethyst_leggings",
-                "progressionmod:amethyst_boots",
+                "progressionmod:unsmelted_amethyst_alloy",
                 "progressionmod:amethyst_ingot_from_smelting",
-                "progressionmod:amethyst_ingot_from_blasting"
+                "progressionmod:amethyst_ingot_from_blasting",
+                "progressionmod:diamond_amethyst_upgrade_duplicate",
+                "progressionmod:amethyst_axe_smithing",
+                "progressionmod:amethyst_pickaxe_smithing",
+                "progressionmod:amethyst_shovel_smithing",
+                "progressionmod:amethyst_sword_smithing",
+                "progressionmod:amethyst_hoe_smithing",
+                "progressionmod:amethyst_helmet_smithing",
+                "progressionmod:amethyst_chestplate_smithing",
+                "progressionmod:amethyst_leggings_smithing",
+                "progressionmod:amethyst_boots_smithing",
+                "progressionmod:amethyst_netherite_upgrade_duplicate"
         );
 
         List<String> allEndiumRecipes = List.of(
-                "progressionmod:endium_axe",
-                "progressionmod:endium_pickaxe",
-                "progressionmod:endium_shovel",
-                "progressionmod:endium_sword",
-                "progressionmod:endium_hoe",
-                "progressionmod:endium_helmet",
-                "progressionmod:endium_chestplate",
-                "progressionmod:endium_leggings",
-                "progressionmod:endium_boots",
                 "progressionmod:endium_crystal_from_smelting",
-                "progressionmod:endium_crystal_from_blasting"
+                "progressionmod:endium_crystal_from_blasting",
+                "progressionmod:netherite_endium_upgrade_duplicate",
+                "progressionmod:endium_axe_smithing",
+                "progressionmod:endium_pickaxe_smithing",
+                "progressionmod:endium_shovel_smithing",
+                "progressionmod:endium_sword_smithing",
+                "progressionmod:endium_hoe_smithing",
+                "progressionmod:endium_helmet_smithing",
+                "progressionmod:endium_chestplate_smithing",
+                "progressionmod:endium_leggings_smithing",
+                "progressionmod:endium_boots_smithing",
+                "progressionmod:endium_locator"
         );
 
         UNLOCK_MAP.put(Items.FLINT,           allFlintRecipes);

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "progressionmod:diamond_amethyst_upgrade",
+  "base": "minecraft:diamond_helmet",
+  "addition": "progressionmod:amethyst_ingot",
+  "result": {
+    "id": "progressionmod:amethyst_helmet"
+  }
+}

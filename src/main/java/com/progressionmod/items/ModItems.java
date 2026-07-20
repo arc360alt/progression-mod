@@ -45,6 +45,9 @@ public class ModItems {
     public static final Item AMETHYST_INGOT = register("amethyst_ingot",
             new Item(new Item.Properties().setId(key("amethyst_ingot"))));
 
+    public static final Item UNSMELTED_AMETHYST_ALLOY = register("unsmelted_amethyst_alloy",
+            new Item(new Item.Properties().setId(key("unsmelted_amethyst_alloy"))));
+
     // ── Amethyst Ore Block Items ─────────────────────────────────────────────
     public static final Item AMETHYST_ORE_ITEM = register("amethyst_ore",
             new BlockItem(ModBlocks.AMETHYST_ORE,
@@ -149,6 +152,16 @@ public class ModItems {
             new Item(new Item.Properties().setId(key("endium_boots"))
                     .humanoidArmor(EndiumArmorMaterial.INSTANCE, ArmorType.BOOTS)
                     .durability(ArmorType.BOOTS.getDurability(EndiumArmorMaterial.BASE_DURABILITY))));
+
+    // ── Smithing Upgrade Templates ────────────────────────────────────────────
+    public static final Item DIAMOND_AMETHYST_UPGRADE = register("diamond_amethyst_upgrade",
+            new Item(new Item.Properties().setId(key("diamond_amethyst_upgrade"))));
+
+    public static final Item AMETHYST_NETHERITE_UPGRADE = register("amethyst_netherite_upgrade",
+            new Item(new Item.Properties().setId(key("amethyst_netherite_upgrade"))));
+
+    public static final Item NETHERITE_ENDIUM_UPGRADE = register("netherite_endium_upgrade",
+            new Item(new Item.Properties().setId(key("netherite_endium_upgrade"))));
 
     // ── Endium Locator ────────────────────────────────────────────────────────
     public static final Item ENDIUM_LOCATOR = register("endium_locator",

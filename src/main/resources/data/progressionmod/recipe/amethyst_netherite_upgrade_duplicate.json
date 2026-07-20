@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "#N#",
+    "###"
+  ],
+  "key": {
+    "#": "progressionmod:amethyst_ingot",
+    "S": "progressionmod:amethyst_netherite_upgrade",
+    "N": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "progressionmod:amethyst_netherite_upgrade",
+    "count": 2
+  }
+}
