@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "progressionmod:endium_sword",
+    "progressionmod:endium_pickaxe",
+    "progressionmod:endium_axe",
+    "progressionmod:endium_shovel",
+    "progressionmod:endium_hoe",
+    "progressionmod:endium_helmet",
+    "progressionmod:endium_chestplate",
+    "progressionmod:endium_leggings",
+    "progressionmod:endium_boots"
+  ]
+}

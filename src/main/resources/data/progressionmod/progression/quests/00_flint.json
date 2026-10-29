@@ -1,0 +1,399 @@
+{
+  "age": "flint",
+  "quests": [
+    {
+      "id": "flint/pull_grass",
+      "title": "Pulling Weeds",
+      "description": "You can't punch trees in this world. Start small: pull up some grass by hand.",
+      "icon": "minecraft:short_grass",
+      "task": {
+        "type": "mine",
+        "target": [
+          "minecraft:short_grass",
+          "minecraft:tall_grass",
+          "minecraft:fern"
+        ],
+        "count": 10
+      },
+      "rewards": {
+        "xp": 5
+      }
+    },
+    {
+      "id": "flint/shake_trees",
+      "title": "Shake the Trees",
+      "description": "Break leaves by hand. They can drop saplings, sticks and even apples.",
+      "icon": "minecraft:oak_leaves",
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:leaves",
+        "count": 12
+      },
+      "rewards": {
+        "items": [
+          {
+            "item": "minecraft:apple",
+            "count": 2
+          }
+        ],
+        "xp": 5
+      }
+    },
+    {
+      "id": "flint/gravel",
+      "title": "Grit and Gravel",
+      "description": "Dig up gravel with your bare hands. Riverbeds and beaches are full of it.",
+      "icon": "minecraft:gravel",
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:gravel",
+        "count": 6
+      },
+      "rewards": {
+        "xp": 5
+      }
+    },
+    {
+      "id": "flint/flint",
+      "title": "Spark of Progress",
+      "description": "Gravel sometimes drops flint. Flint is the start of every tool you'll make.",
+      "icon": "minecraft:flint",
+      "requires": [
+        "flint/gravel"
+      ],
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:flint",
+        "count": 4
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/sticks",
+      "title": "Stick Shift",
+      "description": "No planks yet? Two gravel or three leaves crafts into sticks.",
+      "icon": "minecraft:stick",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:stick",
+        "count": 4
+      },
+      "rewards": {
+        "xp": 5
+      }
+    },
+    {
+      "id": "flint/knife",
+      "title": "Sharp Edge",
+      "description": "Craft a Flint Knife from flint and a stick. It's your first weapon and tool.",
+      "icon": "progressionmod:flint_sword",
+      "requires": [
+        "flint/flint",
+        "flint/sticks"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "progressionmod:flint_sword",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/string",
+      "title": "Fiber Harvest",
+      "description": "Cut grass with the Flint Knife in your hand. Sometimes it gives string.",
+      "icon": "minecraft:string",
+      "requires": [
+        "flint/knife"
+      ],
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:string",
+        "count": 2
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/axe",
+      "title": "Timber!",
+      "description": "Lash flint to a stick with string to make a Flint Axe. Now you can chop wood.",
+      "icon": "progressionmod:flint_axe",
+      "requires": [
+        "flint/string"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "progressionmod:flint_axe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/logs",
+      "title": "Lumberjack",
+      "description": "Chop down a few trees with your Flint Axe.",
+      "icon": "minecraft:oak_log",
+      "requires": [
+        "flint/axe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:logs",
+        "count": 10
+      },
+      "rewards": {
+        "items": [
+          {
+            "item": "minecraft:apple",
+            "count": 2
+          }
+        ],
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/planks",
+      "title": "Plank Walker",
+      "description": "Turn logs into planks.",
+      "icon": "minecraft:oak_planks",
+      "requires": [
+        "flint/logs"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "#minecraft:planks",
+        "count": 24
+      },
+      "rewards": {
+        "xp": 5
+      }
+    },
+    {
+      "id": "flint/crafting_table",
+      "title": "Workbench",
+      "description": "A crafting table gives you a full 3x3 grid.",
+      "icon": "minecraft:crafting_table",
+      "requires": [
+        "flint/planks"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:crafting_table",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/kit",
+      "title": "Flint Toolkit",
+      "description": "Finish the flint set: pickaxe, shovel and hoe.",
+      "icon": "progressionmod:flint_pickaxe",
+      "requires": [
+        "flint/crafting_table"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "progressionmod:flint_pickaxe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:flint_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:flint_hoe",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "flint/dirt",
+      "title": "Groundwork",
+      "description": "Dig dirt and grass with your shovel. A shovel is much faster than your hands.",
+      "icon": "minecraft:dirt",
+      "requires": [
+        "flint/kit"
+      ],
+      "task": {
+        "type": "mine",
+        "target": [
+          "minecraft:dirt",
+          "minecraft:grass_block",
+          "minecraft:coarse_dirt",
+          "minecraft:sand"
+        ],
+        "count": 32
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/hunt",
+      "title": "First Hunt",
+      "description": "Hunt a few animals with your Flint Knife for food and materials.",
+      "icon": "minecraft:porkchop",
+      "requires": [
+        "flint/knife"
+      ],
+      "task": {
+        "type": "kill",
+        "target": [
+          "minecraft:cow",
+          "minecraft:pig",
+          "minecraft:sheep",
+          "minecraft:chicken",
+          "minecraft:rabbit",
+          "minecraft:goat"
+        ],
+        "count": 4
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/eat",
+      "title": "Living Off the Land",
+      "description": "Eat something: apples, berries, raw meat, whatever you can find.",
+      "icon": "minecraft:apple",
+      "task": {
+        "type": "use",
+        "target": [
+          "minecraft:apple",
+          "minecraft:sweet_berries",
+          "minecraft:beef",
+          "minecraft:porkchop",
+          "minecraft:chicken",
+          "minecraft:mutton",
+          "minecraft:rabbit",
+          "minecraft:carrot",
+          "minecraft:potato",
+          "minecraft:melon_slice",
+          "minecraft:glow_berries"
+        ],
+        "count": 3
+      },
+      "rewards": {
+        "items": [
+          {
+            "item": "minecraft:bread",
+            "count": 3
+          }
+        ],
+        "xp": 5
+      }
+    },
+    {
+      "id": "flint/sapling",
+      "title": "Plant a Tree",
+      "description": "Tip: replant saplings to keep a forest going near your base.",
+      "icon": "minecraft:oak_sapling",
+      "requires": [
+        "flint/shake_trees"
+      ],
+      "task": {
+        "type": "use",
+        "target": "#minecraft:saplings",
+        "count": 3
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/seeds",
+      "title": "Seeds of Civilization",
+      "description": "Breaking grass drops wheat seeds. Till some dirt with a hoe and plant them.",
+      "icon": "minecraft:wheat_seeds",
+      "requires": [
+        "flint/kit"
+      ],
+      "tasks": [
+        {
+          "type": "pickup",
+          "target": "minecraft:wheat_seeds",
+          "count": 4
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:husbandry/plant_seed",
+          "label": "Plant a seed"
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "flint/bed",
+      "title": "Sweet Dreams",
+      "description": "Make a bed from wool and planks, then sleep in it to skip the night.",
+      "icon": "minecraft:red_bed",
+      "requires": [
+        "flint/crafting_table"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "#minecraft:beds",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:sleep_in_bed",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "flint/chest",
+      "title": "Storage Solution",
+      "description": "Craft a chest to keep your things safe.",
+      "icon": "minecraft:chest",
+      "requires": [
+        "flint/crafting_table"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:chest",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "flint/explore",
+      "title": "Scout the Land",
+      "description": "Explore. Visit three different biomes.",
+      "icon": "minecraft:map",
+      "task": {
+        "type": "biomes_visited",
+        "count": 3
+      },
+      "rewards": {
+        "xp": 15
+      }
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "age": "gold",
+  "quests": [
+    {
+      "id": "gold/pickaxe",
+      "title": "Golden Pickaxe",
+      "description": "Gold tools are unlocked. Here they're stronger than iron, and a gold pickaxe can mine diamonds.",
+      "icon": "minecraft:golden_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:golden_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "gold/tools",
+      "title": "Midas Touch",
+      "description": "Craft the rest of the golden set.",
+      "icon": "minecraft:golden_axe",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:golden_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:golden_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:golden_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:golden_hoe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:golden_spear",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "gold/armor",
+      "title": "Gilded Guardian",
+      "description": "Golden armor is unlocked. Piglins won't attack you while you wear a piece of it.",
+      "icon": "minecraft:golden_chestplate",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:golden_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:golden_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:golden_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:golden_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "gold/diamonds",
+      "title": "Diamonds!",
+      "description": "Mine diamond ore with your golden pickaxe. It's most common deep in the deepslate layer.",
+      "icon": "minecraft:diamond",
+      "requires": [
+        "gold/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:diamond_ores",
+        "count": 5
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "gold/golden_apple",
+      "title": "Golden Snack",
+      "description": "Craft a golden apple and eat it. It gives regeneration and absorption.",
+      "icon": "minecraft:golden_apple",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:golden_apple",
+          "count": 1
+        },
+        {
+          "type": "use",
+          "target": "minecraft:golden_apple",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "gold/golden_carrot",
+      "title": "Gourmet",
+      "description": "Golden carrots are among the most filling foods in the game.",
+      "icon": "minecraft:golden_carrot",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:golden_carrot",
+        "count": 8
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "gold/nether",
+      "title": "We Need to Go Deeper",
+      "description": "Build a nether portal from obsidian and light it with flint and steel.",
+      "icon": "minecraft:obsidian",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:story/enter_the_nether",
+        "label": "Enter the Nether"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "gold/barter",
+      "title": "Oh Shiny",
+      "description": "Throw gold ingots to a piglin to barter with it.",
+      "icon": "minecraft:gold_ingot",
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/distract_piglin",
+        "label": "Distract a piglin with gold"
+      },
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "gold/forests",
+      "title": "Fungal Forests",
+      "description": "Visit both of the Nether's forests.",
+      "icon": "minecraft:crimson_fungus",
+      "requires": [
+        "gold/nether"
+      ],
+      "tasks": [
+        {
+          "type": "biome",
+          "biome": "minecraft:crimson_forest"
+        },
+        {
+          "type": "biome",
+          "biome": "minecraft:warped_forest"
+        }
+      ],
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "gold/quartz",
+      "title": "Quartz Miner",
+      "description": "Mine nether quartz ore. Quartz is used in observers and comparators.",
+      "icon": "minecraft:quartz",
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "minecraft:nether_quartz_ore",
+        "count": 12
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "gold/nether_gold",
+      "title": "Nether Gold",
+      "description": "Nether gold ore drops gold nuggets.",
+      "icon": "minecraft:gold_nugget",
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "minecraft:nether_gold_ore",
+        "count": 6
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "gold/ghast",
+      "title": "Ghastly",
+      "description": "Kill a ghast. Hit its fireballs back at it for bonus style.",
+      "icon": "minecraft:ghast_tear",
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "kill",
+        "target": "minecraft:ghast",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "gold/return_to_sender",
+      "title": "Return to Sender",
+      "description": "Kill a ghast with its own fireball.",
+      "icon": "minecraft:fire_charge",
+      "optional": true,
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/return_to_sender",
+        "label": "Deflect a fireball into a ghast"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "gold/strider",
+      "title": "This Boat Has Legs",
+      "description": "Ride a strider across the lava, steering with a warped fungus on a stick.",
+      "icon": "minecraft:warped_fungus_on_a_stick",
+      "optional": true,
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/ride_strider",
+        "label": "Ride a strider"
+      },
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "gold/soul_fire",
+      "title": "Soul Light",
+      "description": "Torches made with soul soil or soul sand burn blue, and piglins avoid them.",
+      "icon": "minecraft:soul_torch",
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:soul_torch",
+        "count": 8
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "gold/fast_travel",
+      "title": "Subspace Bubble",
+      "description": "Each block in the Nether is eight in the Overworld. Travel far through it.",
+      "icon": "minecraft:compass",
+      "optional": true,
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/fast_travel",
+        "label": "Travel 7 km in the Overworld using the Nether"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "gold/respawn_anchor",
+      "title": "Not Quite Nine Lives",
+      "description": "Charge a respawn anchor with glowstone to set your spawn point in the Nether.",
+      "icon": "minecraft:respawn_anchor",
+      "optional": true,
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/charge_respawn_anchor",
+        "label": "Charge a respawn anchor"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "gold/hoglin",
+      "title": "Pork Chopper",
+      "description": "Hunt a hoglin in a crimson forest.",
+      "icon": "minecraft:cooked_porkchop",
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "kill",
+        "target": "minecraft:hoglin",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "gold/glowstone",
+      "title": "Glow Up",
+      "description": "Collect glowstone dust from the Nether ceiling.",
+      "icon": "minecraft:glowstone_dust",
+      "requires": [
+        "gold/nether"
+      ],
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:glowstone_dust",
+        "count": 16
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "gold/hoard",
+      "title": "Dragon's Hoard",
+      "description": "Carry 32 gold ingots at once. Ingots stored as blocks do not count.",
+      "icon": "minecraft:gold_block",
+      "task": {
+        "type": "has_item",
+        "item": "minecraft:gold_ingot",
+        "count": 32
+      },
+      "rewards": {
+        "xp": 20
+      }
+    }
+  ]
+}

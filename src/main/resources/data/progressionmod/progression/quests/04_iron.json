@@ -1,0 +1,421 @@
+{
+  "age": "iron",
+  "quests": [
+    {
+      "id": "iron/pickaxe",
+      "title": "Iron Pickaxe",
+      "description": "Iron tools are unlocked. An iron pickaxe can mine gold, redstone and emeralds.",
+      "icon": "minecraft:iron_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:iron_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "iron/tools",
+      "title": "Forged in Iron",
+      "description": "Craft the rest of the iron set.",
+      "icon": "minecraft:iron_axe",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:iron_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:iron_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:iron_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:iron_hoe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:iron_spear",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "iron/armor",
+      "title": "Suit Up",
+      "description": "Iron armor is unlocked. Craft the full set.",
+      "icon": "minecraft:iron_chestplate",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:iron_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:iron_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:iron_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:iron_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "iron/shield",
+      "title": "Shield Bearer",
+      "description": "Craft a shield and block attacks with it. Hold right-click to raise it.",
+      "icon": "minecraft:shield",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:shield",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:damage_blocked_by_shield",
+          "count": 20,
+          "divisor": 10,
+          "label": "Block 20 damage with a shield"
+        }
+      ],
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "iron/gold_ore",
+      "title": "Gold Rush",
+      "description": "Mine gold ore with your iron pickaxe.",
+      "icon": "minecraft:raw_gold",
+      "requires": [
+        "iron/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:gold_ores",
+        "count": 8
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "iron/gold_ingots",
+      "title": "Glittering Ingots",
+      "description": "Smelt raw gold into ingots. You'll need lots for the Gold Age.",
+      "icon": "minecraft:gold_ingot",
+      "requires": [
+        "iron/gold_ore"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:gold_ingot",
+        "count": 24
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "iron/redstone",
+      "title": "Redstone Engineer",
+      "description": "Mine redstone ore. Redstone is like wiring for machines.",
+      "icon": "minecraft:redstone",
+      "requires": [
+        "iron/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:redstone_ores",
+        "count": 5
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "iron/emerald",
+      "title": "Rare Find",
+      "description": "Emerald ore only appears in mountain biomes.",
+      "icon": "minecraft:emerald",
+      "optional": true,
+      "requires": [
+        "iron/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:emerald_ores",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "iron/navigation",
+      "title": "Navigator",
+      "description": "A compass points to world spawn and a clock shows the time of day.",
+      "icon": "minecraft:compass",
+      "requires": [
+        "iron/redstone",
+        "iron/gold_ingots"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:compass",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:clock",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "iron/trade",
+      "title": "Haggler",
+      "description": "Trade with a villager. Cure zombie villagers for huge discounts.",
+      "icon": "minecraft:emerald",
+      "optional": true,
+      "task": {
+        "type": "custom",
+        "target": "minecraft:traded_with_villager",
+        "count": 3
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "iron/golem",
+      "title": "Hired Help",
+      "description": "Build an iron golem: four iron blocks in a T shape with a carved pumpkin on top.",
+      "icon": "minecraft:carved_pumpkin",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:adventure/summon_iron_golem",
+        "label": "Summon an iron golem"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "iron/bell",
+      "title": "Ding Dong",
+      "description": "Ring a village bell. Villagers run inside, and raiders nearby start glowing.",
+      "icon": "minecraft:bell",
+      "optional": true,
+      "task": {
+        "type": "custom",
+        "target": "minecraft:bell_ring",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "iron/note_block",
+      "title": "Musician",
+      "description": "Play a note block, then use it again to tune it. The block underneath changes the instrument.",
+      "icon": "minecraft:note_block",
+      "requires": [
+        "iron/redstone"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:note_block",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:tune_noteblock",
+          "count": 3
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:play_noteblock",
+          "count": 3
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "iron/automation",
+      "title": "Automation",
+      "description": "Dispensers shoot arrows, place water, equip armor and more. Use one to look inside.",
+      "icon": "minecraft:dispenser",
+      "requires": [
+        "iron/redstone"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:dispenser",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:inspect_dispenser",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "iron/railway",
+      "title": "Railway Tycoon",
+      "description": "Powered rails keep minecarts moving. Build a real line and ride it.",
+      "icon": "minecraft:powered_rail",
+      "requires": [
+        "iron/redstone",
+        "iron/gold_ingots"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:powered_rail",
+          "count": 6
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:minecart_one_cm",
+          "count": 500
+        }
+      ],
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "iron/cartographer",
+      "title": "Cartographer",
+      "description": "Copy, zoom out and lock maps at a cartography table.",
+      "icon": "minecraft:cartography_table",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:map",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:cartography_table",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_cartography_table",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "iron/archery",
+      "title": "Take Aim",
+      "description": "Craft a bow and hit something with an arrow.",
+      "icon": "minecraft:bow",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:bow",
+          "count": 1
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:adventure/shoot_arrow",
+          "label": "Shoot something with an arrow"
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "iron/crossbow",
+      "title": "Ol' Betsy",
+      "description": "Fire a crossbow. It loads slowly but you can carry it loaded.",
+      "icon": "minecraft:crossbow",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:adventure/ol_betsy",
+        "label": "Shoot a crossbow"
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "iron/honey",
+      "title": "Bee Our Guest",
+      "description": "Put a campfire under a beehive, then collect honey with a glass bottle without angering the bees.",
+      "icon": "minecraft:honey_bottle",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:husbandry/safely_harvest_honey",
+        "label": "Safely harvest honey"
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "iron/anvil",
+      "title": "Blacksmith",
+      "description": "An anvil repairs and combines gear and renames items. Name a mob with a name tag and it won't despawn!",
+      "icon": "minecraft:anvil",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:anvil",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_anvil",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 20
+      }
+    }
+  ]
+}

@@ -1,0 +1,401 @@
+{
+  "age": "wooden",
+  "quests": [
+    {
+      "id": "wooden/pickaxe",
+      "title": "Wooden Pickaxe",
+      "description": "Wooden tools are unlocked! Start with a pickaxe so you can mine stone.",
+      "icon": "minecraft:wooden_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:wooden_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/stone",
+      "title": "Rock Bottom",
+      "description": "Mine stone with your wooden pickaxe.",
+      "icon": "minecraft:stone",
+      "requires": [
+        "wooden/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": [
+          "minecraft:stone",
+          "minecraft:deepslate"
+        ],
+        "count": 16
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/cobblestone",
+      "title": "Cobbled Together",
+      "description": "Collect a good stack of cobblestone.",
+      "icon": "minecraft:cobblestone",
+      "requires": [
+        "wooden/stone"
+      ],
+      "task": {
+        "type": "pickup",
+        "target": [
+          "minecraft:cobblestone",
+          "minecraft:cobbled_deepslate"
+        ],
+        "count": 48
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/furnace",
+      "title": "Hot Stuff",
+      "description": "Craft a furnace from eight cobblestone.",
+      "icon": "minecraft:furnace",
+      "requires": [
+        "wooden/cobblestone"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:furnace",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/coal",
+      "title": "Coal Miner",
+      "description": "Mine some coal ore. Look for black-speckled stone in hillsides and caves.",
+      "icon": "minecraft:coal",
+      "requires": [
+        "wooden/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:coal_ores",
+        "count": 6
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/torches",
+      "title": "Let There Be Light",
+      "description": "Torches keep monsters from spawning around you.",
+      "icon": "minecraft:torch",
+      "requires": [
+        "wooden/coal"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:torch",
+        "count": 16
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/charcoal",
+      "title": "Charcoal Burner",
+      "description": "No coal nearby? Smelt logs in a furnace to make charcoal.",
+      "icon": "minecraft:charcoal",
+      "requires": [
+        "wooden/furnace"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:charcoal",
+        "count": 4
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/cook",
+      "title": "Hot Meal",
+      "description": "Cook some food in a furnace. Cooked food fills you up much more than raw.",
+      "icon": "minecraft:cooked_beef",
+      "requires": [
+        "wooden/furnace"
+      ],
+      "task": {
+        "type": "craft",
+        "target": [
+          "minecraft:cooked_beef",
+          "minecraft:cooked_porkchop",
+          "minecraft:cooked_chicken",
+          "minecraft:cooked_mutton",
+          "minecraft:cooked_rabbit",
+          "minecraft:cooked_cod",
+          "minecraft:cooked_salmon",
+          "minecraft:baked_potato"
+        ],
+        "count": 6
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/arsenal",
+      "title": "Wooden Arsenal",
+      "description": "Craft a wooden sword and a wooden spear. Spears hit hard and reach far.",
+      "icon": "minecraft:wooden_spear",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:wooden_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:wooden_spear",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/tools",
+      "title": "Wooden Toolkit",
+      "description": "Craft a wooden axe, shovel and hoe.",
+      "icon": "minecraft:wooden_axe",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:wooden_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:wooden_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:wooden_hoe",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/leather",
+      "title": "Tanner",
+      "description": "Collect leather from cows, horses and other animals.",
+      "icon": "minecraft:leather",
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:leather",
+        "count": 10
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/leather_armor",
+      "title": "Hide Armor",
+      "description": "Leather armor is unlocked. Craft the full set.",
+      "icon": "minecraft:leather_chestplate",
+      "requires": [
+        "wooden/leather"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:leather_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:leather_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:leather_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:leather_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "wooden/campfire",
+      "title": "Campfire Cooking",
+      "description": "Campfires cook food without fuel. Place raw food on one and use it.",
+      "icon": "minecraft:campfire",
+      "requires": [
+        "wooden/coal"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:campfire",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_campfire",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "wooden/zombies",
+      "title": "Night Watch",
+      "description": "Defend yourself against zombies.",
+      "icon": "minecraft:rotten_flesh",
+      "task": {
+        "type": "kill",
+        "target": [
+          "minecraft:zombie",
+          "minecraft:husk",
+          "minecraft:drowned"
+        ],
+        "count": 3
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "wooden/skeletons",
+      "title": "Bone Rattlers",
+      "description": "Defeat skeletons or spiders.",
+      "icon": "minecraft:bone",
+      "task": {
+        "type": "kill",
+        "target": [
+          "minecraft:skeleton",
+          "minecraft:spider",
+          "minecraft:stray"
+        ],
+        "count": 3
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "wooden/fishing",
+      "title": "Gone Fishing",
+      "description": "Make a fishing rod from sticks and string. Fishing can also catch treasure!",
+      "icon": "minecraft:fishing_rod",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:fishing_rod",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:fish_caught",
+          "count": 3
+        }
+      ],
+      "rewards": {
+        "items": [
+          {
+            "item": "minecraft:cod",
+            "count": 2
+          }
+        ],
+        "xp": 15
+      }
+    },
+    {
+      "id": "wooden/boat",
+      "title": "Set Sail",
+      "description": "Craft a boat and travel by water. It's faster than swimming.",
+      "icon": "minecraft:oak_boat",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "#minecraft:boats",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:boat_one_cm",
+          "count": 200,
+          "label": "Travel 200 blocks by boat"
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "wooden/bone_meal",
+      "title": "Green Thumb",
+      "description": "Use bone meal on crops, saplings or grass to make them grow instantly.",
+      "icon": "minecraft:bone_meal",
+      "task": {
+        "type": "use",
+        "target": "minecraft:bone_meal",
+        "count": 5
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "wooden/breed",
+      "title": "Animal Husbandry",
+      "description": "Feed two animals of the same kind their favorite food to breed them.",
+      "icon": "minecraft:wheat",
+      "task": {
+        "type": "custom",
+        "target": "minecraft:animals_bred",
+        "count": 3
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "wooden/depths",
+      "title": "Into the Depths",
+      "description": "Dig down past Y=0, into the deepslate layer.",
+      "icon": "minecraft:deepslate",
+      "requires": [
+        "wooden/pickaxe"
+      ],
+      "task": {
+        "type": "y_level",
+        "below": 0
+      },
+      "rewards": {
+        "xp": 15
+      }
+    }
+  ]
+}

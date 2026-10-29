@@ -5,6 +5,7 @@ import com.progressionmod.entities.ModEntities;
 import com.progressionmod.items.EndiumLocatorItem;
 import com.progressionmod.items.ModItems;
 import com.progressionmod.items.ModItemGroup;
+import com.progressionmod.quest.*;
 import com.progressionmod.worldgen.AmethystOreGeneration;
 import com.progressionmod.worldgen.EndiumOreGeneration;
 import net.fabricmc.api.ModInitializer;
@@ -33,6 +34,16 @@ public class ProgressionMod implements ModInitializer {
         SmithingTemplateLoot.register();
         AmethystOreGeneration.register();
         EndiumOreGeneration.register();
+
+        // Quests & ages
+        ModStats.register();
+        QuestData.register();
+        QuestRegistry.register();
+        QuestNetworking.register();
+        QuestManager.register();
+        QuestCommands.register();
+        QuestValidator.register();
+        AgeLocks.register();
 
         // Endium Locator: expire glow markers every tick; stale markers from a previous
         // session are cleaned up on the first tick the End level is present.

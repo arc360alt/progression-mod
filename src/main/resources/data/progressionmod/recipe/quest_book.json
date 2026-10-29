@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:stick",
+    "#minecraft:saplings"
+  ],
+  "result": {
+    "id": "progressionmod:quest_book",
+    "count": 1
+  }
+}

@@ -1,0 +1,394 @@
+{
+  "age": "diamond",
+  "quests": [
+    {
+      "id": "diamond/pickaxe",
+      "title": "Diamond Pickaxe",
+      "description": "Diamond tools are unlocked. A diamond pickaxe can mine obsidian and amethyst ore.",
+      "icon": "minecraft:diamond_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:diamond_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/tools",
+      "title": "Brilliant Arsenal",
+      "description": "Craft the rest of the diamond set.",
+      "icon": "minecraft:diamond_sword",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_hoe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_spear",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "diamond/armor",
+      "title": "Cover Me with Diamonds",
+      "description": "Diamond armor is unlocked. Craft the full set.",
+      "icon": "minecraft:diamond_chestplate",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:diamond_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "diamond/obsidian",
+      "title": "Obsidian Collector",
+      "description": "Mine obsidian with your diamond pickaxe.",
+      "icon": "minecraft:obsidian",
+      "requires": [
+        "diamond/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "minecraft:obsidian",
+        "count": 10
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "diamond/enchanting",
+      "title": "Enchanter",
+      "description": "Build an enchanting table and enchant an item.",
+      "icon": "minecraft:enchanting_table",
+      "requires": [
+        "diamond/obsidian"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:enchanting_table",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:enchant_item",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/library",
+      "title": "Library",
+      "description": "Fifteen bookshelves around an enchanting table unlock the strongest enchantments.",
+      "icon": "minecraft:bookshelf",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:bookshelf",
+        "count": 15
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/fortress",
+      "title": "A Terrible Fortress",
+      "description": "Find a nether fortress. Its chests may hold upgrade templates.",
+      "icon": "minecraft:nether_bricks",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/find_fortress",
+        "label": "Enter a nether fortress"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/blaze",
+      "title": "Into Fire",
+      "description": "Defeat a blaze and take its rod.",
+      "icon": "minecraft:blaze_rod",
+      "requires": [
+        "diamond/fortress"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/obtain_blaze_rod",
+        "label": "Obtain a blaze rod"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/nether_wart",
+      "title": "Wart Gatherer",
+      "description": "Nether wart grows on soul sand in fortresses. It's the base of every potion.",
+      "icon": "minecraft:nether_wart",
+      "requires": [
+        "diamond/fortress"
+      ],
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:nether_wart",
+        "count": 8
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "diamond/brewing",
+      "title": "Local Brewery",
+      "description": "Brew a potion in a brewing stand.",
+      "icon": "minecraft:brewing_stand",
+      "requires": [
+        "diamond/blaze",
+        "diamond/nether_wart"
+      ],
+      "tasks": [
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_brewingstand",
+          "count": 1
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:nether/brew_potion",
+          "label": "Brew a potion"
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/amethyst_ore",
+      "title": "Purple Rain",
+      "description": "Amethyst ore is deep underground, below Y=11. Only a diamond pickaxe can mine it.",
+      "icon": "progressionmod:amethyst_ore",
+      "requires": [
+        "diamond/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": [
+          "progressionmod:amethyst_ore",
+          "progressionmod:deepslate_amethyst_ore"
+        ],
+        "count": 4
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/shards",
+      "title": "Geode Hunter",
+      "description": "Mine amethyst clusters in a geode for shards. The alloy needs them.",
+      "icon": "minecraft:amethyst_shard",
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:amethyst_shard",
+        "count": 8
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "diamond/template",
+      "title": "Upgrade Blueprint",
+      "description": "Find a Diamond to Amethyst Upgrade template in a fortress or bastion chest.",
+      "icon": "progressionmod:diamond_amethyst_upgrade",
+      "task": {
+        "type": "has_item",
+        "item": "progressionmod:diamond_amethyst_upgrade",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/alloy",
+      "title": "Alloy Smith",
+      "description": "Combine an amethyst crystal with two shards, then smelt the alloy into an amethyst ingot.",
+      "icon": "progressionmod:amethyst_ingot",
+      "requires": [
+        "diamond/amethyst_ore",
+        "diamond/shards"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "progressionmod:unsmelted_amethyst_alloy",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_ingot",
+          "count": 3
+        }
+      ],
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "diamond/bastion",
+      "title": "Those Were the Days",
+      "description": "Find a bastion remnant. Watch out for the piglin brutes.",
+      "icon": "minecraft:gilded_blackstone",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/find_bastion",
+        "label": "Enter a bastion remnant"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "diamond/wither_skeletons",
+      "title": "Bone Collector",
+      "description": "Defeat wither skeletons in a fortress.",
+      "icon": "minecraft:coal",
+      "requires": [
+        "diamond/fortress"
+      ],
+      "task": {
+        "type": "kill",
+        "target": "minecraft:wither_skeleton",
+        "count": 5
+      },
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "diamond/deep_dark",
+      "title": "Sneak 100",
+      "description": "Find the deep dark and sneak past a sculk sensor without it noticing.",
+      "icon": "minecraft:sculk_sensor",
+      "optional": true,
+      "tasks": [
+        {
+          "type": "biome",
+          "biome": "minecraft:deep_dark"
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:adventure/avoid_vibration",
+          "label": "Sneak near a sculk sensor"
+        }
+      ],
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "diamond/raid",
+      "title": "Voluntary Exile",
+      "description": "Kill a raid captain. Careful: it gives you Bad Omen and starts a raid.",
+      "icon": "minecraft:white_banner",
+      "optional": true,
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:adventure/voluntary_exile",
+        "label": "Kill a raid captain"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "diamond/jukebox",
+      "title": "Party Time",
+      "description": "Craft a jukebox and play a music disc. Discs are found in dungeons, trial chambers and creepers.",
+      "icon": "minecraft:jukebox",
+      "optional": true,
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:jukebox",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:play_record",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "diamond/experience",
+      "title": "Seasoned Adventurer",
+      "description": "Reach experience level 30, enough for the best enchantments.",
+      "icon": "minecraft:experience_bottle",
+      "task": {
+        "type": "xp_level",
+        "count": 30
+      },
+      "rewards": {
+        "items": [
+          {
+            "item": "minecraft:lapis_lazuli",
+            "count": 16
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,350 @@
+{
+  "age": "amethyst",
+  "quests": [
+    {
+      "id": "amethyst/pickaxe",
+      "title": "Amethyst Pickaxe",
+      "description": "Amethyst gear is unlocked. Upgrade a diamond pickaxe at a smithing table. It can mine ancient debris.",
+      "icon": "progressionmod:amethyst_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "progressionmod:amethyst_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "amethyst/tools",
+      "title": "Crystal Clear",
+      "description": "Upgrade the rest of your diamond tools to amethyst.",
+      "icon": "progressionmod:amethyst_sword",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_hoe",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "amethyst/armor",
+      "title": "Amethyst Aegis",
+      "description": "Upgrade your diamond armor to amethyst.",
+      "icon": "progressionmod:amethyst_chestplate",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:amethyst_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 60
+      }
+    },
+    {
+      "id": "amethyst/duplicate",
+      "title": "Blueprint Copier",
+      "description": "Templates can be copied: craft one with diamonds and an amethyst ingot to get two.",
+      "icon": "progressionmod:diamond_amethyst_upgrade",
+      "task": {
+        "type": "craft",
+        "target": "progressionmod:diamond_amethyst_upgrade",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "amethyst/debris",
+      "title": "Hidden in the Depths",
+      "description": "Ancient debris hides low in the Nether, around Y=15. Beds explode there. Use that.",
+      "icon": "minecraft:ancient_debris",
+      "requires": [
+        "amethyst/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "minecraft:ancient_debris",
+        "count": 4
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "amethyst/scrap",
+      "title": "Scrap Metal",
+      "description": "Smelt ancient debris into netherite scrap.",
+      "icon": "minecraft:netherite_scrap",
+      "requires": [
+        "amethyst/debris"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:netherite_scrap",
+        "count": 4
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "amethyst/ingot",
+      "title": "Netherite Ingot",
+      "description": "Combine four netherite scrap and four gold ingots.",
+      "icon": "minecraft:netherite_ingot",
+      "requires": [
+        "amethyst/scrap"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:netherite_ingot",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "amethyst/template",
+      "title": "The Next Blueprint",
+      "description": "Find an Amethyst to Netherite Upgrade template in a fortress or bastion chest.",
+      "icon": "progressionmod:amethyst_netherite_upgrade",
+      "task": {
+        "type": "has_item",
+        "item": "progressionmod:amethyst_netherite_upgrade",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "amethyst/splash",
+      "title": "Splash Damage",
+      "description": "Add gunpowder to a potion to make a splash potion, then throw it.",
+      "icon": "minecraft:splash_potion",
+      "task": {
+        "type": "use",
+        "target": "minecraft:splash_potion",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "amethyst/fireproof",
+      "title": "Fireproof",
+      "description": "Drink a potion of fire resistance (magma cream) and you can swim in lava.",
+      "icon": "minecraft:magma_cream",
+      "task": {
+        "type": "effect",
+        "effect": "minecraft:fire_resistance",
+        "label": "Have Fire Resistance"
+      },
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "amethyst/crying_obsidian",
+      "title": "Who's Cutting Onions?",
+      "description": "Crying obsidian is found in ruined portals and from piglin bartering.",
+      "icon": "minecraft:crying_obsidian",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/obtain_crying_obsidian",
+        "label": "Obtain crying obsidian"
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "amethyst/lodestone",
+      "title": "Country Lode, Take Me Home",
+      "description": "Use a compass on a lodestone and it will always point back to it, even in the Nether.",
+      "icon": "minecraft:lodestone",
+      "requires": [
+        "amethyst/ingot"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:lodestone",
+          "count": 1
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:adventure/use_lodestone",
+          "label": "Use a compass on a lodestone"
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "amethyst/trims",
+      "title": "Crafting a New Look",
+      "description": "Trim templates from structures add decorative patterns to armor at a smithing table.",
+      "icon": "minecraft:rib_armor_trim_smithing_template",
+      "optional": true,
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:adventure/trim_with_any_armor_pattern",
+        "label": "Trim a piece of armor"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "amethyst/smithing",
+      "title": "Master Smith",
+      "description": "Use the smithing table again and again.",
+      "icon": "minecraft:smithing_table",
+      "task": {
+        "type": "custom",
+        "target": "minecraft:interact_with_smithing_table",
+        "count": 10
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "amethyst/wither_skull",
+      "title": "Spooky Scary Skeleton",
+      "description": "Wither skeletons sometimes drop their skull. You need three.",
+      "icon": "minecraft:wither_skeleton_skull",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:nether/get_wither_skull",
+        "label": "Obtain a wither skeleton skull"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "amethyst/magma",
+      "title": "Magma Cream",
+      "description": "Magma cubes live in basalt deltas and drop magma cream.",
+      "icon": "minecraft:magma_cream",
+      "task": {
+        "type": "kill",
+        "target": "minecraft:magma_cube",
+        "count": 5
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "amethyst/fungal_forester",
+      "title": "Fungal Forester",
+      "description": "Nether trees are huge fungi. Their stems make planks that never burn.",
+      "icon": "minecraft:crimson_stem",
+      "task": {
+        "type": "mine",
+        "target": [
+          "minecraft:crimson_stem",
+          "minecraft:warped_stem"
+        ],
+        "count": 16
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "amethyst/endermen",
+      "title": "Ender Hunter",
+      "description": "Endermen drop ender pearls. Don't look them in the eye, or wear a carved pumpkin.",
+      "icon": "minecraft:ender_pearl",
+      "tasks": [
+        {
+          "type": "kill",
+          "target": "minecraft:enderman",
+          "count": 6
+        },
+        {
+          "type": "pickup",
+          "target": "minecraft:ender_pearl",
+          "count": 6
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "amethyst/blaze_powder",
+      "title": "Blaze Powder",
+      "description": "Grind blaze rods into powder. You'll need it for eyes of ender.",
+      "icon": "minecraft:blaze_powder",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:blaze_powder",
+        "count": 12
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "amethyst/saddle_up",
+      "title": "Saddle Up",
+      "description": "Saddles can be crafted. Tame a horse and ride it.",
+      "icon": "minecraft:saddle",
+      "task": {
+        "type": "custom",
+        "target": "minecraft:horse_one_cm",
+        "count": 200,
+        "label": "Ride a horse 200 blocks"
+      },
+      "rewards": {
+        "xp": 20
+      }
+    }
+  ]
+}

@@ -1,0 +1,373 @@
+{
+  "age": "stone",
+  "quests": [
+    {
+      "id": "stone/pickaxe",
+      "title": "Stone Pickaxe",
+      "description": "Stone tools are unlocked. A stone pickaxe can mine copper ore.",
+      "icon": "minecraft:stone_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:stone_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/tools",
+      "title": "Set in Stone",
+      "description": "Craft the rest of the stone set.",
+      "icon": "minecraft:stone_axe",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:stone_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:stone_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:stone_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:stone_hoe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:stone_spear",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "stone/copper_ore",
+      "title": "Copper Prospector",
+      "description": "Mine copper ore. It's common in most caves, especially dripstone caves.",
+      "icon": "minecraft:raw_copper",
+      "requires": [
+        "stone/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:copper_ores",
+        "count": 10
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/copper_ingots",
+      "title": "Smelting Copper",
+      "description": "Smelt raw copper into ingots. You'll need them for the Copper Age.",
+      "icon": "minecraft:copper_ingot",
+      "requires": [
+        "stone/copper_ore"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:copper_ingot",
+        "count": 24
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "stone/rocks",
+      "title": "Rock Collector",
+      "description": "Mine one of each common stone variant.",
+      "icon": "minecraft:diorite",
+      "tasks": [
+        {
+          "type": "mine",
+          "target": "minecraft:granite",
+          "count": 4
+        },
+        {
+          "type": "mine",
+          "target": "minecraft:diorite",
+          "count": 4
+        },
+        {
+          "type": "mine",
+          "target": "minecraft:andesite",
+          "count": 4
+        }
+      ],
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "stone/stonecutter",
+      "title": "Precision Masonry",
+      "description": "A stonecutter makes stairs, slabs and walls with no wasted blocks.",
+      "icon": "minecraft:stonecutter",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:stonecutter",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_stonecutter",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/bricks",
+      "title": "Stonemason",
+      "description": "Craft stone bricks for sturdier-looking builds.",
+      "icon": "minecraft:stone_bricks",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:stone_bricks",
+        "count": 16
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "stone/smoker",
+      "title": "Smokehouse",
+      "description": "A smoker cooks food twice as fast as a furnace.",
+      "icon": "minecraft:smoker",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:smoker",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_smoker",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/bread",
+      "title": "Daily Bread",
+      "description": "Harvest wheat and bake bread.",
+      "icon": "minecraft:bread",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:bread",
+        "count": 6
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "stone/tame",
+      "title": "Best Friend",
+      "description": "Tame a wolf with bones, or a cat with raw fish.",
+      "icon": "minecraft:bone",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:husbandry/tame_an_animal",
+        "label": "Tame an animal"
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "stone/armor_stand",
+      "title": "On Display",
+      "description": "Armor stands show off your gear. Sneak and use one to change its pose.",
+      "icon": "minecraft:armor_stand",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:armor_stand",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "stone/flower_pot",
+      "title": "Interior Decorator",
+      "description": "Smelt clay into bricks, craft a flower pot and put a flower in it.",
+      "icon": "minecraft:flower_pot",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:flower_pot",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:pot_flower",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/deepslate",
+      "title": "Deepslate Delver",
+      "description": "Mine deepslate far underground. It's slower to mine than stone.",
+      "icon": "minecraft:cobbled_deepslate",
+      "task": {
+        "type": "mine",
+        "target": "minecraft:deepslate",
+        "count": 32
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/caves",
+      "title": "Spelunker",
+      "description": "Find a lush cave or a dripstone cave.",
+      "icon": "minecraft:pointed_dripstone",
+      "task": {
+        "type": "biome",
+        "biome": [
+          "minecraft:lush_caves",
+          "minecraft:dripstone_caves"
+        ],
+        "label": "Visit Lush Caves or Dripstone Caves"
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "stone/creeper",
+      "title": "Sssafety First",
+      "description": "Kill a creeper before it gets too close. They drop gunpowder.",
+      "icon": "minecraft:gunpowder",
+      "task": {
+        "type": "kill",
+        "target": "minecraft:creeper",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/sprint",
+      "title": "Marathon",
+      "description": "Sprint a total of 1,000 blocks. Double-tap forward to sprint.",
+      "icon": "minecraft:leather_boots",
+      "task": {
+        "type": "custom",
+        "target": "minecraft:sprint_one_cm",
+        "count": 1000
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/grindstone",
+      "title": "Grind It Out",
+      "description": "A grindstone repairs tools and strips enchantments off them for XP.",
+      "icon": "minecraft:grindstone",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:grindstone",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_grindstone",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "stone/sugar_cane",
+      "title": "Riverside Harvest",
+      "description": "Sugar cane grows next to water. You'll need it for paper.",
+      "icon": "minecraft:sugar_cane",
+      "task": {
+        "type": "pickup",
+        "target": "minecraft:sugar_cane",
+        "count": 9
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "stone/books",
+      "title": "Bookworm",
+      "description": "Craft paper from sugar cane, then bind books with leather.",
+      "icon": "minecraft:book",
+      "requires": [
+        "stone/sugar_cane"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:paper",
+          "count": 9
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:book",
+          "count": 3
+        }
+      ],
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "stone/barrel",
+      "title": "Barrel Roll",
+      "description": "A barrel holds as much as a chest and opens even with a block on top.",
+      "icon": "minecraft:barrel",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:barrel",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:open_barrel",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 10
+      }
+    }
+  ]
+}

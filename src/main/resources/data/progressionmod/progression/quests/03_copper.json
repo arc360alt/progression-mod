@@ -1,0 +1,388 @@
+{
+  "age": "copper",
+  "quests": [
+    {
+      "id": "copper/pickaxe",
+      "title": "Copper Pickaxe",
+      "description": "Copper tools are unlocked. A copper pickaxe can mine iron ore.",
+      "icon": "minecraft:copper_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:copper_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "copper/tools",
+      "title": "Copper Craftsman",
+      "description": "Craft the rest of the copper set.",
+      "icon": "minecraft:copper_axe",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:copper_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:copper_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:copper_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:copper_hoe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:copper_spear",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 25
+      }
+    },
+    {
+      "id": "copper/armor",
+      "title": "Copper Plating",
+      "description": "Copper armor is unlocked. Craft the full set.",
+      "icon": "minecraft:copper_chestplate",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:copper_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:copper_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:copper_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:copper_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "copper/iron_ore",
+      "title": "Iron Prospector",
+      "description": "Mine iron ore with your copper pickaxe.",
+      "icon": "minecraft:raw_iron",
+      "requires": [
+        "copper/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:iron_ores",
+        "count": 12
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "copper/iron_ingots",
+      "title": "Ironworks",
+      "description": "Smelt raw iron into ingots. A blast furnace does it twice as fast.",
+      "icon": "minecraft:iron_ingot",
+      "requires": [
+        "copper/iron_ore"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:iron_ingot",
+        "count": 32
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "copper/lapis",
+      "title": "Feeling Blue",
+      "description": "Mine lapis lazuli. You'll need it later for enchanting.",
+      "icon": "minecraft:lapis_lazuli",
+      "requires": [
+        "copper/pickaxe"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "#minecraft:lapis_ores",
+        "count": 3
+      },
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "copper/lightning_rod",
+      "title": "Storm Chaser",
+      "description": "Lightning rods attract lightning and protect flammable builds.",
+      "icon": "minecraft:lightning_rod",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:lightning_rod",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "copper/spyglass",
+      "title": "Eagle Eye",
+      "description": "Make a spyglass from copper and an amethyst shard from a geode, then look through it.",
+      "icon": "minecraft:spyglass",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:spyglass",
+          "count": 1
+        },
+        {
+          "type": "use",
+          "target": "minecraft:spyglass",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "copper/wax",
+      "title": "Waxing Poetic",
+      "description": "Rub honeycomb on copper blocks to stop them oxidizing. Scrape with an axe to undo.",
+      "icon": "minecraft:honeycomb",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:husbandry/wax_on",
+        "label": "Wax a copper block"
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "copper/copper_chest",
+      "title": "Copper Chest",
+      "description": "Copper chests oxidize like other copper blocks. Copper golems sort items into them.",
+      "icon": "minecraft:copper_chest",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:copper_chest",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "copper/copper_torch",
+      "title": "Green Flames",
+      "description": "Copper torches burn with a green flame.",
+      "icon": "minecraft:copper_torch",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:copper_torch",
+        "count": 8
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "copper/archaeology",
+      "title": "Archaeologist",
+      "description": "Brush suspicious sand or gravel in desert temples or trail ruins to find pottery sherds.",
+      "icon": "minecraft:brush",
+      "optional": true,
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:brush",
+          "count": 1
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:adventure/salvage_sherd",
+          "label": "Brush up a pottery sherd"
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "copper/bucket",
+      "title": "Bucket List",
+      "description": "Craft a bucket and scoop up some lava. Careful!",
+      "icon": "minecraft:lava_bucket",
+      "requires": [
+        "copper/iron_ingots"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:bucket",
+          "count": 1
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:story/lava_bucket",
+          "label": "Fill a bucket with lava"
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "copper/obsidian",
+      "title": "Ice Bucket Challenge",
+      "description": "Pour water onto still lava to make obsidian.",
+      "icon": "minecraft:obsidian",
+      "requires": [
+        "copper/bucket"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:story/form_obsidian",
+        "label": "Form obsidian"
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "copper/shears",
+      "title": "Shear Genius",
+      "description": "Shears get wool without hurting sheep, and pick up leaves, vines and cobwebs.",
+      "icon": "minecraft:shears",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:shears",
+          "count": 1
+        },
+        {
+          "type": "use",
+          "target": "minecraft:shears",
+          "count": 5
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "copper/laundry",
+      "title": "Laundry Day",
+      "description": "Fill a cauldron, then use dyed leather armor on it to wash out the dye.",
+      "icon": "minecraft:cauldron",
+      "tasks": [
+        {
+          "type": "custom",
+          "target": "minecraft:fill_cauldron",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:clean_armor",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "copper/minecart",
+      "title": "All Aboard",
+      "description": "Lay some rails and ride a minecart.",
+      "icon": "minecraft:minecart",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:rail",
+          "count": 16
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:minecart_one_cm",
+          "count": 100
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "copper/hopper",
+      "title": "Item Logistics",
+      "description": "Hoppers move items between containers. Use one to look inside.",
+      "icon": "minecraft:hopper",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:hopper",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:inspect_hopper",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      }
+    },
+    {
+      "id": "copper/smithing_table",
+      "title": "Smith's Workshop",
+      "description": "Every later tier is upgraded at a smithing table.",
+      "icon": "minecraft:smithing_table",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:smithing_table",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 10
+      }
+    },
+    {
+      "id": "copper/bedrock",
+      "title": "Bedrock Bound",
+      "description": "Dig to the bottom of the world, below Y=-55.",
+      "icon": "minecraft:bedrock",
+      "task": {
+        "type": "y_level",
+        "below": -55
+      },
+      "rewards": {
+        "xp": 20
+      }
+    }
+  ]
+}

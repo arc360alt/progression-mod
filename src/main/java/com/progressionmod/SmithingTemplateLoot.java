@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 
 public class SmithingTemplateLoot {
@@ -25,19 +25,19 @@ public class SmithingTemplateLoot {
 
             // Diamond→Amethyst template: 30% chance in each chest
             tableBuilder.withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
+                    .setRolls(ContextIntProviders.exactly(1))
                     .when(LootItemRandomChanceCondition.randomChance(0.30f))
                     .add(LootItem.lootTableItem(ModItems.DIAMOND_AMETHYST_UPGRADE)));
 
             // Amethyst→Netherite template: 20% chance
             tableBuilder.withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
+                    .setRolls(ContextIntProviders.exactly(1))
                     .when(LootItemRandomChanceCondition.randomChance(0.20f))
                     .add(LootItem.lootTableItem(ModItems.AMETHYST_NETHERITE_UPGRADE)));
 
             // Netherite→Endium template: 10% chance (rarest upgrade)
             tableBuilder.withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
+                    .setRolls(ContextIntProviders.exactly(1))
                     .when(LootItemRandomChanceCondition.randomChance(0.10f))
                     .add(LootItem.lootTableItem(ModItems.NETHERITE_ENDIUM_UPGRADE)));
         });

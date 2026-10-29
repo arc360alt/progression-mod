@@ -8,7 +8,10 @@
     "ItemPickupMixin",
     "GrassBreakMixin",
     "MiningDropMixin",
-    "GoldToolMiningMixin"
+    "GoldToolMiningMixin",
+    "AgeLockPickupMixin",
+    "AgeLockSlotMixin",
+    "AgeLockCombinerResultMixin"
   ],
   "injectors": {
     "defaultRequire": 1

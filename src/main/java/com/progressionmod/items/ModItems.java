@@ -3,12 +3,14 @@ package com.progressionmod.items;
 import com.progressionmod.ProgressionMod;
 import com.progressionmod.blocks.ModBlocks;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.equipment.ArmorType;
 
 public class ModItems {
@@ -168,6 +170,14 @@ public class ModItems {
             new EndiumLocatorItem(new Item.Properties()
                     .setId(key("endium_locator"))
                     .durability(25)));
+
+    // ── Quest Book ────────────────────────────────────────────────────────────
+    public static final Item QUEST_BOOK = register("quest_book",
+            new QuestBookItem(new Item.Properties()
+                    .setId(key("quest_book"))
+                    .stacksTo(1)
+                    .rarity(Rarity.UNCOMMON)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     // ── Helper ───────────────────────────────────────────────────────────────
     private static Item register(String name, Item item) {

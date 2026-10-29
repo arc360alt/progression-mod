@@ -4,14 +4,11 @@
   "item.progressionmod.flint_shovel": "Flint Shovel",
   "item.progressionmod.flint_sword": "Flint Knife",
   "item.progressionmod.flint_hoe": "Flint Hoe",
-
   "item.progressionmod.raw_amethyst": "Amethyst Crystal",
   "item.progressionmod.amethyst_ingot": "Amethyst Ingot",
   "item.progressionmod.unsmelted_amethyst_alloy": "Unsmelted Amethyst Alloy",
-
   "item.progressionmod.amethyst_ore": "Amethyst Ore",
   "item.progressionmod.deepslate_amethyst_ore": "Deepslate Amethyst Ore",
-
   "item.progressionmod.amethyst_axe": "Amethyst Axe",
   "item.progressionmod.amethyst_pickaxe": "Amethyst Pickaxe",
   "item.progressionmod.amethyst_shovel": "Amethyst Shovel",
@@ -21,16 +18,13 @@
   "item.progressionmod.amethyst_chestplate": "Amethyst Chestplate",
   "item.progressionmod.amethyst_leggings": "Amethyst Leggings",
   "item.progressionmod.amethyst_boots": "Amethyst Boots",
-
   "item.progressionmod.raw_endium": "Endium Shard",
   "item.progressionmod.endium_crystal": "Endium Ingot",
   "item.progressionmod.endium_ore": "Endium Ore",
   "item.progressionmod.endium_locator": "Endium Locator (WIP)",
-
   "item.progressionmod.diamond_amethyst_upgrade": "Diamond to Amethyst Upgrade",
   "item.progressionmod.amethyst_netherite_upgrade": "Amethyst to Netherite Upgrade",
   "item.progressionmod.netherite_endium_upgrade": "Netherite to Endium Upgrade",
-
   "item.progressionmod.endium_axe": "Endium Axe",
   "item.progressionmod.endium_pickaxe": "Endium Pickaxe",
   "item.progressionmod.endium_shovel": "Endium Shovel",
@@ -40,9 +34,7 @@
   "item.progressionmod.endium_chestplate": "Endium Chestplate",
   "item.progressionmod.endium_leggings": "Endium Leggings",
   "item.progressionmod.endium_boots": "Endium Boots",
-
   "itemGroup.progressionmod.progression_tools": "Progression Overhaul",
-
   "text.autoconfig.progressionmod.title": "Progression Overhaul Config",
   "text.autoconfig.progressionmod.option.showMiningTierMessages": "Show Mining Tier Messages",
   "text.autoconfig.progressionmod.option.showMiningTierMessages.@Tooltip": "Shows a message in the action bar when you try to mine a block you don't have the right tool tier for.",
@@ -52,7 +44,6 @@
   "text.autoconfig.progressionmod.option.stickDropFromLeaves.@Tooltip": "Leaves have a 10% chance to drop 1-2 sticks when broken.",
   "text.autoconfig.progressionmod.option.improvedFlintFromGravel": "Increase flint drop from gravel",
   "text.autoconfig.progressionmod.option.improvedFlintFromGravel.@Tooltip": "Adds an extra 10% chance to drop flint when breaking gravel, on top of the vanilla drop chance.",
-
   "jade.progressionmod.required_tool": "Requires: %s",
   "jade.progressionmod.tool.stone_pickaxe": "Stone Pickaxe",
   "jade.progressionmod.tool.copper_pickaxe": "Copper Pickaxe",
@@ -60,5 +51,28 @@
   "jade.progressionmod.tool.gold_pickaxe": "Gold Pickaxe",
   "jade.progressionmod.tool.diamond_pickaxe": "Diamond Pickaxe",
   "jade.progressionmod.tool.amethyst_pickaxe": "Amethyst Pickaxe",
-  "jade.progressionmod.tool.netherite_pickaxe": "Netherite Pickaxe"
+  "jade.progressionmod.tool.netherite_pickaxe": "Netherite Pickaxe",
+  "item.progressionmod.quest_book": "Quest Book",
+  "key.progressionmod.open_quests": "Open Quest Book",
+  "key.category.progressionmod.progression": "Progression Overhaul",
+  "stat.progressionmod.quests_completed": "Quests Completed",
+  "stat.progressionmod.ages_reached": "Ages Reached",
+  "stat.progressionmod.biomes_visited": "Biomes Visited",
+  "text.autoconfig.progressionmod.option.ageItemLocking": "Age Item Locking",
+  "text.autoconfig.progressionmod.option.ageItemLocking.@Tooltip": "Tools and armor from ages you haven't reached can't be picked up, taken from containers, used or worn.",
+  "text.autoconfig.progressionmod.option.showQuestHud": "Show Quest HUD",
+  "text.autoconfig.progressionmod.option.showQuestHud.@Tooltip": "Shows your current age and active quests in the top-left corner of the screen.",
+  "tag.item.progressionmod.age.flint": "Flint Age Items",
+  "tag.item.progressionmod.age.wooden": "Wooden Age Items",
+  "tag.item.progressionmod.age.stone": "Stone Age Items",
+  "tag.item.progressionmod.age.copper": "Copper Age Items",
+  "tag.item.progressionmod.age.iron": "Iron Age Items",
+  "tag.item.progressionmod.age.gold": "Gold Age Items",
+  "tag.item.progressionmod.age.diamond": "Diamond Age Items",
+  "tag.item.progressionmod.age.amethyst": "Amethyst Age Items",
+  "tag.item.progressionmod.age.netherite": "Netherite Age Items",
+  "tag.item.progressionmod.age.endium": "Endium Age Items",
+  "tag.item.progressionmod.repairs_flint_tools": "Repairs Flint Tools",
+  "tag.item.progressionmod.repairs_amethyst_tools": "Repairs Amethyst Tools",
+  "tag.item.progressionmod.repairs_endium_tools": "Repairs Endium Tools"
 }

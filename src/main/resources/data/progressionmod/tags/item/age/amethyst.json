@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "progressionmod:amethyst_sword",
+    "progressionmod:amethyst_pickaxe",
+    "progressionmod:amethyst_axe",
+    "progressionmod:amethyst_shovel",
+    "progressionmod:amethyst_hoe",
+    "progressionmod:amethyst_helmet",
+    "progressionmod:amethyst_chestplate",
+    "progressionmod:amethyst_leggings",
+    "progressionmod:amethyst_boots"
+  ]
+}

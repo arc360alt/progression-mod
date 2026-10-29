@@ -21,6 +21,12 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 1)
     public boolean improvedFlintFromGravel = false;
 
+    @ConfigEntry.Gui.Tooltip(count = 1)
+    public boolean ageItemLocking = true;
+
+    @ConfigEntry.Gui.Tooltip(count = 1)
+    public boolean showQuestHud = true;
+
     public static ModConfig get() {
         return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }

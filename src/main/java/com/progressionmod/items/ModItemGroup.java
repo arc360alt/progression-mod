@@ -18,6 +18,7 @@ public class ModItemGroup {
             .title(Component.literal("Progression Overhaul"))
             .icon(() -> new ItemStack(ModItems.FLINT_AXE))
             .displayItems((context, output) -> {
+                output.accept(ModItems.QUEST_BOOK);
                 output.accept(ModItems.FLINT_AXE);
                 output.accept(ModItems.FLINT_PICKAXE);
                 output.accept(ModItems.FLINT_SHOVEL);

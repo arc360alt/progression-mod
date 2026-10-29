@@ -1,0 +1,387 @@
+{
+  "age": "endium",
+  "quests": [
+    {
+      "id": "endium/pickaxe",
+      "title": "Endium Pickaxe",
+      "description": "Endium is unlocked: the strongest gear there is. Upgrade your netherite pickaxe.",
+      "icon": "progressionmod:endium_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "progressionmod:endium_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 60
+      }
+    },
+    {
+      "id": "endium/tools",
+      "title": "Edge of the Void",
+      "description": "Upgrade the rest of your netherite tools to endium.",
+      "icon": "progressionmod:endium_sword",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_hoe",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "endium/armor",
+      "title": "Voidwalker",
+      "description": "Upgrade your netherite armor to endium.",
+      "icon": "progressionmod:endium_chestplate",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "progressionmod:endium_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 100
+      }
+    },
+    {
+      "id": "endium/gateway",
+      "title": "Remote Getaway",
+      "description": "Throw an ender pearl into an end gateway to reach the outer islands.",
+      "icon": "minecraft:ender_pearl",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/enter_end_gateway",
+        "label": "Enter an end gateway"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "endium/end_city",
+      "title": "The City at the End of the Game",
+      "description": "Find an end city.",
+      "icon": "minecraft:purpur_block",
+      "requires": [
+        "endium/gateway"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/find_end_city",
+        "label": "Enter an end city"
+      },
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "endium/shulkers",
+      "title": "Shell Game",
+      "description": "Defeat shulkers and collect their shells.",
+      "icon": "minecraft:shulker_shell",
+      "requires": [
+        "endium/end_city"
+      ],
+      "tasks": [
+        {
+          "type": "kill",
+          "target": "minecraft:shulker",
+          "count": 6
+        },
+        {
+          "type": "pickup",
+          "target": "minecraft:shulker_shell",
+          "count": 4
+        }
+      ],
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "endium/levitate",
+      "title": "Great View From Up Here",
+      "description": "Float 50 blocks up after a shulker hits you.",
+      "icon": "minecraft:shulker_shell",
+      "optional": true,
+      "requires": [
+        "endium/end_city"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/levitate",
+        "label": "Levitate 50 blocks"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "endium/elytra",
+      "title": "Sky's the Limit",
+      "description": "Find an elytra in an end ship.",
+      "icon": "minecraft:elytra",
+      "requires": [
+        "endium/end_city"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/elytra",
+        "label": "Obtain an elytra"
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "endium/fly",
+      "title": "Frequent Flyer",
+      "description": "Glide 1,000 blocks with your elytra.",
+      "icon": "minecraft:elytra",
+      "requires": [
+        "endium/elytra"
+      ],
+      "task": {
+        "type": "custom",
+        "target": "minecraft:aviate_one_cm",
+        "count": 1000
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "endium/rockets",
+      "title": "Rocket Fuel",
+      "description": "Firework rockets boost elytra flight. Leave out the star so they don't explode.",
+      "icon": "minecraft:firework_rocket",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:firework_rocket",
+        "count": 32
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "endium/shulker_box",
+      "title": "Pocket Storage",
+      "description": "A shulker box keeps its items when you break it.",
+      "icon": "minecraft:shulker_box",
+      "requires": [
+        "endium/shulkers"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:shulker_box",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:open_shulker_box",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "endium/clean_box",
+      "title": "Spring Cleaning",
+      "description": "Wash the dye out of a shulker box in a water cauldron.",
+      "icon": "minecraft:cauldron",
+      "optional": true,
+      "requires": [
+        "endium/shulker_box"
+      ],
+      "task": {
+        "type": "custom",
+        "target": "minecraft:clean_shulker_box",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "endium/ender_chest",
+      "title": "Pocket Dimension",
+      "description": "Every ender chest opens to the same private storage, wherever you are.",
+      "icon": "minecraft:ender_chest",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:ender_chest",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:open_enderchest",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "endium/chorus",
+      "title": "Teleportation Snack",
+      "description": "Eating chorus fruit teleports you. Smelt it into popped chorus fruit to make end rods.",
+      "icon": "minecraft:chorus_fruit",
+      "tasks": [
+        {
+          "type": "use",
+          "target": "minecraft:chorus_fruit",
+          "count": 5
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:end_rod",
+          "count": 4
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "endium/purpur",
+      "title": "Purpur Palace",
+      "description": "Craft purpur blocks from popped chorus fruit.",
+      "icon": "minecraft:purpur_block",
+      "requires": [
+        "endium/chorus"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "minecraft:purpur_block",
+        "count": 16
+      },
+      "rewards": {
+        "xp": 20
+      }
+    },
+    {
+      "id": "endium/dragon_egg",
+      "title": "The Next Generation",
+      "description": "The dragon egg teleports when hit. Push it off with a piston, or break the block under it.",
+      "icon": "minecraft:dragon_egg",
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/dragon_egg",
+        "label": "Hold the dragon egg"
+      },
+      "rewards": {
+        "xp": 60
+      }
+    },
+    {
+      "id": "endium/spyglass_dragon",
+      "title": "Is It a Plane?",
+      "description": "Look at the Ender Dragon through a spyglass.",
+      "icon": "minecraft:spyglass",
+      "optional": true,
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:adventure/spyglass_at_dragon",
+        "label": "Look at the dragon through a spyglass"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "endium/sky",
+      "title": "Touch the Sky",
+      "description": "Fly or climb above Y=300.",
+      "icon": "minecraft:feather",
+      "requires": [
+        "endium/elytra"
+      ],
+      "task": {
+        "type": "y_level",
+        "above": 300
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "endium/traveler",
+      "title": "World Traveler",
+      "description": "Visit 40 different biomes.",
+      "icon": "minecraft:filled_map",
+      "optional": true,
+      "task": {
+        "type": "biomes_visited",
+        "count": 40
+      },
+      "rewards": {
+        "xp": 100
+      }
+    },
+    {
+      "id": "endium/ascension",
+      "title": "Master of Ages",
+      "description": "You've mastered every age. Reach level 50 to finish the journey.",
+      "icon": "minecraft:nether_star",
+      "requires": [
+        "endium/pickaxe",
+        "endium/tools",
+        "endium/armor",
+        "endium/elytra",
+        "endium/dragon_egg"
+      ],
+      "task": {
+        "type": "xp_level",
+        "count": 50
+      },
+      "rewards": {
+        "items": [
+          {
+            "item": "minecraft:nether_star",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ]
+}

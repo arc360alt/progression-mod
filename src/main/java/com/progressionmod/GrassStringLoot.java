@@ -11,8 +11,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 public class GrassStringLoot {
     public static void register() {
@@ -25,11 +24,11 @@ public class GrassStringLoot {
             if (isShortGrass || isTallGrass) {
                 var itemGetter = holder.lookupOrThrow(Registries.ITEM);
                 LootPool.Builder stringPool = LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(LootItemRandomChanceCondition.randomChance(0.25f))
                         .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemGetter, ModItems.FLINT_SWORD)))
                         .add(LootItem.lootTableItem(Items.STRING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))));
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2))));
 
                 tableBuilder.withPool(stringPool);
             }

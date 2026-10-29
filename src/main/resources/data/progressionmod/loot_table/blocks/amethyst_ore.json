@@ -9,26 +9,20 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:enchantment_active_check",
-                  "enchantment": "minecraft:silk_touch",
-                  "active": true
-                }
-              ],
+              "condition": "minecraft:tool/can_silk_touch",
               "name": "progressionmod:amethyst_ore"
             },
             {
               "type": "minecraft:item",
               "name": "progressionmod:raw_amethyst",
-              "functions": [
+              "modifier": [
                 {
-                  "function": "minecraft:apply_bonus",
+                  "type": "minecraft:apply_bonus",
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:ore_drops"
                 },
                 {
-                  "function": "minecraft:explosion_decay"
+                  "type": "minecraft:explosion_decay"
                 }
               ]
             }
@@ -36,5 +30,6 @@
         }
       ]
     }
-  ]
+  ],
+  "random_sequence": "progressionmod:blocks/amethyst_ore"
 }

@@ -50,6 +50,16 @@ public class ModConfigScreen extends Screen {
                 Component.translatable("text.autoconfig.progressionmod.option.improvedFlintFromGravel"),
                 (btn, val) -> config.improvedFlintFromGravel = val));
 
+        addRenderableWidget(CycleButton.onOffBuilder(config.ageItemLocking)
+            .create(x, y + 96, bw, bh,
+                Component.translatable("text.autoconfig.progressionmod.option.ageItemLocking"),
+                (btn, val) -> config.ageItemLocking = val));
+
+        addRenderableWidget(CycleButton.onOffBuilder(config.showQuestHud)
+            .create(x, y + 120, bw, bh,
+                Component.translatable("text.autoconfig.progressionmod.option.showQuestHud"),
+                (btn, val) -> config.showQuestHud = val));
+
         addRenderableWidget(Button.builder(Component.translatable("gui.done"), btn -> onClose())
             .bounds(cx - 75, this.height - 28, 150, bh)
             .build());

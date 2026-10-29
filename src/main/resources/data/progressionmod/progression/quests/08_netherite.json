@@ -1,0 +1,365 @@
+{
+  "age": "netherite",
+  "quests": [
+    {
+      "id": "netherite/pickaxe",
+      "title": "Netherite Pickaxe",
+      "description": "Netherite is unlocked. Upgrade your amethyst pickaxe. It can mine endium ore.",
+      "icon": "minecraft:netherite_pickaxe",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:netherite_pickaxe",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "netherite/tools",
+      "title": "Unbreakable Will",
+      "description": "Upgrade the rest of your amethyst tools to netherite.",
+      "icon": "minecraft:netherite_sword",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_axe",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_shovel",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_sword",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_hoe",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 60
+      }
+    },
+    {
+      "id": "netherite/armor",
+      "title": "Cover Me in Debris",
+      "description": "Upgrade your amethyst armor to netherite.",
+      "icon": "minecraft:netherite_chestplate",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_helmet",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_chestplate",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_leggings",
+          "count": 1
+        },
+        {
+          "type": "craft",
+          "target": "minecraft:netherite_boots",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "netherite/eyes",
+      "title": "Eyes of Ender",
+      "description": "Combine ender pearls with blaze powder.",
+      "icon": "minecraft:ender_eye",
+      "task": {
+        "type": "craft",
+        "target": "minecraft:ender_eye",
+        "count": 12
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "netherite/stronghold",
+      "title": "Eye Spy",
+      "description": "Throw an eye of ender and follow it to a stronghold.",
+      "icon": "minecraft:end_portal_frame",
+      "requires": [
+        "netherite/eyes"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:story/follow_ender_eye",
+        "label": "Follow an eye of ender into a stronghold"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "netherite/the_end",
+      "title": "The End?",
+      "description": "Fill the portal frame with eyes and jump in.",
+      "icon": "minecraft:end_stone",
+      "requires": [
+        "netherite/stronghold"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:story/enter_the_end",
+        "label": "Enter the End"
+      },
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "netherite/dragon",
+      "title": "Free the End",
+      "description": "Destroy the end crystals on the pillars, then slay the Ender Dragon.",
+      "icon": "minecraft:dragon_head",
+      "requires": [
+        "netherite/the_end"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/kill_dragon",
+        "label": "Kill the Ender Dragon"
+      },
+      "rewards": {
+        "xp": 100
+      }
+    },
+    {
+      "id": "netherite/breath",
+      "title": "You Need a Mint",
+      "description": "Collect the dragon's breath in a glass bottle. It makes lingering potions.",
+      "icon": "minecraft:dragon_breath",
+      "requires": [
+        "netherite/the_end"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/dragon_breath",
+        "label": "Collect dragon's breath"
+      },
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
+      "id": "netherite/endium_ore",
+      "title": "Endium Strike",
+      "description": "Endium ore is in the outer End islands. Only a netherite pickaxe can mine it.",
+      "icon": "progressionmod:endium_ore",
+      "requires": [
+        "netherite/pickaxe",
+        "netherite/the_end"
+      ],
+      "task": {
+        "type": "mine",
+        "target": "progressionmod:endium_ore",
+        "count": 4
+      },
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "netherite/endium_ingot",
+      "title": "Endium Refinery",
+      "description": "Smelt endium shards into endium ingots.",
+      "icon": "progressionmod:endium_crystal",
+      "requires": [
+        "netherite/endium_ore"
+      ],
+      "task": {
+        "type": "craft",
+        "target": "progressionmod:endium_crystal",
+        "count": 4
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "netherite/template",
+      "title": "The Final Blueprint",
+      "description": "Find a Netherite to Endium Upgrade template in a fortress or bastion chest.",
+      "icon": "progressionmod:netherite_endium_upgrade",
+      "task": {
+        "type": "has_item",
+        "item": "progressionmod:netherite_endium_upgrade",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "netherite/locator",
+      "title": "Endium Locator",
+      "description": "Craft an Endium Locator (diamond blocks and netherite). Use it in the End to highlight nearby endium ore.",
+      "icon": "progressionmod:endium_locator",
+      "optional": true,
+      "task": {
+        "type": "craft",
+        "target": "progressionmod:endium_locator",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "netherite/wither",
+      "title": "Withering Heights",
+      "description": "Summon the Wither with soul sand and three skulls, then defeat it.",
+      "icon": "minecraft:nether_star",
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "minecraft:nether/summon_wither",
+          "label": "Summon the Wither"
+        },
+        {
+          "type": "kill",
+          "target": "minecraft:wither",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 100
+      }
+    },
+    {
+      "id": "netherite/beacon",
+      "title": "Bring Home the Beacon",
+      "description": "Place a beacon on a pyramid of mineral blocks for powerful effects.",
+      "icon": "minecraft:beacon",
+      "requires": [
+        "netherite/wither"
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "minecraft:nether/create_beacon",
+          "label": "Construct a beacon"
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_beacon",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "netherite/respawn_dragon",
+      "title": "The End... Again...",
+      "description": "Put four end crystals on the exit portal to bring the dragon back.",
+      "icon": "minecraft:end_crystal",
+      "optional": true,
+      "requires": [
+        "netherite/dragon"
+      ],
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:end/respawn_dragon",
+        "label": "Respawn the Ender Dragon"
+      },
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "netherite/conduit",
+      "title": "Ocean Guardian",
+      "description": "Build a conduit with a heart of the sea and prismarine. It gives you water breathing.",
+      "icon": "minecraft:conduit",
+      "optional": true,
+      "task": {
+        "type": "effect",
+        "effect": "minecraft:conduit_power",
+        "label": "Have Conduit Power"
+      },
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "netherite/elder_guardian",
+      "title": "Monument Raider",
+      "description": "Defeat an elder guardian in an ocean monument.",
+      "icon": "minecraft:sponge",
+      "optional": true,
+      "task": {
+        "type": "kill",
+        "target": "minecraft:elder_guardian",
+        "count": 1
+      },
+      "rewards": {
+        "xp": 60
+      }
+    },
+    {
+      "id": "netherite/totem",
+      "title": "Postmortal",
+      "description": "Hold a totem of undying when you die and it saves you. Evokers drop them.",
+      "icon": "minecraft:totem_of_undying",
+      "optional": true,
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:adventure/totem_of_undying",
+        "label": "Cheat death with a totem"
+      },
+      "rewards": {
+        "xp": 50
+      }
+    },
+    {
+      "id": "netherite/trident",
+      "title": "A Throwaway Joke",
+      "description": "Some drowned drop tridents. Throw one at something.",
+      "icon": "minecraft:trident",
+      "optional": true,
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:adventure/throw_trident",
+        "label": "Throw a trident at something"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    },
+    {
+      "id": "netherite/sniffer",
+      "title": "Smells Interesting",
+      "description": "Brush suspicious sand in warm ocean ruins for a sniffer egg.",
+      "icon": "minecraft:sniffer_egg",
+      "optional": true,
+      "task": {
+        "type": "advancement",
+        "advancement": "minecraft:husbandry/obtain_sniffer_egg",
+        "label": "Obtain a sniffer egg"
+      },
+      "rewards": {
+        "xp": 40
+      }
+    }
+  ]
+}

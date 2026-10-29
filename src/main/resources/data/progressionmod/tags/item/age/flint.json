@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "progressionmod:flint_sword",
+    "progressionmod:flint_pickaxe",
+    "progressionmod:flint_axe",
+    "progressionmod:flint_shovel",
+    "progressionmod:flint_hoe"
+  ]
+}
