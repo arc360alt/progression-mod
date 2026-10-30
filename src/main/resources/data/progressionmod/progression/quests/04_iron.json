@@ -200,6 +200,30 @@
       }
     },
     {
+      "id": "iron/lodestone",
+      "title": "Country Lode, Take Me Home",
+      "description": "Craft a lodestone from chiseled stone bricks and an iron ingot. A compass used on it always points back to it, even in the Nether.",
+      "icon": "minecraft:lodestone",
+      "requires": [
+        "iron/navigation"
+      ],
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:lodestone",
+          "count": 1
+        },
+        {
+          "type": "advancement",
+          "advancement": "minecraft:adventure/use_lodestone",
+          "label": "Use a compass on a lodestone"
+        }
+      ],
+      "rewards": {
+        "xp": 30
+      }
+    },
+    {
       "id": "iron/trade",
       "title": "Haggler",
       "description": "Trade with a villager. Cure zombie villagers for huge discounts.",
@@ -324,7 +348,7 @@
     {
       "id": "iron/cartographer",
       "title": "Cartographer",
-      "description": "Copy, zoom out and lock maps at a cartography table.",
+      "description": "A map is paper around a compass. Copy, zoom out and lock maps at a cartography table.",
       "icon": "minecraft:cartography_table",
       "tasks": [
         {
@@ -345,7 +369,10 @@
       ],
       "rewards": {
         "xp": 15
-      }
+      },
+      "requires": [
+        "iron/navigation"
+      ]
     },
     {
       "id": "iron/archery",

@@ -76,8 +76,6 @@ public class RecipeUnlocker {
         UNLOCK_MAP.put(ModItems.RAW_AMETHYST, allAmethystRecipes);
         UNLOCK_MAP.put(ModItems.RAW_ENDIUM,   allEndiumRecipes);
 
-        UNLOCK_MAP.put(Items.GRAVEL,     List.of("progressionmod:sticks_from_gravel"));
-        UNLOCK_MAP.put(Items.OAK_LEAVES, List.of("progressionmod:sticks_from_leaves"));
     }
 
     @SuppressWarnings("unchecked")

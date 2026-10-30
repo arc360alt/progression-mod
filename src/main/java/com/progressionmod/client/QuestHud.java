@@ -55,8 +55,10 @@ public final class QuestHud {
         if (mc.player == null) return;
         ModConfig config = ModConfig.get();
         HudPosition position = config.questHudPosition;
+        // Hide only while the F3 text overlay is open. showDebugScreen() is also true when any
+        // debug entry is set to "always on" (e.g. hitboxes via F3+B), which would hide the HUD for good.
         boolean showPanel = ClientQuestState.synced && config.showQuestHud
-                && !mc.getDebugOverlay().showDebugScreen() && !(mc.gui.screen() instanceof QuestScreen);
+                && !mc.debugEntries.isOverlayVisible() && !(mc.gui.screen() instanceof QuestScreen);
 
         List<QuestDefinition> quests = ClientQuestState.age < Age.COUNT
                 ? ClientQuestState.hudQuests(config.questHudQuestCount) : List.of();
@@ -137,7 +139,7 @@ public final class QuestHud {
         g.item(stackOf(quest), x + 5, y + 4);
 
         boolean pinned = quest.id().equals(ClientQuestState.tracked);
-        String progress = ClientQuestState.questProgress(quest) + "/" + quest.totalCount();
+        String progress = ClientQuestState.progressText(quest) + (quest.tasks().size() > 1 ? " tasks" : "");
         String title = (pinned ? "★ " : "") + quest.title();
         int titleWidth = WIDTH - 29 - font.width(progress) - 6;
         g.text(font, font.plainSubstrByWidth(title, titleWidth), x + 24, y + 3, pinned ? 0xFFFFFF55 : 0xFFFFFFFF, true);

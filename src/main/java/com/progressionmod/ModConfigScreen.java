@@ -39,9 +39,8 @@ public class ModConfigScreen extends Screen {
         // ── Gameplay ──
         toggle(leftX, 0, "showMiningTierMessages", config.showMiningTierMessages, v -> config.showMiningTierMessages = v);
         toggle(leftX, 1, "showHandBreakWarning", config.showHandBreakWarning, v -> config.showHandBreakWarning = v);
-        toggle(leftX, 2, "stickDropFromLeaves", config.stickDropFromLeaves, v -> config.stickDropFromLeaves = v);
-        toggle(leftX, 3, "improvedFlintFromGravel", config.improvedFlintFromGravel, v -> config.improvedFlintFromGravel = v);
-        toggle(leftX, 4, "ageItemLocking", config.ageItemLocking, v -> config.ageItemLocking = v);
+        toggle(leftX, 2, "improvedFlintFromGravel", config.improvedFlintFromGravel, v -> config.improvedFlintFromGravel = v);
+        toggle(leftX, 3, "ageItemLocking", config.ageItemLocking, v -> config.ageItemLocking = v);
 
         // ── Quest HUD ──
         toggle(rightX, 0, "showQuestHud", config.showQuestHud, v -> config.showQuestHud = v);

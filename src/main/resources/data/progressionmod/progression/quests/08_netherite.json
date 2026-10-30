@@ -162,7 +162,7 @@
     {
       "id": "netherite/endium_ore",
       "title": "Endium Strike",
-      "description": "Endium ore is in the outer End islands. Only a netherite pickaxe can mine it.",
+      "description": "Endium ore hides inside End stone, on the main island and the outer islands. Only a netherite pickaxe can mine it.",
       "icon": "progressionmod:endium_ore",
       "requires": [
         "netherite/pickaxe",

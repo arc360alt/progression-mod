@@ -4,6 +4,7 @@ import com.progressionmod.blocks.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.BlockAccessor;
@@ -35,6 +36,8 @@ public enum ProgressionToolProvider implements IBlockComponentProvider {
     }
 
     private String getRequiredToolKey(BlockState state) {
+        if (state.is(BlockTags.LOGS) || state.is(BlockTags.BAMBOO_BLOCKS))
+                                     return "jade.progressionmod.tool.flint_axe";
         if (isCopperBlock(state))    return "jade.progressionmod.tool.stone_pickaxe";
         if (isIronBlock(state))      return "jade.progressionmod.tool.copper_pickaxe";
         if (isGoldBlock(state))      return "jade.progressionmod.tool.iron_pickaxe";

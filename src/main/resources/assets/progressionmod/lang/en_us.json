@@ -39,9 +39,7 @@
   "text.autoconfig.progressionmod.option.showMiningTierMessages": "Show Mining Tier Messages",
   "text.autoconfig.progressionmod.option.showMiningTierMessages.@Tooltip": "Shows a message in the action bar when you try to mine a block you don't have the right tool tier for.",
   "text.autoconfig.progressionmod.option.showHandBreakWarning": "Show Hand Break Warning",
-  "text.autoconfig.progressionmod.option.showHandBreakWarning.@Tooltip": "Shows a message when you try to break wood with your bare hands.",
-  "text.autoconfig.progressionmod.option.stickDropFromLeaves": "Increase stick drop from leaves",
-  "text.autoconfig.progressionmod.option.stickDropFromLeaves.@Tooltip": "Leaves have a 10% chance to drop 1-2 sticks when broken.",
+  "text.autoconfig.progressionmod.option.showHandBreakWarning.@Tooltip": "Shows a message when you try to chop wood without an axe.",
   "text.autoconfig.progressionmod.option.improvedFlintFromGravel": "Increase flint drop from gravel",
   "text.autoconfig.progressionmod.option.improvedFlintFromGravel.@Tooltip": "Adds an extra 10% chance to drop flint when breaking gravel, on top of the vanilla drop chance.",
   "jade.progressionmod.required_tool": "Requires: %s",
@@ -78,5 +76,6 @@
   "text.autoconfig.progressionmod.option.questHudPosition": "HUD Position",
   "text.autoconfig.progressionmod.option.questHudPosition.@Tooltip": "Which part of the screen the quest HUD sits in. You can also change this from the Quest Book.",
   "text.autoconfig.progressionmod.option.questHudQuestCount": "Quests on HUD",
-  "text.autoconfig.progressionmod.option.questHudQuestCount.@Tooltip": "How many active quests the HUD shows at once."
+  "text.autoconfig.progressionmod.option.questHudQuestCount.@Tooltip": "How many active quests the HUD shows at once.",
+  "jade.progressionmod.tool.flint_axe": "Flint Axe"
 }

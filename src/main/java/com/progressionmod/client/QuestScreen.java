@@ -384,7 +384,7 @@ public class QuestScreen extends Screen {
             rightX -= font.width(pillText) + 6;
             pill(g, rightX, y + 3, pillText, pillColor);
         } else {
-            String progress = ClientQuestState.questProgress(quest) + "/" + quest.totalCount();
+            String progress = ClientQuestState.progressText(quest) + (quest.tasks().size() > 1 ? " tasks" : "");
             rightX -= font.width(progress);
             g.text(font, progress, rightX, y + 4, GRAY, true);
         }

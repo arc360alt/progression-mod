@@ -199,30 +199,6 @@
       }
     },
     {
-      "id": "amethyst/lodestone",
-      "title": "Country Lode, Take Me Home",
-      "description": "Use a compass on a lodestone and it will always point back to it, even in the Nether.",
-      "icon": "minecraft:lodestone",
-      "requires": [
-        "amethyst/ingot"
-      ],
-      "tasks": [
-        {
-          "type": "craft",
-          "target": "minecraft:lodestone",
-          "count": 1
-        },
-        {
-          "type": "advancement",
-          "advancement": "minecraft:adventure/use_lodestone",
-          "label": "Use a compass on a lodestone"
-        }
-      ],
-      "rewards": {
-        "xp": 30
-      }
-    },
-    {
       "id": "amethyst/trims",
       "title": "Crafting a New Look",
       "description": "Trim templates from structures add decorative patterns to armor at a smithing table.",

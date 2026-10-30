@@ -16,11 +16,12 @@ public class PrimitiveLoot {
 
             String tablePath = key.identifier().getPath();
 
-            if (ModConfig.get().stickDropFromLeaves
-                    && tablePath.startsWith("blocks/") && tablePath.endsWith("_leaves")) {
+            // Leaves are the only early source of sticks (there's no wood without an axe),
+            // so every kind of leaves has a 30% chance to drop 1-2 sticks on top of vanilla's 2%.
+            if (tablePath.startsWith("blocks/") && tablePath.endsWith("_leaves")) {
                 LootPool.Builder stickPool = LootPool.lootPool()
                     .setRolls(ContextIntProviders.exactly(1))
-                    .when(LootItemRandomChanceCondition.randomChance(0.10f))
+                    .when(LootItemRandomChanceCondition.randomChance(0.30f))
                     .add(LootItem.lootTableItem(Items.STICK)
                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2))));
                 tableBuilder.withPool(stickPool);

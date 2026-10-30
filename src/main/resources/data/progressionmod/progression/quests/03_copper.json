@@ -117,6 +117,30 @@
       }
     },
     {
+      "id": "copper/stonecutter",
+      "title": "Precision Masonry",
+      "description": "A stonecutter (an iron ingot over three stone) makes stairs, slabs and walls with no wasted blocks.",
+      "icon": "minecraft:stonecutter",
+      "tasks": [
+        {
+          "type": "craft",
+          "target": "minecraft:stonecutter",
+          "count": 1
+        },
+        {
+          "type": "custom",
+          "target": "minecraft:interact_with_stonecutter",
+          "count": 1
+        }
+      ],
+      "rewards": {
+        "xp": 15
+      },
+      "requires": [
+        "copper/iron_ingots"
+      ]
+    },
+    {
       "id": "copper/lapis",
       "title": "Feeling Blue",
       "description": "Mine lapis lazuli. You'll need it later for enchanting.",
@@ -171,7 +195,7 @@
     {
       "id": "copper/wax",
       "title": "Waxing Poetic",
-      "description": "Rub honeycomb on copper blocks to stop them oxidizing. Scrape with an axe to undo.",
+      "description": "Use shears on a full beehive for honeycomb, then rub it on a copper block to stop it oxidizing. Scrape with an axe to undo.",
       "icon": "minecraft:honeycomb",
       "task": {
         "type": "advancement",
@@ -180,7 +204,10 @@
       },
       "rewards": {
         "xp": 20
-      }
+      },
+      "requires": [
+        "copper/shears"
+      ]
     },
     {
       "id": "copper/copper_chest",
@@ -297,7 +324,7 @@
     {
       "id": "copper/laundry",
       "title": "Laundry Day",
-      "description": "Fill a cauldron, then use dyed leather armor on it to wash out the dye.",
+      "description": "Craft a cauldron, fill it with a water bucket, then use dyed leather armor on it to wash out the dye.",
       "icon": "minecraft:cauldron",
       "tasks": [
         {
@@ -313,7 +340,10 @@
       ],
       "rewards": {
         "xp": 20
-      }
+      },
+      "requires": [
+        "copper/bucket"
+      ]
     },
     {
       "id": "copper/minecart",

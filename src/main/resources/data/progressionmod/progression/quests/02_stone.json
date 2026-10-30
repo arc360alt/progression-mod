@@ -112,27 +112,6 @@
       }
     },
     {
-      "id": "stone/stonecutter",
-      "title": "Precision Masonry",
-      "description": "A stonecutter makes stairs, slabs and walls with no wasted blocks.",
-      "icon": "minecraft:stonecutter",
-      "tasks": [
-        {
-          "type": "craft",
-          "target": "minecraft:stonecutter",
-          "count": 1
-        },
-        {
-          "type": "custom",
-          "target": "minecraft:interact_with_stonecutter",
-          "count": 1
-        }
-      ],
-      "rewards": {
-        "xp": 15
-      }
-    },
-    {
       "id": "stone/bricks",
       "title": "Stonemason",
       "description": "Craft stone bricks for sturdier-looking builds.",

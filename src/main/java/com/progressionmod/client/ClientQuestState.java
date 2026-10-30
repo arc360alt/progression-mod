@@ -68,12 +68,6 @@ public final class ClientQuestState {
         return -1;
     }
 
-    public static int questProgress(QuestDefinition quest) {
-        int sum = 0;
-        for (int v : taskProgress(quest)) sum += v;
-        return sum;
-    }
-
     public static int completedInAge(int ageIndex) {
         int n = 0;
         for (QuestDefinition quest : QUESTS.forAge(ageIndex)) if (isComplete(quest)) n++;
@@ -99,8 +93,24 @@ public final class ClientQuestState {
         return out;
     }
 
+    /**
+     * Overall progress from 0 to 1: the average of each task's own progress, so a big
+     * count in one task (like "collect 20") can't make a two-task quest look nearly done.
+     */
     public static double fraction(QuestDefinition quest) {
-        int total = quest.totalCount();
-        return total == 0 ? 0 : (double) questProgress(quest) / total;
+        int[] values = taskProgress(quest);
+        if (values.length == 0) return 0;
+        double sum = 0;
+        for (int i = 0; i < values.length; i++) sum += Math.min(1.0, values[i] / (double) quest.tasks().get(i).count());
+        return sum / values.length;
+    }
+
+    /** "3/10" for a single-task quest, or completed tasks out of total ("1/2") when there are several. */
+    public static String progressText(QuestDefinition quest) {
+        if (quest.tasks().size() == 1) return taskProgress(quest)[0] + "/" + quest.tasks().getFirst().count();
+        int[] values = taskProgress(quest);
+        int done = 0;
+        for (int i = 0; i < values.length; i++) if (values[i] >= quest.tasks().get(i).count()) done++;
+        return done + "/" + values.length;
     }
 }
