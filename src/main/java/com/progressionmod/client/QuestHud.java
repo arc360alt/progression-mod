@@ -1,6 +1,7 @@
 package com.progressionmod.client;
 
 import com.progressionmod.ModConfig;
+import com.progressionmod.ModConfig.HudPosition;
 import com.progressionmod.quest.Age;
 import com.progressionmod.quest.QuestDefinition;
 import net.fabricmc.api.EnvType;
@@ -9,6 +10,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Util;
@@ -19,14 +21,17 @@ import java.util.Deque;
 import java.util.List;
 
 /**
- * Top-left HUD panel: current age, age progress, and up to three active quests.
- * Also shows a banner when a quest is completed.
+ * Quest HUD: current age, age progress, and the active quests with the task each one
+ * is waiting on. Its corner is set in the config. Quest completions show a banner
+ * next to it.
  */
 @Environment(EnvType.CLIENT)
 public final class QuestHud {
 
-    private static final int WIDTH = 150;
-    private static final int MAX_QUESTS = 3;
+    private static final int WIDTH = 170;
+    private static final int MARGIN = 4;
+    private static final int HEADER_H = 22;
+    private static final int ROW_H = 31;
     private static final long BANNER_MS = 3500;
 
     private record Banner(Component title, Component subtitle, ItemStack icon, int color) {}
@@ -48,54 +53,113 @@ public final class QuestHud {
     public static void extract(GuiGraphicsExtractor g, DeltaTracker delta) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
-        boolean showPanel = ClientQuestState.synced && ModConfig.get().showQuestHud
+        ModConfig config = ModConfig.get();
+        HudPosition position = config.questHudPosition;
+        boolean showPanel = ClientQuestState.synced && config.showQuestHud
                 && !mc.getDebugOverlay().showDebugScreen() && !(mc.gui.screen() instanceof QuestScreen);
-        int bannerY = showPanel ? drawPanel(g, mc.font) + 4 : 4;
-        drawBanner(g, mc.font, bannerY);
+
+        List<QuestDefinition> quests = ClientQuestState.age < Age.COUNT
+                ? ClientQuestState.hudQuests(config.questHudQuestCount) : List.of();
+        int height = HEADER_H + quests.size() * ROW_H + (quests.isEmpty() ? 0 : 2);
+        int x = anchorX(g, position, WIDTH);
+        int y = anchorY(g, mc, position, height);
+
+        if (showPanel) {
+            drawPanel(g, mc.font, x, y, height, quests);
+            drawBanner(g, mc.font, position, x, position.isBottom() ? y - 34 : y + height + 4);
+        } else {
+            int bannerY = anchorY(g, mc, position, 30);
+            drawBanner(g, mc.font, position, x, bannerY);
+        }
     }
 
-    /** Draws the panel and returns its bottom edge. */
-    private static int drawPanel(GuiGraphicsExtractor g, Font font) {
-        int age = ClientQuestState.age;
-        Age current = Age.byIndex(age);
-        List<QuestDefinition> quests = ClientQuestState.hudQuests(MAX_QUESTS);
+    // ── Placement ────────────────────────────────────────────────────────────
 
-        int x = 4, y = 4;
-        int height = 24 + quests.size() * 22 + (quests.isEmpty() ? 0 : 2);
-        g.fill(x, y, x + WIDTH, y + height, 0x90000000);
-        g.outline(x, y, WIDTH, height, 0x40FFFFFF);
+    static int anchorX(GuiGraphicsExtractor g, HudPosition position, int width) {
+        if (position.isLeft()) return MARGIN;
+        if (position.isRight()) return g.guiWidth() - width - MARGIN;
+        return (g.guiWidth() - width) / 2;
+    }
+
+    static int anchorY(GuiGraphicsExtractor g, Minecraft mc, HudPosition position, int height) {
+        if (position.isTop()) {
+            // Top right shares the corner with status effect icons and toasts; move below them.
+            if (position == HudPosition.TOP_RIGHT) {
+                int y = MARGIN;
+                if (!mc.player.getActiveEffects().isEmpty()) {
+                    boolean harmful = mc.player.getActiveEffects().stream().anyMatch(e -> !e.getEffect().value().isBeneficial());
+                    y += harmful ? 52 : 26;
+                }
+                int toastSlots = mc.gui.toastManager().occupiedSlots.length();
+                return Math.max(y, toastSlots * Toast.SLOT_HEIGHT + MARGIN);
+            }
+            return MARGIN;
+        }
+        // Keep clear of the hotbar, health and food bars at the bottom.
+        if (position.isBottom()) return g.guiHeight() - height - 52;
+        return (g.guiHeight() - height) / 2;
+    }
+
+    // ── Panel ────────────────────────────────────────────────────────────────
+
+    private static void drawPanel(GuiGraphicsExtractor g, Font font, int x, int y, int height, List<QuestDefinition> quests) {
+        Age current = Age.byIndex(ClientQuestState.age);
+        int accent = current != null ? 0xFF000000 | current.color : 0xFFFF55FF;
+
+        g.fill(x, y, x + WIDTH, y + height, 0xA0101014);
+        g.outline(x, y, WIDTH, height, 0x50FFFFFF);
+        g.fill(x, y, x + 2, y + height, accent);
 
         if (current == null) {
-            g.item(new ItemStack(BuiltInRegistries.ITEM.getValue(Age.ENDIUM.icon)), x + 3, y + 3);
-            g.text(font, Component.literal("Ascended"), x + 22, y + 8, 0xFFFF55FF, true);
-            return y + height;
+            g.item(new ItemStack(BuiltInRegistries.ITEM.getValue(Age.ENDIUM.icon)), x + 5, y + 3);
+            g.text(font, Component.literal("Ascended"), x + 24, y + 4, 0xFFFF55FF, true);
+            g.text(font, Component.literal("Every age complete"), x + 24, y + 13, 0xFFAAAAAA, false);
+            return;
         }
 
-        int total = ClientQuestState.QUESTS.forAge(age).size();
-        int done = ClientQuestState.completedInAge(age);
-        g.item(new ItemStack(BuiltInRegistries.ITEM.getValue(current.icon)), x + 3, y + 3);
-        g.text(font, current.displayName, x + 22, y + 4, 0xFF000000 | current.color, true);
+        int total = ClientQuestState.QUESTS.forAge(ClientQuestState.age).size();
+        int done = ClientQuestState.completedInAge(ClientQuestState.age);
+        g.item(new ItemStack(BuiltInRegistries.ITEM.getValue(current.icon)), x + 5, y + 3);
+        g.text(font, current.displayName, x + 24, y + 4, accent, true);
         String count = done + "/" + total;
-        g.text(font, count, x + WIDTH - 4 - font.width(count), y + 4, 0xFFCCCCCC, true);
-        bar(g, x + 22, y + 15, WIDTH - 26, 3, total == 0 ? 1 : (double) done / total, 0xFF000000 | current.color);
+        g.text(font, count, x + WIDTH - 5 - font.width(count), y + 4, 0xFFCCCCCC, true);
+        bar(g, x + 24, y + 15, WIDTH - 29, 2, total == 0 ? 1 : (double) done / total, accent);
 
-        int rowY = y + 24;
+        int rowY = y + HEADER_H;
         for (QuestDefinition quest : quests) {
-            g.item(stackOf(quest), x + 3, rowY + 1);
-            boolean pinned = quest.id().equals(ClientQuestState.tracked);
-            String progress = ClientQuestState.questProgress(quest) + "/" + quest.totalCount();
-            int titleWidth = WIDTH - 26 - font.width(progress) - 6;
-            String title = (pinned ? "★ " : "") + quest.title();
-            g.text(font, font.plainSubstrByWidth(title, titleWidth), x + 22, rowY + 2, pinned ? 0xFFFFFF55 : 0xFFFFFFFF, true);
-            g.text(font, progress, x + WIDTH - 4 - font.width(progress), rowY + 2, 0xFFAAAAAA, true);
-            bar(g, x + 22, rowY + 13, WIDTH - 26, 2, ClientQuestState.fraction(quest), 0xFF55FF55);
-            rowY += 22;
+            drawQuestRow(g, font, quest, x, rowY);
+            rowY += ROW_H;
         }
-        return y + height;
     }
 
-    /** Draws the current banner at the left edge, sliding in from off-screen. */
-    private static void drawBanner(GuiGraphicsExtractor g, Font font, int y) {
+    private static void drawQuestRow(GuiGraphicsExtractor g, Font font, QuestDefinition quest, int x, int y) {
+        g.fill(x + 3, y, x + WIDTH - 3, y + 1, 0x30FFFFFF);
+        g.item(stackOf(quest), x + 5, y + 4);
+
+        boolean pinned = quest.id().equals(ClientQuestState.tracked);
+        String progress = ClientQuestState.questProgress(quest) + "/" + quest.totalCount();
+        String title = (pinned ? "★ " : "") + quest.title();
+        int titleWidth = WIDTH - 29 - font.width(progress) - 6;
+        g.text(font, font.plainSubstrByWidth(title, titleWidth), x + 24, y + 3, pinned ? 0xFFFFFF55 : 0xFFFFFFFF, true);
+        g.text(font, progress, x + WIDTH - 5 - font.width(progress), y + 3, 0xFFAAAAAA, true);
+
+        // The task this quest is waiting on.
+        int taskIndex = ClientQuestState.currentTask(quest);
+        if (taskIndex >= 0) {
+            QuestDefinition.Task task = quest.tasks().get(taskIndex);
+            int value = ClientQuestState.taskProgress(quest)[taskIndex];
+            String amount = task.count() > 1 ? " " + value + "/" + task.count() : "";
+            String text = "▸ " + QuestText.describe(task).getString();
+            int maxW = WIDTH - 29 - font.width(amount);
+            g.text(font, font.plainSubstrByWidth(text, maxW) + amount, x + 24, y + 13, 0xFFB8B8C8, false);
+        }
+        bar(g, x + 24, y + 24, WIDTH - 29, 2, ClientQuestState.fraction(quest), 0xFF55FF55);
+    }
+
+    // ── Banner ───────────────────────────────────────────────────────────────
+
+    /** Draws the current banner near (x, y), sliding in from the side the HUD is anchored to. */
+    private static void drawBanner(GuiGraphicsExtractor g, Font font, HudPosition position, int x, int y) {
         if (banners.isEmpty()) return;
         long now = Util.getMillis();
         if (bannerStart == 0) bannerStart = now;
@@ -106,13 +170,20 @@ public final class QuestHud {
             return;
         }
         Banner banner = banners.peek();
-        // Slide in for 250ms, hold, slide out for the last 250ms.
-        double slide = Math.min(1, Math.min(elapsed, BANNER_MS - elapsed) / 250.0);
         int w = Math.max(WIDTH, Math.max(font.width(banner.title()), font.width(banner.subtitle())) + 36);
         int h = 30;
-        int x = (int) (-w + (w + 4) * slide);
+        x = anchorX(g, position, w);
+
+        // Slide in for 250ms, hold, slide out for the last 250ms.
+        double slide = Math.min(1, Math.min(elapsed, BANNER_MS - elapsed) / 250.0);
+        int hidden = (int) ((1 - slide) * (w + MARGIN * 2));
+        if (position.isLeft()) x -= hidden;
+        else if (position.isRight()) x += hidden;
+        else y -= (int) ((1 - slide) * (h + y + 2));
+
         g.fill(x, y, x + w, y + h, 0xE0101010);
         g.outline(x, y, w, h, banner.color());
+        g.fill(x, y, x + 2, y + h, banner.color());
         g.item(banner.icon(), x + 7, y + 7);
         g.text(font, banner.title(), x + 28, y + 6, banner.color(), true);
         g.text(font, banner.subtitle(), x + 28, y + 17, 0xFFFFFFFF, true);

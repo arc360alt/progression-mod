@@ -59,6 +59,15 @@ public final class ClientQuestState {
         return out;
     }
 
+    /** Index of the first task that isn't finished yet, or -1 if every task is done. */
+    public static int currentTask(QuestDefinition quest) {
+        int[] values = taskProgress(quest);
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] < quest.tasks().get(i).count()) return i;
+        }
+        return -1;
+    }
+
     public static int questProgress(QuestDefinition quest) {
         int sum = 0;
         for (int v : taskProgress(quest)) sum += v;

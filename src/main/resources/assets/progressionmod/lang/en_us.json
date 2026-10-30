@@ -74,5 +74,9 @@
   "tag.item.progressionmod.age.endium": "Endium Age Items",
   "tag.item.progressionmod.repairs_flint_tools": "Repairs Flint Tools",
   "tag.item.progressionmod.repairs_amethyst_tools": "Repairs Amethyst Tools",
-  "tag.item.progressionmod.repairs_endium_tools": "Repairs Endium Tools"
+  "tag.item.progressionmod.repairs_endium_tools": "Repairs Endium Tools",
+  "text.autoconfig.progressionmod.option.questHudPosition": "HUD Position",
+  "text.autoconfig.progressionmod.option.questHudPosition.@Tooltip": "Which part of the screen the quest HUD sits in. You can also change this from the Quest Book.",
+  "text.autoconfig.progressionmod.option.questHudQuestCount": "Quests on HUD",
+  "text.autoconfig.progressionmod.option.questHudQuestCount.@Tooltip": "How many active quests the HUD shows at once."
 }
