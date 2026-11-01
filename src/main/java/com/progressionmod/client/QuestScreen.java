@@ -67,7 +67,12 @@ public class QuestScreen extends Screen {
     private boolean draggingScrollbar;
 
     private QuestButton trackButton;
+    private QuestButton treeTrackButton;
     private EditBox searchBox;
+
+    /** Tree view (default) or the classic list; remembered while the game is running. */
+    private static boolean treeMode = true;
+    private QuestTreeView tree;
 
     public QuestScreen() {
         super(Component.literal("Quest Book"));
@@ -79,8 +84,8 @@ public class QuestScreen extends Screen {
 
     @Override
     protected void init() {
-        panelW = Math.min(480, width - 10);
-        panelH = Math.min(296, height - 10);
+        panelW = Math.min(treeMode ? 640 : 480, width - 10);
+        panelH = Math.min(treeMode ? 360 : 296, height - 10);
         left = (width - panelW) / 2;
         top = (height - panelH) / 2;
         contentX = left + SIDEBAR_W + 8;
@@ -115,8 +120,19 @@ public class QuestScreen extends Screen {
         ageRowsTop = top + TITLE_H + 6;
         ageRowH = Math.max(14, Math.min(21, (hudY - 6 - ageRowsTop) / Age.COUNT));
 
-        // Toolbar: filter tabs and search.
+        // Toolbar: view toggle, filter tabs, focus and search.
         int tx = contentX;
+        for (boolean tree : new boolean[] { true, false }) {
+            String label = tree ? "Tree" : "List";
+            int w = font.width(label) + 14;
+            addRenderableWidget(new QuestButton(tx, toolbarY, w, BUTTON_H, Component.literal(label), 0xFF6FA8FF, b -> {
+                if (treeMode == tree) return;
+                treeMode = tree;
+                rebuildWidgets();
+            }).selectedWhen(() -> treeMode == tree));
+            tx += w + 3;
+        }
+        tx += 6;
         for (Filter f : Filter.values()) {
             int w = font.width(f.label) + 14;
             addRenderableWidget(new QuestButton(tx, toolbarY, w, BUTTON_H, Component.literal(f.label), 0xFFFFC94D, b -> {
@@ -128,7 +144,7 @@ public class QuestScreen extends Screen {
         }
         int searchW = Math.min(130, contentX + contentW - tx - 6);
         searchBox = new EditBox(font, contentX + contentW - searchW, toolbarY + 1, searchW, BUTTON_H - 2, Component.literal("Search"));
-        searchBox.setHint(Component.literal("Search quests...").withColor(DARK_GRAY));
+        searchBox.setHint(Component.literal("Search...").withColor(DARK_GRAY));
         searchBox.setMaxLength(48);
         searchBox.setValue(search);
         searchBox.setResponder(text -> {
@@ -140,6 +156,17 @@ public class QuestScreen extends Screen {
         addRenderableWidget(searchBox);
 
         trackButton = addRenderableWidget(new QuestButton(left + panelW - 84, top + panelH - 5 - BUTTON_H - 2, 78, BUTTON_H + 2,
+                Component.literal("Track"), GOLD, b -> toggleTrack()));
+
+        if (tree == null) tree = new QuestTreeView(this, font);
+        tree.setBounds(contentX - 2, listTop - 2, contentW + 4, top + panelH - 5 - (listTop - 2));
+        tree.setAge(selectedAge, selected);
+        // Focus sits in the canvas corner and glides back to the selected (or next open) quest.
+        addRenderableWidget(new QuestButton(contentX + 2, listTop + 2, font.width("Focus") + 14, BUTTON_H - 2,
+                Component.literal("Focus"), 0xFF8A8A9A,
+                b -> tree.focus(selected != null ? selected : firstOpenQuest(selectedAge), true))).visible = treeMode;
+        int[] card = tree.cardBounds();
+        treeTrackButton = addRenderableWidget(new QuestButton(card[0] + 6, card[1] + card[3] - 23, card[2] - 12, BUTTON_H + 1,
                 Component.literal("Track"), GOLD, b -> toggleTrack()));
         clampScroll();
         tick();
@@ -178,24 +205,56 @@ public class QuestScreen extends Screen {
         boolean trackable = selected != null && !ClientQuestState.isComplete(selected)
                 && selected.age() <= ClientQuestState.age;
         boolean tracked = selected != null && selected.id().equals(ClientQuestState.tracked);
+        Component label = Component.literal(tracked ? "✖ Untrack" : "★ Track");
         trackButton.active = trackable;
-        trackButton.setMessage(Component.literal(tracked ? "✖ Untrack" : "★ Track"));
+        trackButton.setMessage(label);
+        trackButton.visible = !treeMode;
+        treeTrackButton.active = trackable;
+        treeTrackButton.setMessage(label);
+        treeTrackButton.visible = treeMode && tree.isCardOpen();
+    }
+
+    // ── Hooks for the tree view ──────────────────────────────────────────────
+
+    QuestDefinition selected() {
+        return selected;
+    }
+
+    /** Selects a quest, switching age if needed, and brings it into view. */
+    void selectQuest(QuestDefinition quest) {
+        if (quest.age() != selectedAge) selectAge(quest.age());
+        selected = quest;
+        if (treeMode) tree.reveal(quest);
+        else keepSelectionVisible();
+        tick();
+    }
+
+    void toggleTrackFromTree() {
+        if (treeTrackButton.active) toggleTrack();
+    }
+
+    void playClick() {
+        click();
     }
 
     // ── Data ─────────────────────────────────────────────────────────────────
 
     private List<QuestDefinition> visibleQuests() {
-        String query = search.trim().toLowerCase(Locale.ROOT);
         List<QuestDefinition> out = new ArrayList<>();
         for (QuestDefinition quest : ClientQuestState.QUESTS.forAge(selectedAge)) {
-            boolean done = ClientQuestState.isComplete(quest);
-            if (filter == Filter.ACTIVE && done) continue;
-            if (filter == Filter.DONE && !done) continue;
-            if (!query.isEmpty() && !quest.title().toLowerCase(Locale.ROOT).contains(query)
-                    && !quest.description().toLowerCase(Locale.ROOT).contains(query)) continue;
-            out.add(quest);
+            if (matches(quest)) out.add(quest);
         }
         return out;
+    }
+
+    /** Whether a quest passes the current filter tab and search text. */
+    private boolean matches(QuestDefinition quest) {
+        boolean done = ClientQuestState.isComplete(quest);
+        if (filter == Filter.ACTIVE && done) return false;
+        if (filter == Filter.DONE && !done) return false;
+        String query = search.trim().toLowerCase(Locale.ROOT);
+        return query.isEmpty() || quest.title().toLowerCase(Locale.ROOT).contains(query)
+                || quest.description().toLowerCase(Locale.ROOT).contains(query);
     }
 
     private Age age() {
@@ -221,8 +280,12 @@ public class QuestScreen extends Screen {
         drawTitleBar(g, accent);
         drawSidebar(g, mouseX, mouseY);
         drawHeader(g, mouseX, mouseY);
-        drawQuestList(g, mouseX, mouseY);
-        drawDetails(g, mouseX, mouseY);
+        if (treeMode) {
+            tree.render(g, mouseX, mouseY, this::matches);
+        } else {
+            drawQuestList(g, mouseX, mouseY);
+            drawDetails(g, mouseX, mouseY);
+        }
 
         super.extractRenderState(g, mouseX, mouseY, partialTick);
     }
@@ -520,6 +583,13 @@ public class QuestScreen extends Screen {
             }
         }
 
+        if (treeMode) {
+            searchBox.setFocused(false);
+            boolean handled = tree.mouseClicked(mx, my, doubleClick);
+            tick();
+            return handled;
+        }
+
         List<QuestDefinition> quests = visibleQuests();
         if (needsScrollbar(quests) && isIn(mx, my, contentX + contentW - 5, listTop, 8, listBottom - listTop)) {
             draggingScrollbar = true;
@@ -546,18 +616,21 @@ public class QuestScreen extends Screen {
             dragScrollbar(event.y(), visibleQuests());
             return true;
         }
+        if (treeMode && tree.mouseDragged(event.x(), event.y())) return true;
         return super.mouseDragged(event, dx, dy);
     }
 
     @Override
     public boolean mouseReleased(MouseButtonEvent event) {
         draggingScrollbar = false;
+        if (treeMode) tree.mouseReleased();
         return super.mouseReleased(event);
     }
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        if (mouseX >= contentX && mouseX < contentX + contentW && mouseY >= listTop && mouseY < listBottom) {
+        if (treeMode && tree.mouseScrolled(mouseX, mouseY, scrollY)) return true;
+        if (!treeMode && mouseX >= contentX && mouseX < contentX + contentW && mouseY >= listTop && mouseY < listBottom) {
             scroll -= scrollY * QUEST_ROW_H;
             clampScroll();
             return true;
@@ -599,6 +672,7 @@ public class QuestScreen extends Screen {
         selected = firstOpenQuest(index);
         scroll = 0;
         keepSelectionVisible();
+        if (tree != null) tree.setAge(index, selected);
         tick();
     }
 
@@ -609,6 +683,7 @@ public class QuestScreen extends Screen {
         index = index < 0 ? 0 : Math.max(0, Math.min(quests.size() - 1, index + delta));
         selected = quests.get(index);
         keepSelectionVisible();
+        if (treeMode) tree.reveal(selected);
         tick();
         click();
     }
