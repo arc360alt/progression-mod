@@ -3,6 +3,8 @@
 /bin/
 /target/
 *.jar
+# Compile-only jars for optional integrations (see build.gradle)
+!libs/*.jar
 
 # IDE Support
 .idea/

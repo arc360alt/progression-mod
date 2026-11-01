@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "Progression Overhaul",
   "description": "A complete progression overhaul starting from Flint tools.",
-  "authors": ["Arc360"],
+  "authors": [
+    "Arc360"
+  ],
   "contact": {},
   "license": "MIT",
   "icon": "assets/progressionmod/icon.png",
@@ -21,6 +23,9 @@
     ],
     "jade": [
       "com.progressionmod.jade.JadePlugin"
+    ],
+    "neocraft_ui:hud": [
+      "com.progressionmod.client.compat.NeoCraftHudCompat"
     ]
   },
   "accessWidener": "progressionmod.accesswidener",
@@ -33,6 +38,7 @@
     "minecraft": "${minecraft_version_range}"
   },
   "suggests": {
-    "jade": "*"
+    "jade": "*",
+    "neocraft_ui": "*"
   }
 }

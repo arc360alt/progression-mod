@@ -28,6 +28,8 @@ dependencies {
 	implementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
 	include "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
 	compileOnly "maven.modrinth:jade:${project.jade_version}"
+	// Not on any maven; the jar is checked into libs/. Never required at runtime.
+	compileOnly files("libs/neocraft_ui-${project.neocraft_version}.jar")
 }
 
 processResources {

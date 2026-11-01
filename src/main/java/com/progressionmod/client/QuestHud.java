@@ -2,6 +2,7 @@ package com.progressionmod.client;
 
 import com.progressionmod.ModConfig;
 import com.progressionmod.ModConfig.HudPosition;
+import com.progressionmod.client.compat.NeoCraftHudCompat;
 import com.progressionmod.quest.Age;
 import com.progressionmod.quest.QuestDefinition;
 import net.fabricmc.api.EnvType;
@@ -15,6 +16,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -32,7 +34,14 @@ public final class QuestHud {
     private static final int MARGIN = 4;
     private static final int HEADER_H = 22;
     private static final int ROW_H = 31;
+    private static final int BANNER_H = 30;
     private static final long BANNER_MS = 3500;
+
+    /**
+     * Set by {@link NeoCraftHudCompat} when NeoCraft UI's HUD API registers our elements.
+     * While false nothing NeoCraft-related is touched, so the mod works without it.
+     */
+    public static boolean neoCraftActive = false;
 
     private record Banner(Component title, Component subtitle, ItemStack icon, int color) {}
 
@@ -55,38 +64,93 @@ public final class QuestHud {
         if (mc.player == null) return;
         ModConfig config = ModConfig.get();
         HudPosition position = config.questHudPosition;
+        boolean editor = neoCraftActive && NeoCraftHudCompat.editorOpen();
         // Hide only while the F3 text overlay is open. showDebugScreen() is also true when any
         // debug entry is set to "always on" (e.g. hitboxes via F3+B), which would hide the HUD for good.
-        boolean showPanel = ClientQuestState.synced && config.showQuestHud
+        // In NeoCraft's HUD editor the panel is always shown so it can be placed.
+        boolean showPanel = ClientQuestState.synced && (config.showQuestHud || editor)
                 && !mc.debugEntries.isOverlayVisible() && !(mc.gui.screen() instanceof QuestScreen);
 
         List<QuestDefinition> quests = ClientQuestState.age < Age.COUNT
                 ? ClientQuestState.hudQuests(config.questHudQuestCount) : List.of();
         int height = HEADER_H + quests.size() * ROW_H + (quests.isEmpty() ? 0 : 2);
-        int x = anchorX(g, position, WIDTH);
-        int y = anchorY(g, mc, position, height);
+
+        if (neoCraftActive) {
+            extractWithNeoCraft(g, mc.font, position, showPanel, editor, quests, height);
+            return;
+        }
+
+        int x = anchorX(g.guiWidth(), position, WIDTH);
+        int y = anchorY(g.guiHeight(), mc, position, height);
 
         if (showPanel) {
             drawPanel(g, mc.font, x, y, height, quests);
             drawBanner(g, mc.font, position, x, position.isBottom() ? y - 34 : y + height + 4);
         } else {
-            int bannerY = anchorY(g, mc, position, 30);
+            int bannerY = anchorY(g.guiHeight(), mc, position, BANNER_H);
             drawBanner(g, mc.font, position, x, bannerY);
         }
     }
 
-    // ── Placement ────────────────────────────────────────────────────────────
+    // ── NeoCraft UI integration ──────────────────────────────────────────────
 
-    static int anchorX(GuiGraphicsExtractor g, HudPosition position, int width) {
-        if (position.isLeft()) return MARGIN;
-        if (position.isRight()) return g.guiWidth() - width - MARGIN;
-        return (g.guiWidth() - width) / 2;
+    /**
+     * With NeoCraft UI the panel and banner are separate HUD-editor elements. Each draws at
+     * its default box ({@link #panelBox}, {@link #bannerBox}) and NeoCraft moves and scales it.
+     */
+    private static void extractWithNeoCraft(GuiGraphicsExtractor g, Font font, HudPosition position, boolean showPanel,
+                                            boolean editor, List<QuestDefinition> quests, int height) {
+        if (showPanel) {
+            int[] box = panelBox(g.guiWidth(), g.guiHeight());
+            if (NeoCraftHudCompat.pushPanel(g)) drawPanel(g, font, box[0], box[1], height, quests);
+            NeoCraftHudCompat.popPanel(g);
+        }
+
+        int[] box = bannerBox(g.guiWidth(), g.guiHeight());
+        if (NeoCraftHudCompat.pushBanner(g)) {
+            if (editor && banners.isEmpty()) {
+                drawBannerBox(g, font, box[0], box[1], Component.literal("Quest Complete!"),
+                        Component.literal("Example Quest"), new ItemStack(Items.BOOK), 0xFF55FF55);
+            } else {
+                drawBanner(g, font, position, box[0], box[1]);
+            }
+        }
+        NeoCraftHudCompat.popBanner(g);
     }
 
-    static int anchorY(GuiGraphicsExtractor g, Minecraft mc, HudPosition position, int height) {
+    /** Height of the panel with every quest slot filled; the editor box uses it so it doesn't jump around. */
+    private static int fullPanelHeight() {
+        return HEADER_H + ModConfig.get().questHudQuestCount * ROW_H + 2;
+    }
+
+    /** Where the panel is drawn before NeoCraft moves it: {x, y, width, height} in GUI pixels. */
+    public static int[] panelBox(int screenWidth, int screenHeight) {
+        HudPosition position = ModConfig.get().questHudPosition;
+        int h = fullPanelHeight();
+        return new int[] { anchorX(screenWidth, position, WIDTH), anchorY(screenHeight, Minecraft.getInstance(), position, h), WIDTH, h };
+    }
+
+    /** Where the banner is drawn before NeoCraft moves it: next to the panel's default box. */
+    public static int[] bannerBox(int screenWidth, int screenHeight) {
+        HudPosition position = ModConfig.get().questHudPosition;
+        int[] panel = panelBox(screenWidth, screenHeight);
+        int y = position.isBottom() ? panel[1] - BANNER_H - 4 : panel[1] + panel[3] + 4;
+        return new int[] { panel[0], y, WIDTH, BANNER_H };
+    }
+
+    // ── Placement ────────────────────────────────────────────────────────────
+
+    static int anchorX(int screenWidth, HudPosition position, int width) {
+        if (position.isLeft()) return MARGIN;
+        if (position.isRight()) return screenWidth - width - MARGIN;
+        return (screenWidth - width) / 2;
+    }
+
+    static int anchorY(int screenHeight, Minecraft mc, HudPosition position, int height) {
         if (position.isTop()) {
             // Top right shares the corner with status effect icons and toasts; move below them.
-            if (position == HudPosition.TOP_RIGHT) {
+            // (No player when NeoCraft's editor asks from the title screen.)
+            if (position == HudPosition.TOP_RIGHT && mc.player != null) {
                 int y = MARGIN;
                 if (!mc.player.getActiveEffects().isEmpty()) {
                     boolean harmful = mc.player.getActiveEffects().stream().anyMatch(e -> !e.getEffect().value().isBeneficial());
@@ -98,8 +162,8 @@ public final class QuestHud {
             return MARGIN;
         }
         // Keep clear of the hotbar, health and food bars at the bottom.
-        if (position.isBottom()) return g.guiHeight() - height - 52;
-        return (g.guiHeight() - height) / 2;
+        if (position.isBottom()) return screenHeight - height - 52;
+        return (screenHeight - height) / 2;
     }
 
     // ── Panel ────────────────────────────────────────────────────────────────
@@ -172,23 +236,25 @@ public final class QuestHud {
             return;
         }
         Banner banner = banners.peek();
-        int w = Math.max(WIDTH, Math.max(font.width(banner.title()), font.width(banner.subtitle())) + 36);
-        int h = 30;
-        x = anchorX(g, position, w);
 
         // Slide in for 250ms, hold, slide out for the last 250ms.
         double slide = Math.min(1, Math.min(elapsed, BANNER_MS - elapsed) / 250.0);
-        int hidden = (int) ((1 - slide) * (w + MARGIN * 2));
+        int hidden = (int) ((1 - slide) * (WIDTH + MARGIN * 2));
         if (position.isLeft()) x -= hidden;
         else if (position.isRight()) x += hidden;
-        else y -= (int) ((1 - slide) * (h + y + 2));
+        else y -= (int) ((1 - slide) * (BANNER_H + y + 2));
 
-        g.fill(x, y, x + w, y + h, 0xE0101010);
-        g.outline(x, y, w, h, banner.color());
-        g.fill(x, y, x + 2, y + h, banner.color());
-        g.item(banner.icon(), x + 7, y + 7);
-        g.text(font, banner.title(), x + 28, y + 6, banner.color(), true);
-        g.text(font, banner.subtitle(), x + 28, y + 17, 0xFFFFFFFF, true);
+        drawBannerBox(g, font, x, y, banner.title(), banner.subtitle(), banner.icon(), banner.color());
+    }
+
+    private static void drawBannerBox(GuiGraphicsExtractor g, Font font, int x, int y, Component title,
+                                      Component subtitle, ItemStack icon, int color) {
+        g.fill(x, y, x + WIDTH, y + BANNER_H, 0xE0101010);
+        g.outline(x, y, WIDTH, BANNER_H, color);
+        g.fill(x, y, x + 2, y + BANNER_H, color);
+        g.item(icon, x + 7, y + 7);
+        g.text(font, title, x + 28, y + 6, color, true);
+        g.text(font, font.plainSubstrByWidth(subtitle.getString(), WIDTH - 32), x + 28, y + 17, 0xFFFFFFFF, true);
     }
 
     static void bar(GuiGraphicsExtractor g, int x, int y, int w, int h, double fraction, int color) {
