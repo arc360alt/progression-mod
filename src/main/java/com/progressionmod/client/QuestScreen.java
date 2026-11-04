@@ -573,6 +573,13 @@ public class QuestScreen extends Screen {
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (super.mouseClicked(event, doubleClick)) return true;
         double mx = event.x(), my = event.y();
+        // Any button can pan the tree; only the left button does anything else.
+        if (treeMode && tree.contains(mx, my)) {
+            searchBox.setFocused(false);
+            boolean handled = tree.mouseClicked(mx, my, event.button(), doubleClick);
+            tick();
+            return handled;
+        }
         if (event.button() != 0) return false;
 
         for (int i = 0; i < Age.COUNT; i++) {
@@ -585,9 +592,7 @@ public class QuestScreen extends Screen {
 
         if (treeMode) {
             searchBox.setFocused(false);
-            boolean handled = tree.mouseClicked(mx, my, doubleClick);
-            tick();
-            return handled;
+            return false;
         }
 
         List<QuestDefinition> quests = visibleQuests();
@@ -623,7 +628,10 @@ public class QuestScreen extends Screen {
     @Override
     public boolean mouseReleased(MouseButtonEvent event) {
         draggingScrollbar = false;
-        if (treeMode) tree.mouseReleased();
+        if (treeMode && tree.mouseReleased()) {
+            tick();
+            return true;
+        }
         return super.mouseReleased(event);
     }
 

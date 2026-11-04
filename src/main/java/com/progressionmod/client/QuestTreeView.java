@@ -2,6 +2,7 @@ package com.progressionmod.client;
 
 import com.progressionmod.quest.Age;
 import com.progressionmod.quest.QuestDefinition;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Font;
@@ -67,6 +68,9 @@ final class QuestTreeView {
     private boolean pressed, dragging;
     private double pressX, pressY;
     private float pressCamX, pressCamY;
+    /** Card under the cursor when the button went down; selected on release if the mouse didn't move. */
+    private Node pressNode;
+    private int pressButton;
 
     private boolean cardOpen;
     private final List<Link> links = new ArrayList<>();
@@ -317,6 +321,8 @@ final class QuestTreeView {
         if (nodes.isEmpty()) g.centeredText(font, "No quests in this age", x + w / 2, y + h / 2 - 4, DARK_GRAY);
         drawOverlay(g);
 
+        if (dragging) g.requestCursor(CursorTypes.RESIZE_ALL);
+        else if (hovered != null) g.requestCursor(CursorTypes.POINTING_HAND);
         if (hovered != null) {
             g.setComponentTooltipForNextFrame(font, tooltip(hovered.quest()), mouseX, mouseY);
         }
@@ -575,9 +581,15 @@ final class QuestTreeView {
         return mx >= x && mx < x + w && my >= y && my < y + h;
     }
 
-    boolean mouseClicked(double mx, double my, boolean doubleClick) {
+    /**
+     * A press anywhere on the canvas (cards included) may start a drag. Moving more than a
+     * few pixels pans the view; releasing without moving counts as a click on the card.
+     * Any mouse button pans; only the left button selects.
+     */
+    boolean mouseClicked(double mx, double my, int button, boolean doubleClick) {
         if (!contains(mx, my)) return false;
         if (isCardOpen() && inCard(mx, my)) {
+            if (button != 0) return true;
             int[] c = cardBounds();
             if (mx >= c[0] + c[2] - 13 && my < c[1] + 14) {
                 cardOpen = false;
@@ -594,15 +606,15 @@ final class QuestTreeView {
             return true;
         }
         Node node = nodeAt(worldX(mx), worldY(my));
-        if (node != null) {
-            screen.selectQuest(node.quest());
-            cardOpen = true;
-            screen.playClick();
-            if (doubleClick) screen.toggleTrackFromTree();
+        if (button == 0 && doubleClick && node != null) {
+            select(node);
+            screen.toggleTrackFromTree();
             return true;
         }
         pressed = true;
         dragging = false;
+        pressNode = node;
+        pressButton = button;
         pressX = mx;
         pressY = my;
         pressCamX = camX;
@@ -624,9 +636,17 @@ final class QuestTreeView {
 
     boolean mouseReleased() {
         boolean was = pressed;
+        if (pressed && !dragging && pressNode != null && pressButton == 0) select(pressNode);
         pressed = false;
         dragging = false;
+        pressNode = null;
         return was;
+    }
+
+    private void select(Node node) {
+        screen.selectQuest(node.quest());
+        cardOpen = true;
+        screen.playClick();
     }
 
     boolean mouseScrolled(double mx, double my, double amount) {
