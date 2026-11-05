@@ -580,7 +580,8 @@ public class QuestScreen extends Screen {
             tick();
             return handled;
         }
-        if (event.button() != 0) return false;
+        // 26.3 uses SDL button numbers (left = 1), so compare against the constant, not 0.
+        if (event.button() != InputConstants.MOUSE_BUTTON_LEFT) return false;
 
         for (int i = 0; i < Age.COUNT; i++) {
             if (isIn(mx, my, left + 4, ageRowsTop + i * ageRowH, SIDEBAR_W - 7, ageRowH - 2)) {

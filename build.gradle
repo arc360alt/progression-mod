@@ -18,6 +18,39 @@ repositories {
 
 loom {
 	accessWidenerPath = file("src/main/resources/progressionmod.accesswidener")
+
+	runs {
+		// Offline test client with its own game folder (run/test), separate from runClient's run/.
+		testClient {
+			client()
+			configName = "Test Client"
+			runDir = "run/test"
+			programArgs "--username", "Tester"
+		}
+	}
+}
+
+// ./gradlew testClient            -> launch the test client
+// ./gradlew testClient -Pneocraft -> same, with NeoCraft UI from libs/ loaded too
+def testMods = file("run/test/mods")
+tasks.matching { it.name == "runTestClient" }.configureEach {
+	doFirst {
+		testMods.mkdirs()
+		def neocraft = file("libs/neocraft_ui-${project.neocraft_version}.jar")
+		def installed = new File(testMods, neocraft.name)
+		if (project.hasProperty("neocraft")) {
+			if (!neocraft.exists()) throw new GradleException("NeoCraft jar not found: ${neocraft}")
+			java.nio.file.Files.copy(neocraft.toPath(), installed.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+		} else {
+			installed.delete()
+		}
+	}
+}
+
+tasks.register("testClient") {
+	group = "progression"
+	description = "Launches an offline Minecraft client with the mod for testing (add -Pneocraft to include NeoCraft UI)."
+	dependsOn "runTestClient"
 }
 
 dependencies {

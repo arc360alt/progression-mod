@@ -2,6 +2,7 @@ package com.progressionmod.client;
 
 import com.progressionmod.quest.Age;
 import com.progressionmod.quest.QuestDefinition;
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -589,7 +590,7 @@ final class QuestTreeView {
     boolean mouseClicked(double mx, double my, int button, boolean doubleClick) {
         if (!contains(mx, my)) return false;
         if (isCardOpen() && inCard(mx, my)) {
-            if (button != 0) return true;
+            if (button != InputConstants.MOUSE_BUTTON_LEFT) return true;
             int[] c = cardBounds();
             if (mx >= c[0] + c[2] - 13 && my < c[1] + 14) {
                 cardOpen = false;
@@ -606,7 +607,7 @@ final class QuestTreeView {
             return true;
         }
         Node node = nodeAt(worldX(mx), worldY(my));
-        if (button == 0 && doubleClick && node != null) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT && doubleClick && node != null) {
             select(node);
             screen.toggleTrackFromTree();
             return true;
@@ -636,7 +637,7 @@ final class QuestTreeView {
 
     boolean mouseReleased() {
         boolean was = pressed;
-        if (pressed && !dragging && pressNode != null && pressButton == 0) select(pressNode);
+        if (pressed && !dragging && pressNode != null && pressButton == InputConstants.MOUSE_BUTTON_LEFT) select(pressNode);
         pressed = false;
         dragging = false;
         pressNode = null;
