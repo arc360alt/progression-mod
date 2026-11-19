@@ -448,7 +448,7 @@ final class QuestTreeView {
             }
         }
         int task = ClientQuestState.currentTask(quest);
-        if (ClientQuestState.isComplete(quest)) lines.add(Component.literal("✔ Completed").withColor(GREEN));
+        if (ClientQuestState.isComplete(quest)) lines.add(Component.literal("✔ " + ClientQuestState.completedText(quest)).withColor(GREEN));
         else if (task >= 0) lines.add(Component.literal("▸ " + QuestText.describe(quest.tasks().get(task)).getString()).withColor(GRAY));
         lines.add(Component.literal("Click for details").withColor(DARK_GRAY));
         return lines;
@@ -482,9 +482,9 @@ final class QuestTreeView {
         g.fill(cx + 5, cy + 6, cx + 25, cy + 26, 0xFF101015);
         g.item(QuestHud.stackOf(quest), cx + 7, cy + 8);
         g.text(font, font.plainSubstrByWidth(quest.title(), cw - 44), cx + 29, cy + 7, complete ? GREEN : GOLD, true);
-        String state = complete ? "Completed" : futureAge ? "Reach the " + Age.nameOf(quest.age())
+        String state = complete ? ClientQuestState.completedText(quest) : futureAge ? "Reach the " + Age.nameOf(quest.age())
                 : !ClientQuestState.isAvailable(quest) ? "Locked" : quest.optional() ? "Optional" : "Required";
-        g.text(font, state, cx + 29, cy + 17, GRAY, false);
+        g.text(font, font.plainSubstrByWidth(state, cw - 34), cx + 29, cy + 17, GRAY, false);
 
         int ty = cy + 31;
         if (!quest.description().isEmpty()) {

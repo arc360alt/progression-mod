@@ -38,6 +38,7 @@ public class ProgressionMod implements ModInitializer {
         // Quests & ages
         ModStats.register();
         QuestData.register();
+        SharedQuestProgress.register();
         QuestRegistry.register();
         QuestNetworking.register();
         QuestManager.register();

@@ -58,6 +58,8 @@
   "stat.progressionmod.biomes_visited": "Biomes Visited",
   "text.autoconfig.progressionmod.option.ageItemLocking": "Age Item Locking",
   "text.autoconfig.progressionmod.option.ageItemLocking.@Tooltip": "Tools and armor from ages you haven't reached can't be picked up, taken from containers, used or worn.",
+  "text.autoconfig.progressionmod.option.shareQuestProgress": "Share Quest Progress",
+  "text.autoconfig.progressionmod.option.shareQuestProgress.@Tooltip": "Multiplayer: when one player completes a quest it counts for everyone. Uses the host's or server's setting.",
   "text.autoconfig.progressionmod.option.showQuestHud": "Show Quest HUD",
   "text.autoconfig.progressionmod.option.showQuestHud.@Tooltip": "Shows your current age and active quests in the top-left corner of the screen.",
   "tag.item.progressionmod.age.flint": "Flint Age Items",

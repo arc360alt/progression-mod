@@ -462,7 +462,7 @@ public class QuestScreen extends Screen {
 
         // Second line: what to do next.
         String sub;
-        if (complete) sub = "Completed";
+        if (complete) sub = ClientQuestState.completedText(quest);
         else if (futureAge) sub = "Reach the " + Age.nameOf(quest.age()) + " to start";
         else {
             int task = ClientQuestState.currentTask(quest);
@@ -492,7 +492,7 @@ public class QuestScreen extends Screen {
         g.fill(x + 1, y + 4, x + 21, y + 24, 0xFF14141A);
         g.item(QuestHud.stackOf(quest), x + 3, y + 6);
         g.text(font, quest.title(), x + 26, y + 5, complete ? GREEN : GOLD, true);
-        String state = complete ? "Completed" : futureAge ? "Reach the " + Age.nameOf(quest.age()) + " first"
+        String state = complete ? ClientQuestState.completedText(quest) : futureAge ? "Reach the " + Age.nameOf(quest.age()) + " first"
                 : quest.optional() ? "Optional: not needed for the next age" : "Required for the next age";
         g.text(font, state, x + 26, y + 15, GRAY, false);
 

@@ -7,6 +7,7 @@ import com.progressionmod.quest.QuestNetworking;
 import com.progressionmod.quest.QuestRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 
 import java.util.*;
 
@@ -22,6 +23,8 @@ public final class ClientQuestState {
     public static Set<String> completed = Set.of();
     public static Map<String, int[]> progress = Map.of();
     public static String tracked = "";
+    /** Quest id to the name of the player who completed it (another player's when progress is shared). */
+    public static Map<String, String> completedBy = Map.of();
 
     private ClientQuestState() {}
 
@@ -30,6 +33,7 @@ public final class ClientQuestState {
         completed = payload.completed();
         progress = payload.progress();
         tracked = payload.tracked();
+        completedBy = payload.completedBy();
         synced = true;
     }
 
@@ -40,10 +44,25 @@ public final class ClientQuestState {
         completed = Set.of();
         progress = Map.of();
         tracked = "";
+        completedBy = Map.of();
     }
 
     public static boolean isComplete(QuestDefinition quest) {
         return completed.contains(quest.id());
+    }
+
+    /** True for an empty name (unknown) or this client's own player. */
+    public static boolean isLocalPlayer(String name) {
+        if (name == null || name.isEmpty()) return true;
+        Minecraft mc = Minecraft.getInstance();
+        return mc.player != null && name.equals(mc.player.getName().getString());
+    }
+
+    /** "Completed by Steve", "Completed by you", or just "Completed" when the server didn't say. */
+    public static String completedText(QuestDefinition quest) {
+        String name = completedBy.get(quest.id());
+        if (name == null || name.isEmpty()) return "Completed";
+        return "Completed by " + (isLocalPlayer(name) ? "you" : name);
     }
 
     public static boolean isAvailable(QuestDefinition quest) {

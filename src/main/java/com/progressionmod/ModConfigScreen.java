@@ -41,6 +41,7 @@ public class ModConfigScreen extends Screen {
         toggle(leftX, 1, "showHandBreakWarning", config.showHandBreakWarning, v -> config.showHandBreakWarning = v);
         toggle(leftX, 2, "improvedFlintFromGravel", config.improvedFlintFromGravel, v -> config.improvedFlintFromGravel = v);
         toggle(leftX, 3, "ageItemLocking", config.ageItemLocking, v -> config.ageItemLocking = v);
+        toggle(leftX, 4, "shareQuestProgress", config.shareQuestProgress, v -> config.shareQuestProgress = v);
 
         // ── Quest HUD ──
         toggle(rightX, 0, "showQuestHud", config.showQuestHud, v -> config.showQuestHud = v);

@@ -55,7 +55,7 @@ public class ProgressionModClient implements ClientModInitializer {
                 mc.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0f));
             } else {
                 QuestDefinition quest = ClientQuestState.QUESTS.get(payload.questId());
-                if (quest != null) QuestHud.showQuestComplete(quest);
+                if (quest != null) QuestHud.showQuestComplete(quest, payload.completer());
                 mc.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.PLAYER_LEVELUP, 1.4f, 0.6f));
             }
         });

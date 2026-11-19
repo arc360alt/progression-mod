@@ -50,9 +50,12 @@ public final class QuestHud {
 
     private QuestHud() {}
 
-    public static void showQuestComplete(QuestDefinition quest) {
-        banners.add(new Banner(Component.literal("Quest Complete!"), Component.literal(quest.title()),
-                stackOf(quest), 0xFF55FF55));
+    /** @param completer who finished it; another player's name shows in place of "Quest Complete!" */
+    public static void showQuestComplete(QuestDefinition quest, String completer) {
+        Component title = ClientQuestState.isLocalPlayer(completer)
+                ? Component.literal("Quest Complete!")
+                : Component.literal("Completed by " + completer);
+        banners.add(new Banner(title, Component.literal(quest.title()), stackOf(quest), 0xFF55FF55));
     }
 
     static ItemStack stackOf(QuestDefinition quest) {
@@ -253,7 +256,7 @@ public final class QuestHud {
         g.outline(x, y, WIDTH, BANNER_H, color);
         g.fill(x, y, x + 2, y + BANNER_H, color);
         g.item(icon, x + 7, y + 7);
-        g.text(font, title, x + 28, y + 6, color, true);
+        g.text(font, font.plainSubstrByWidth(title.getString(), WIDTH - 32), x + 28, y + 6, color, true);
         g.text(font, font.plainSubstrByWidth(subtitle.getString(), WIDTH - 32), x + 28, y + 17, 0xFFFFFFFF, true);
     }
 

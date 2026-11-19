@@ -1,5 +1,6 @@
 package com.progressionmod.quest;
 
+import com.progressionmod.ModConfig;
 import com.progressionmod.items.ModItems;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -26,6 +27,10 @@ import java.util.*;
  * Server-side quest logic: once a second per player it records what we track
  * ourselves (biomes, dimensions, Y-levels), evaluates every available quest,
  * completes finished ones, advances the player's age, and syncs progress to the client.
+ *
+ * <p>When {@link ModConfig#shareQuestProgress} is on (the default), a quest completed by one
+ * player is completed for everyone: online players get it straight away, and everyone else
+ * catches up from {@link SharedQuestProgress} when they next join.
  */
 public final class QuestManager {
 
@@ -86,10 +91,13 @@ public final class QuestManager {
     public static void update(ServerPlayer player) {
         if (player.isSpectator()) return;
         QuestData data = QuestData.get(player);
+        if (sharingEnabled()) data = mergeShared(player, data);
         trackExploration(player, data);
 
         QuestRegistry registry = QuestRegistry.SERVER;
         if (registry.size() == 0) return;
+        if (sharingEnabled()) reportContribution(player, data);
+        Team team = team(player);
 
         // Loop so that reaching a new age immediately checks that age's quests too.
         for (int guard = 0; guard <= Age.COUNT; guard++) {
@@ -97,8 +105,8 @@ public final class QuestManager {
             for (QuestDefinition quest : registry.all()) {
                 if (!isVisible(quest, data.age) || data.completed.contains(quest.id())) continue;
                 if (!requirementsMet(quest, data.completed, registry)) continue;
-                if (isFinished(player, data, quest)) {
-                    complete(player, data, quest, true);
+                if (isFinished(player, data, quest, team)) {
+                    finish(player, data, quest);
                     changed = true;
                 }
             }
@@ -108,11 +116,77 @@ public final class QuestManager {
         sync(player, false);
     }
 
-    private static boolean isFinished(ServerPlayer player, QuestData data, QuestDefinition quest) {
-        for (QuestDefinition.Task task : quest.tasks()) {
-            if (TaskTypes.evaluate(player, data, task) < task.count()) return false;
+    private static boolean isFinished(ServerPlayer player, QuestData data, QuestDefinition quest, Team team) {
+        int[] values = taskValues(player, data, quest, team);
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] < quest.tasks().get(i).count()) return false;
         }
         return true;
+    }
+
+    // ── Team progress ────────────────────────────────────────────────────────
+
+    /**
+     * Snapshot of what teammates have done, used to combine their progress with a player's own.
+     * {@code null} when progress isn't shared.
+     */
+    private record Team(SharedQuestProgress shared, QuestData exploration, String self) {}
+
+    private static Team team(ServerPlayer player) {
+        if (!sharingEnabled()) return null;
+        SharedQuestProgress shared = SharedQuestProgress.get(player.level().getServer());
+        return new Team(shared, shared.explorationView(), player.getUUID().toString());
+    }
+
+    /**
+     * Uncapped progress of each task. Alone that is the player's own; with a team, counting tasks
+     * add up every teammate's last reported value and other tasks take the best one, while
+     * exploration tasks use everyone's combined biomes, dimensions and heights.
+     */
+    private static int[] taskValues(ServerPlayer player, QuestData data, QuestDefinition quest, Team team) {
+        List<QuestDefinition.Task> tasks = quest.tasks();
+        int[] values = new int[tasks.size()];
+        for (int i = 0; i < values.length; i++) {
+            QuestDefinition.Task task = tasks.get(i);
+            values[i] = TaskTypes.evaluate(player, data, task);
+            if (team != null && TaskTypes.isExploration(task)) {
+                values[i] = Math.max(values[i], TaskTypes.evaluate(player, team.exploration(), task));
+            }
+        }
+        if (team == null) return values;
+
+        for (Map.Entry<String, Map<String, List<Integer>>> entry : team.shared().contributions().entrySet()) {
+            if (entry.getKey().equals(team.self())) continue;
+            List<Integer> theirs = entry.getValue().get(quest.id());
+            if (theirs == null || theirs.size() != values.length) continue; // quest changed since they reported
+            for (int i = 0; i < values.length; i++) {
+                int other = theirs.get(i);
+                values[i] = TaskTypes.isAdditive(tasks.get(i))
+                        ? (int) Math.min(Integer.MAX_VALUE, (long) values[i] + other)
+                        : Math.max(values[i], other);
+            }
+        }
+        return values;
+    }
+
+    /**
+     * Saves this player's own progress on every open quest (and their exploration) to the shared
+     * store, so it keeps counting for teammates after they log off.
+     */
+    private static void reportContribution(ServerPlayer player, QuestData data) {
+        Map<String, List<Integer>> values = new HashMap<>();
+        for (QuestDefinition quest : QuestRegistry.SERVER.all()) {
+            if (!isVisible(quest, data.age) || data.completed.contains(quest.id())) continue;
+            List<Integer> own = new ArrayList<>(quest.tasks().size());
+            boolean any = false;
+            for (QuestDefinition.Task task : quest.tasks()) {
+                int value = TaskTypes.evaluate(player, data, task);
+                own.add(value);
+                any |= value > 0;
+            }
+            if (any) values.put(quest.id(), List.copyOf(own));
+        }
+        SharedQuestProgress.report(player.level().getServer(), player.getUUID(), values, data);
     }
 
     private static void trackExploration(ServerPlayer player, QuestData data) {
@@ -129,8 +203,81 @@ public final class QuestManager {
 
     // ── Completion & ages ────────────────────────────────────────────────────
 
-    public static void complete(ServerPlayer player, QuestData data, QuestDefinition quest, boolean announce) {
+    public static boolean sharingEnabled() {
+        return ModConfig.get().shareQuestProgress;
+    }
+
+    /** The player finished a quest themselves: complete it for them and, when sharing, for everyone online. */
+    private static void finish(ServerPlayer player, QuestData data, QuestDefinition quest) {
+        if (data.completed.contains(quest.id())) return;
+        String name = player.getName().getString();
+        complete(player, data, quest, name, true);
+        if (!sharingEnabled()) return;
+
+        MinecraftServer server = player.level().getServer();
+        SharedQuestProgress.record(server, quest.id(), name);
+        for (ServerPlayer other : server.getPlayerList().getPlayers()) {
+            if (other == player) continue;
+            QuestData otherData = QuestData.get(other);
+            if (otherData.completed.contains(quest.id())) continue;
+            complete(other, otherData, quest, name, true);
+            // Their own update tick handles any age-up; this just refreshes their quest book now.
+            sync(other, false);
+        }
+    }
+
+    /**
+     * Two-way merge between a player and the shared store: quests they completed while sharing
+     * was off (or before it existed) are added to it, and quests the team completed while they
+     * were away are completed for them, rewards included, with one summary message.
+     * Returns the player's data, which is a fresh object if a team reset was applied.
+     */
+    private static QuestData mergeShared(ServerPlayer player, QuestData data) {
+        MinecraftServer server = player.level().getServer();
+        SharedQuestProgress shared = SharedQuestProgress.get(server);
+        if (data.sharedEpoch != shared.epoch()) {
+            // The team's progress was reset while this player was away.
+            if (data.sharedEpoch < shared.epoch() && !data.completed.isEmpty()) {
+                data = resetData(player, shared.epoch());
+                player.sendSystemMessage(Component.literal("Quest progress was reset for everyone while you were away.")
+                        .withStyle(ChatFormatting.YELLOW));
+            } else {
+                data.sharedEpoch = shared.epoch();
+            }
+        }
+
+        String name = player.getName().getString();
+        for (String id : data.completed) {
+            if (!shared.completedBy().containsKey(id)) {
+                SharedQuestProgress.record(server, id, data.completedBy.getOrDefault(id, name));
+            }
+        }
+
+        QuestRegistry registry = QuestRegistry.SERVER;
+        int caughtUp = 0;
+        for (Map.Entry<String, String> entry : shared.completedBy().entrySet()) {
+            if (data.completed.contains(entry.getKey())) continue;
+            QuestDefinition quest = registry.get(entry.getKey());
+            if (quest == null) continue; // removed by a data pack; kept in case it comes back
+            complete(player, data, quest, entry.getValue(), false);
+            caughtUp++;
+        }
+        if (caughtUp > 0) {
+            player.sendSystemMessage(Component.literal("✔ Caught up on " + caughtUp + (caughtUp == 1 ? " quest" : " quests")
+                    + " completed by other players.").withStyle(ChatFormatting.GREEN));
+        }
+        return data;
+    }
+
+    /**
+     * Marks a quest complete for one player and gives them its rewards.
+     *
+     * @param completer name of the player who actually finished it
+     * @param announce  send the chat message and HUD banner
+     */
+    public static void complete(ServerPlayer player, QuestData data, QuestDefinition quest, String completer, boolean announce) {
         if (!data.completed.add(quest.id())) return;
+        data.completedBy.put(quest.id(), completer);
         for (QuestDefinition.RewardItem reward : quest.rewardItems()) {
             Item item = BuiltInRegistries.ITEM.getValue(reward.item());
             if (item != Items.AIR) player.getInventory().placeItemBackInInventory(new ItemStack(item, reward.count()), Prediction.SERVER_ONLY);
@@ -140,9 +287,14 @@ public final class QuestManager {
         if (quest.id().equals(data.tracked)) data.tracked = "";
 
         if (announce) {
-            player.sendSystemMessage(Component.literal("✔ Quest complete: ").withStyle(ChatFormatting.GREEN)
-                    .append(Component.literal(quest.title()).withStyle(ChatFormatting.WHITE)));
-            ServerPlayNetworking.send(player, new QuestNetworking.EventPayload(false, quest.id(), data.age));
+            Component message = Component.literal("✔ Quest complete: ").withStyle(ChatFormatting.GREEN)
+                    .append(Component.literal(quest.title()).withStyle(ChatFormatting.WHITE));
+            if (!completer.equals(player.getName().getString())) {
+                message = Component.empty().append(message)
+                        .append(Component.literal(" (by " + completer + ")").withStyle(ChatFormatting.GRAY));
+            }
+            player.sendSystemMessage(message);
+            ServerPlayNetworking.send(player, new QuestNetworking.EventPayload(false, quest.id(), data.age, completer));
         }
     }
 
@@ -176,7 +328,7 @@ public final class QuestManager {
         }
         player.connection.send(new ClientboundSetTitleTextPacket(title));
         player.connection.send(new ClientboundSetSubtitleTextPacket(subtitle));
-        ServerPlayNetworking.send(player, new QuestNetworking.EventPayload(true, "", newAge));
+        ServerPlayNetworking.send(player, new QuestNetworking.EventPayload(true, "", newAge, ""));
     }
 
     // ── Admin / player actions ───────────────────────────────────────────────
@@ -190,16 +342,34 @@ public final class QuestManager {
     public static boolean forceComplete(ServerPlayer player, String questId) {
         QuestDefinition quest = QuestRegistry.SERVER.get(questId);
         if (quest == null) return false;
-        complete(player, QuestData.get(player), quest, true);
+        finish(player, QuestData.get(player), quest);
         update(player);
         return true;
     }
 
-    public static void reset(ServerPlayer player) {
+    /**
+     * Resets quest progress. With shared progress on this resets the whole team (everyone online
+     * now, everyone else when they next join), since one player's progress would just be
+     * re-synced from the others. Returns true if the whole team was reset.
+     */
+    public static boolean reset(ServerPlayer player) {
+        if (!sharingEnabled()) {
+            resetData(player, QuestData.get(player).sharedEpoch);
+            return false;
+        }
+        MinecraftServer server = player.level().getServer();
+        int epoch = SharedQuestProgress.reset(server);
+        for (ServerPlayer p : server.getPlayerList().getPlayers()) resetData(p, epoch);
+        return true;
+    }
+
+    private static QuestData resetData(ServerPlayer player, int epoch) {
         QuestData fresh = new QuestData();
         fresh.bookGiven = true;
+        fresh.sharedEpoch = epoch;
         player.setAttached(QuestData.ATTACHMENT, fresh);
         sync(player, true);
+        return fresh;
     }
 
     public static void setTracked(ServerPlayer player, String questId) {
@@ -220,13 +390,12 @@ public final class QuestManager {
         QuestRegistry registry = QuestRegistry.SERVER;
         Map<String, int[]> progress = new HashMap<>();
         int hash = Objects.hash(data.age, data.completed, data.tracked);
+        Team team = team(player);
         for (QuestDefinition quest : registry.all()) {
             if (!isVisible(quest, data.age) || data.completed.contains(quest.id())) continue;
             List<QuestDefinition.Task> tasks = quest.tasks();
-            int[] values = new int[tasks.size()];
-            for (int i = 0; i < values.length; i++) {
-                values[i] = Math.min(tasks.get(i).count(), TaskTypes.evaluate(player, data, tasks.get(i)));
-            }
+            int[] values = taskValues(player, data, quest, team);
+            for (int i = 0; i < values.length; i++) values[i] = Math.min(tasks.get(i).count(), values[i]);
             progress.put(quest.id(), values);
             hash = 31 * hash + quest.id().hashCode() * 17 + Arrays.hashCode(values);
         }
@@ -235,7 +404,7 @@ public final class QuestManager {
         if (!force && previous != null && previous == hash) return;
         lastSync.put(player.getUUID(), hash);
         ServerPlayNetworking.send(player, new QuestNetworking.ProgressPayload(
-                data.age, Set.copyOf(data.completed), progress, data.tracked));
+                data.age, Set.copyOf(data.completed), progress, data.tracked, Map.copyOf(data.completedBy)));
     }
 
     public static void syncAll(MinecraftServer server) {

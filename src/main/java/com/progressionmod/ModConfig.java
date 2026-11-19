@@ -21,6 +21,13 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 1)
     public boolean ageItemLocking = true;
 
+    /**
+     * Multiplayer: share quest completions between every player. Read on the server side, so
+     * the host's setting (LAN / single player) or the dedicated server's config file applies.
+     */
+    @ConfigEntry.Gui.Tooltip(count = 1)
+    public boolean shareQuestProgress = true;
+
     @ConfigEntry.Gui.Tooltip(count = 1)
     public boolean showQuestHud = true;
 

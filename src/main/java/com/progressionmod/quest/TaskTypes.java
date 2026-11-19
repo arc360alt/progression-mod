@@ -51,6 +51,22 @@ public final class TaskTypes {
         return STAT_SHORTHANDS.containsKey(type) || OTHER_TYPES.contains(type);
     }
 
+    /**
+     * With shared progress, whether teammates' values for this task add up (counts like
+     * "mine 10 logs") rather than the best value counting (advancements, XP level, exploration).
+     */
+    public static boolean isAdditive(QuestDefinition.Task task) {
+        return STAT_SHORTHANDS.containsKey(task.type()) || task.type().equals("stat") || task.type().equals("has_item");
+    }
+
+    /** Exploration tasks read the tracked biomes/dimensions/Y-levels, so a team view of those can stand in. */
+    public static boolean isExploration(QuestDefinition.Task task) {
+        return switch (task.type()) {
+            case "biome", "biomes_visited", "dimension", "y_level" -> true;
+            default -> false;
+        };
+    }
+
     /** Current raw progress of a task, uncapped. Compare against {@code task.count()}. */
     public static int evaluate(ServerPlayer player, QuestData data, QuestDefinition.Task task) {
         String type = task.type();

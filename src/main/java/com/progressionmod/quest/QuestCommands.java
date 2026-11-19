@@ -65,9 +65,13 @@ public final class QuestCommands {
                         .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                         .then(Commands.argument("player", EntityArgument.player()).executes(ctx -> {
                             ServerPlayer player = EntityArgument.getPlayer(ctx, "player");
-                            QuestManager.reset(player);
-                            ctx.getSource().sendSuccess(() -> Component.literal("Reset quest progress of ")
-                                    .append(player.getDisplayName()), true);
+                            if (QuestManager.reset(player)) {
+                                ctx.getSource().sendSuccess(() -> Component.literal(
+                                        "Quest progress is shared, so it was reset for every player"), true);
+                            } else {
+                                ctx.getSource().sendSuccess(() -> Component.literal("Reset quest progress of ")
+                                        .append(player.getDisplayName()), true);
+                            }
                             return 1;
                         }))));
     }

@@ -30,10 +30,10 @@ public final class QuestNetworking {
 
     /**
      * S2C: the player's age, completed quests, and per-task progress of every quest
-     * that is visible but not yet complete.
+     * that is visible but not yet complete, plus who completed each finished quest.
      */
-    public record ProgressPayload(int age, Set<String> completed, Map<String, int[]> progress, String tracked)
-            implements CustomPacketPayload {
+    public record ProgressPayload(int age, Set<String> completed, Map<String, int[]> progress, String tracked,
+                                  Map<String, String> completedBy) implements CustomPacketPayload {
         public static final Type<ProgressPayload> TYPE = payloadType("quest_progress");
         public static final StreamCodec<RegistryFriendlyByteBuf, ProgressPayload> CODEC =
                 StreamCodec.ofMember(ProgressPayload::write, ProgressPayload::read);
@@ -49,6 +49,11 @@ public final class QuestNetworking {
                 for (int v : entry.getValue()) buf.writeVarInt(v);
             }
             buf.writeUtf(tracked);
+            buf.writeVarInt(completedBy.size());
+            for (var entry : completedBy.entrySet()) {
+                buf.writeUtf(entry.getKey());
+                buf.writeUtf(entry.getValue());
+            }
         }
 
         private static ProgressPayload read(FriendlyByteBuf buf) {
@@ -64,18 +69,25 @@ public final class QuestNetworking {
                 for (int j = 0; j < values.length; j++) values[j] = buf.readVarInt();
                 progress.put(id, values);
             }
-            return new ProgressPayload(age, completed, progress, buf.readUtf());
+            String tracked = buf.readUtf();
+            int k = buf.readVarInt();
+            Map<String, String> completedBy = new HashMap<>();
+            for (int i = 0; i < k; i++) completedBy.put(buf.readUtf(), buf.readUtf());
+            return new ProgressPayload(age, completed, progress, tracked, completedBy);
         }
 
         @Override public Type<ProgressPayload> type() { return TYPE; }
     }
 
-    /** S2C: a quest was completed, or (when {@code ageUp}) a new age was reached. */
-    public record EventPayload(boolean ageUp, String questId, int age) implements CustomPacketPayload {
+    /**
+     * S2C: a quest was completed (by {@code completer}, which may be another player when
+     * progress is shared), or (when {@code ageUp}) a new age was reached.
+     */
+    public record EventPayload(boolean ageUp, String questId, int age, String completer) implements CustomPacketPayload {
         public static final Type<EventPayload> TYPE = payloadType("quest_event");
         public static final StreamCodec<RegistryFriendlyByteBuf, EventPayload> CODEC = StreamCodec.ofMember(
-                (p, buf) -> { buf.writeBoolean(p.ageUp); buf.writeUtf(p.questId); buf.writeVarInt(p.age); },
-                buf -> new EventPayload(buf.readBoolean(), buf.readUtf(), buf.readVarInt()));
+                (p, buf) -> { buf.writeBoolean(p.ageUp); buf.writeUtf(p.questId); buf.writeVarInt(p.age); buf.writeUtf(p.completer); },
+                buf -> new EventPayload(buf.readBoolean(), buf.readUtf(), buf.readVarInt(), buf.readUtf()));
         @Override public Type<EventPayload> type() { return TYPE; }
     }
 
